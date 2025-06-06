@@ -9,10 +9,12 @@ import CertificationsSection from '../components/CertificationsSection';
 import ProjectsSection from '../components/ProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
+import CustomCursor from '../components/CustomCursor';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <CustomCursor />
       <Navigation />
       <HeroSection />
       <AboutSection />
@@ -24,7 +26,7 @@ const Index = () => {
       <ContactSection />
       
       {/* Footer */}
-      <footer className="relative bg-black/40 backdrop-blur-lg border-t border-white/10 py-8">
+      <footer className="relative bg-black/20 border-t border-white/10 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-gray-400">

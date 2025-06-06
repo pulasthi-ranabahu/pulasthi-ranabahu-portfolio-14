@@ -50,6 +50,7 @@
 @layer base {
   * {
     @apply border-border;
+    cursor: none; /* Hide default cursor for custom cursor */
   }
   
   body {
@@ -84,28 +85,28 @@
   .content-overlay {
     position: relative;
     z-index: 10;
-    background: rgba(26, 26, 46, 0.85);
-    backdrop-filter: blur(10px);
+    background: rgba(26, 26, 46, 0.4);
+    /* Removed backdrop-filter blur */
   }
   
   .content-overlay-light {
     position: relative;
     z-index: 10;
-    background: rgba(26, 26, 46, 0.65);
-    backdrop-filter: blur(8px);
+    background: rgba(26, 26, 46, 0.3);
+    /* Removed backdrop-filter blur */
   }
   
   .glass-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    /* Removed backdrop-filter blur */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
   }
   
   .glass-card-light {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    /* Removed backdrop-filter blur */
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
   }
   
@@ -134,6 +135,41 @@
   .nav-link:hover::after,
   .nav-link.active::after {
     width: 100%;
+  }
+
+  /* Custom Cursor Styles */
+  .custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.6) 50%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    mix-blend-mode: screen;
+  }
+
+  .custom-cursor::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 50%;
+    animation: pulse-cursor 2s infinite;
+  }
+
+  .cursor-ripple {
+    position: fixed;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(240, 147, 251, 0.4) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9998;
+    animation: ripple-effect 0.6s ease-out forwards;
   }
 }
 
@@ -247,9 +283,55 @@
   }
 }
 
+@keyframes pulse-cursor {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
 /* Responsive breakpoints */
 @media (max-width: 768px) {
   .spline-container iframe {
     height: 100vh;
   }
+  
+  .custom-cursor {
+    display: none; /* Hide custom cursor on mobile */
+  }
+  
+  * {
+    cursor: auto !important; /* Restore default cursor on mobile */
+  }
+}
+
+/* Performance optimizations */
+.spline-container iframe {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.glass-card,
+.glass-card-light {
+  will-change: transform;
+  transform: translateZ(0);
 }

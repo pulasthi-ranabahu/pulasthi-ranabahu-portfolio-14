@@ -8,7 +8,7 @@ const CVSection = () => {
   return (
     <section id="cv" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Spline 3D Background - More Visible */}
-      <div className="spline-container opacity-70">
+      <div className="spline-container opacity-90">
         <iframe 
           src='https://my.spline.design/claritystream-N2n7bKB5Yezl1lpHkkzzwWQH/' 
           frameBorder='0' 
@@ -51,7 +51,7 @@ const CVSection = () => {
             {/* CV Display */}
             {showCV && (
               <div className="mt-12 glass-card-light p-8 max-w-5xl mx-auto animate-fade-in">
-                <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4">
+                <div className="bg-white/5 rounded-lg p-4">
                   <img
                     src="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"
                     alt="Pulasthi Ranabahu CV"
