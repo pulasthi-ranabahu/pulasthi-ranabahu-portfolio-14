@@ -1,0 +1,70 @@
+
+import React, { useState } from 'react';
+import { FileText, Download } from 'lucide-react';
+
+const CVSection = () => {
+  const [showCV, setShowCV] = useState(false);
+
+  return (
+    <section id="cv" className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Spline 3D Background - More Visible */}
+      <div className="spline-container opacity-70">
+        <iframe 
+          src='https://my.spline.design/claritystream-N2n7bKB5Yezl1lpHkkzzwWQH/' 
+          frameBorder='0' 
+          width='100%' 
+          height='100%'
+          className="w-full h-full"
+        />
+      </div>
+
+      {/* Content Overlay - More Transparent */}
+      <div className="content-overlay-light w-full min-h-screen flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+              My Curriculum Vitae
+            </h2>
+            <p className="text-xl text-gray-200 mb-12 max-w-3xl mx-auto">
+              Download or view my complete professional profile and achievements
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <button
+                onClick={() => setShowCV(!showCV)}
+                className="flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:scale-105 transition-transform duration-300 shadow-lg"
+              >
+                <FileText className="mr-3" size={24} />
+                {showCV ? 'Hide CV' : 'View My CV'}
+              </button>
+              
+              <a
+                href="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"
+                download="Pulasthi_Ranabahu_CV.png"
+                className="flex items-center px-8 py-4 border border-purple-500 text-white font-semibold rounded-lg hover:bg-purple-500/20 transition-colors duration-300"
+              >
+                <Download className="mr-3" size={24} />
+                Download CV
+              </a>
+            </div>
+
+            {/* CV Display */}
+            {showCV && (
+              <div className="mt-12 glass-card-light p-8 max-w-5xl mx-auto animate-fade-in">
+                <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4">
+                  <img
+                    src="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"
+                    alt="Pulasthi Ranabahu CV"
+                    className="w-full h-auto rounded-lg shadow-2xl"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CVSection;
