@@ -18,10 +18,11 @@ const CVSection = () => {
         />
       </div>
 
-      {/* Content Overlay - More Transparent */}
-      <div className="content-overlay-light w-full min-h-screen flex items-center">
+      {/* Content Overlay */}
+      <div className="content-overlay w-full min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
+          {/* Frosted Glass Card for CV Content */}
+          <div className="glass-card p-8 md:p-12 text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               My Curriculum Vitae
             </h2>
@@ -47,20 +48,20 @@ const CVSection = () => {
                 Download CV
               </a>
             </div>
-
-            {/* CV Display */}
-            {showCV && (
-              <div className="mt-12 glass-card-light p-8 max-w-5xl mx-auto animate-fade-in">
-                <div className="bg-white/5 rounded-lg p-4">
-                  <img
-                    src="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"
-                    alt="Pulasthi Ranabahu CV"
-                    className="w-full h-auto rounded-lg shadow-2xl"
-                  />
-                </div>
-              </div>
-            )}
           </div>
+
+          {/* CV Display */}
+          {showCV && (
+            <div className="mt-12 glass-card p-8 max-w-5xl mx-auto animate-fade-in">
+              <div className="bg-white/5 rounded-lg p-4">
+                <img
+                  src="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"
+                  alt="Pulasthi Ranabahu CV"
+                  className="w-full h-auto rounded-lg shadow-2xl"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
