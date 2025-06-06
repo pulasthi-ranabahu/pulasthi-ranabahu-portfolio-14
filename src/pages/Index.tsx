@@ -1,12 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import Navigation from '../components/Navigation';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import EducationSection from '../components/EducationSection';
+import CertificationsSection from '../components/CertificationsSection';
+import ProjectsSection from '../components/ProjectsSection';
+import SkillsSection from '../components/SkillsSection';
+import ContactSection from '../components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
+      <HeroSection />
+      <AboutSection />
+      <EducationSection />
+      <CertificationsSection />
+      <ProjectsSection />
+      <SkillsSection />
+      <ContactSection />
+      
+      {/* Footer */}
+      <footer className="relative bg-black/40 backdrop-blur-lg border-t border-white/10 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-gray-400">
+              © 2024 Pulasthi Ranabahu. All rights reserved.
+            </p>
+            <p className="text-gray-500 text-sm mt-2">
+              Designed with passion for cybersecurity and innovation
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
