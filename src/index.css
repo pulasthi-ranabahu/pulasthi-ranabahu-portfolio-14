@@ -82,32 +82,36 @@
     overflow: hidden;
   }
   
+  /* Removed content overlays - no more dark overlays on backgrounds */
   .content-overlay {
     position: relative;
     z-index: 10;
-    background: rgba(26, 26, 46, 0.4);
-    /* Removed backdrop-filter blur */
+    /* No background overlay */
   }
   
   .content-overlay-light {
     position: relative;
     z-index: 10;
-    background: rgba(26, 26, 46, 0.3);
-    /* Removed backdrop-filter blur */
+    /* No background overlay */
   }
   
+  /* Frosted glass effect for cards */
   .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    /* Removed backdrop-filter blur */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+    background: rgba(30, 30, 40, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(162, 89, 236, 0.3);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
   }
   
   .glass-card-light {
-    background: rgba(255, 255, 255, 0.08);
-    /* Removed backdrop-filter blur */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
+    background: rgba(30, 30, 40, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(162, 89, 236, 0.4);
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.15);
   }
   
   .timeline-progress {
@@ -170,6 +174,14 @@
     pointer-events: none;
     z-index: 9998;
     animation: ripple-effect 0.6s ease-out forwards;
+  }
+
+  /* Frosted navigation bar */
+  .frosted-nav {
+    background: rgba(26, 26, 46, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
