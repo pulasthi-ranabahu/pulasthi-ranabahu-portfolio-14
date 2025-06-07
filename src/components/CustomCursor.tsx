@@ -1,68 +1,77 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
+  const animationFrameRef = useRef<number>();
+  const cursorRef = useRef<HTMLDivElement>(null);
+
+  const updateCursor = useCallback((e: MouseEvent) => {
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+    
+    animationFrameRef.current = requestAnimationFrame(() => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
+    });
+  }, [isVisible]);
+
+  const handleMouseEnter = useCallback(() => setIsVisible(true), []);
+  const handleMouseLeave = useCallback(() => setIsVisible(false), []);
+
+  const handleClick = useCallback((e: MouseEvent) => {
+    const newRipple = {
+      id: Date.now() + Math.random(),
+      x: e.clientX,
+      y: e.clientY
+    };
+    
+    setRipples(prev => [...prev.slice(-2), newRipple]); // Limit to 3 ripples max
+    
+    setTimeout(() => {
+      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
+    }, 600);
+  }, []);
 
   useEffect(() => {
-    let animationFrame: number;
+    // Check if on mobile device
+    if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) {
+      return;
+    }
 
-    const updateCursor = (e: MouseEvent) => {
-      animationFrame = requestAnimationFrame(() => {
-        setPosition({ x: e.clientX, y: e.clientY });
-        if (!isVisible) setIsVisible(true);
-      });
-    };
-
-    const handleMouseEnter = () => setIsVisible(true);
-    const handleMouseLeave = () => setIsVisible(false);
-
-    const handleClick = (e: MouseEvent) => {
-      const newRipple = {
-        id: Date.now(),
-        x: e.clientX,
-        y: e.clientY
-      };
-      
-      setRipples(prev => [...prev, newRipple]);
-      
-      // Remove ripple after animation
-      setTimeout(() => {
-        setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
-      }, 600);
-    };
-
-    document.addEventListener('mousemove', updateCursor);
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('click', handleClick);
+    document.addEventListener('mousemove', updateCursor, { passive: true });
+    document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    document.addEventListener('click', handleClick, { passive: true });
 
     return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
       document.removeEventListener('mousemove', updateCursor);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('click', handleClick);
     };
-  }, [isVisible]);
+  }, [updateCursor, handleMouseEnter, handleMouseLeave, handleClick]);
 
-  if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-    return null; // Don't render on mobile
+  // Don't render on mobile
+  if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) {
+    return null;
   }
 
   return (
     <>
       {isVisible && (
         <div
-          className="custom-cursor"
+          ref={cursorRef}
+          className="custom-cursor gpu-accelerated"
           style={{
             left: position.x,
             top: position.y,
-            transform: 'translate(-50%, -50%)'
           }}
         />
       )}
@@ -70,7 +79,7 @@ const CustomCursor = () => {
       {ripples.map(ripple => (
         <div
           key={ripple.id}
-          className="cursor-ripple"
+          className="cursor-ripple gpu-accelerated"
           style={{
             left: ripple.x - 25,
             top: ripple.y - 25,

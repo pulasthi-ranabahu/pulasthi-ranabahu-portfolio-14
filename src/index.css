@@ -57,10 +57,16 @@
     @apply bg-background text-foreground font-['Inter',sans-serif];
     background: var(--gradient-primary);
     min-height: 100vh;
+    /* Performance optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   
   html {
     scroll-behavior: smooth;
+    /* Performance optimization */
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -70,6 +76,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Performance optimization */
+    will-change: transform;
   }
   
   .spline-container {
@@ -80,20 +88,27 @@
     height: 100%;
     z-index: 0;
     overflow: hidden;
+    /* Performance optimizations */
+    contain: layout style paint;
+    will-change: transform;
   }
   
-  /* Content overlays with no dark backgrounds */
+  /* Content overlays with optimized performance */
   .content-overlay {
     position: relative;
     z-index: 10;
+    /* Performance optimization */
+    contain: layout style;
   }
   
   .content-overlay-light {
     position: relative;
     z-index: 10;
+    /* Performance optimization */
+    contain: layout style;
   }
   
-  /* Enhanced frosted glass effect for cards */
+  /* Enhanced frosted glass effect for cards with better performance */
   .glass-card {
     background: rgba(30, 30, 40, 0.4);
     backdrop-filter: blur(10px);
@@ -104,6 +119,7 @@
     /* Performance optimizations */
     transform: translateZ(0);
     will-change: transform;
+    contain: layout style paint;
   }
   
   .glass-card-light {
@@ -116,17 +132,20 @@
     /* Performance optimizations */
     transform: translateZ(0);
     will-change: transform;
+    contain: layout style paint;
   }
   
   .timeline-progress {
     background: var(--gradient-secondary);
     width: 4px;
     transition: height 0.5s ease-in-out;
+    will-change: height;
   }
   
   .nav-link {
     position: relative;
     transition: all 0.3s ease;
+    will-change: transform;
   }
   
   .nav-link::after {
@@ -138,6 +157,7 @@
     height: 2px;
     background: var(--gradient-secondary);
     transition: width 0.3s ease;
+    will-change: width;
   }
   
   .nav-link:hover::after,
@@ -145,7 +165,7 @@
     width: 100%;
   }
 
-  /* Custom Cursor Styles */
+  /* Optimized Custom Cursor Styles */
   .custom-cursor {
     position: fixed;
     width: 20px;
@@ -155,10 +175,11 @@
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out;
+    transition: transform 0.05s ease-out;
     mix-blend-mode: screen;
     /* Performance optimization */
     will-change: transform;
+    contain: layout style paint;
   }
 
   .custom-cursor::after {
@@ -180,6 +201,9 @@
     pointer-events: none;
     z-index: 9998;
     animation: ripple-effect 0.6s ease-out forwards;
+    /* Performance optimization */
+    will-change: transform, opacity;
+    contain: layout style paint;
   }
 
   /* Frosted navigation bar */
@@ -188,39 +212,52 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Performance optimization */
+    will-change: transform;
+    contain: layout style paint;
   }
 
-  /* Particle background container */
+  /* Optimized particle background container */
   #particle-background {
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.4; /* Reduced for better visibility of content */
+    /* Performance optimization */
+    will-change: transform;
+    contain: layout style paint;
   }
 }
 
 @layer utilities {
-  /* Optimized animations using transform and opacity */
+  /* GPU-accelerated performance class */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    contain: layout style paint;
+  }
+
+  /* Optimized animations using transform and opacity only */
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out;
+    animation: fadeIn 0.6s ease-out forwards;
   }
   
   .animate-slide-up {
-    animation: slideUp 0.8s ease-out;
+    animation: slideUp 0.6s ease-out forwards;
   }
   
   .animate-slide-left {
-    animation: slideLeft 0.8s ease-out;
+    animation: slideLeft 0.6s ease-out forwards;
   }
   
   .animate-slide-right {
-    animation: slideRight 0.8s ease-out;
+    animation: slideRight 0.6s ease-out forwards;
   }
   
   .animate-zoom-in {
-    animation: zoomIn 0.6s ease-out;
+    animation: zoomIn 0.4s ease-out forwards;
   }
   
   .animate-bounce-hover:hover {
-    animation: bounceHover 0.6s ease;
+    animation: bounceHover 0.4s ease forwards;
   }
   
   .animate-flip-card:hover {
@@ -228,13 +265,7 @@
   }
   
   .animate-progress-bar {
-    animation: progressBar 2s ease-out;
-  }
-
-  /* Performance optimizations */
-  .gpu-accelerated {
-    transform: translateZ(0);
-    will-change: transform;
+    animation: progressBar 1.5s ease-out forwards;
   }
 }
 
@@ -253,7 +284,7 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(50px) translateZ(0);
+    transform: translateY(30px) translateZ(0);
   }
   to {
     opacity: 1;
@@ -264,7 +295,7 @@
 @keyframes slideLeft {
   from {
     opacity: 0;
-    transform: translateX(50px) translateZ(0);
+    transform: translateX(30px) translateZ(0);
   }
   to {
     opacity: 1;
@@ -275,7 +306,7 @@
 @keyframes slideRight {
   from {
     opacity: 0;
-    transform: translateX(-50px) translateZ(0);
+    transform: translateX(-30px) translateZ(0);
   }
   to {
     opacity: 1;
@@ -286,7 +317,7 @@
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.8) translateZ(0);
+    transform: scale(0.9) translateZ(0);
   }
   to {
     opacity: 1;
@@ -299,10 +330,10 @@
     transform: translateY(0) translateZ(0);
   }
   40% {
-    transform: translateY(-10px) translateZ(0);
+    transform: translateY(-8px) translateZ(0);
   }
   80% {
-    transform: translateY(-5px) translateZ(0);
+    transform: translateY(-4px) translateZ(0);
   }
 }
 
@@ -321,8 +352,8 @@
     opacity: 1;
   }
   50% {
-    transform: scale(1.2) translateZ(0);
-    opacity: 0.7;
+    transform: scale(1.1) translateZ(0);
+    opacity: 0.8;
   }
   100% {
     transform: scale(1) translateZ(0);
@@ -345,10 +376,13 @@
 @media (max-width: 768px) {
   .spline-container iframe {
     height: 100vh;
+    /* Reduce quality on mobile */
+    image-rendering: optimizeSpeed;
   }
   
-  .custom-cursor {
-    display: none; /* Hide custom cursor on mobile */
+  .custom-cursor,
+  .cursor-ripple {
+    display: none !important; /* Hide custom cursor on mobile */
   }
   
   * {
@@ -357,7 +391,15 @@
 
   /* Reduce particle effects on mobile for performance */
   #particle-background {
-    opacity: 0.3;
+    opacity: 0.2;
+  }
+
+  /* Disable expensive effects on mobile */
+  .glass-card,
+  .glass-card-light {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(30, 30, 40, 0.8);
   }
 }
 
@@ -365,15 +407,10 @@
 .spline-container iframe {
   will-change: transform;
   transform: translateZ(0);
+  contain: layout style paint;
 }
 
-.glass-card,
-.glass-card-light {
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-/* Preload optimization */
+/* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in,
   .animate-slide-up,
@@ -381,14 +418,35 @@
   .animate-slide-right,
   .animate-zoom-in,
   .animate-bounce-hover {
-    animation: none;
+    animation: none !important;
+    transition: none !important;
   }
   
-  .custom-cursor {
-    display: none;
+  .custom-cursor,
+  .cursor-ripple {
+    display: none !important;
   }
   
   #particle-background {
-    display: none;
+    display: none !important;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Optimize fonts loading */
+@media (max-width: 768px) {
+  body {
+    font-display: swap;
+  }
+}
+
+/* Critical rendering optimizations */
+@media screen and (min-width: 1024px) {
+  .spline-container {
+    contain: strict;
   }
 }

@@ -43,7 +43,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
             width: 1000,
             height: 1000,
           },
-          value: effect === 'snow' ? 80 : effect === 'rain' ? 150 : 60,
+          value: effect === 'snow' ? 40 : effect === 'rain' ? 75 : 30, // Reduced for better performance
         },
         opacity: {
           value: effect === 'snow' ? 0.7 : effect === 'rain' ? 0.5 : 0.8,
@@ -78,6 +78,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           },
           move: {
             ...baseConfig.particles.move,
+            direction: 'bottom',
             angle: {
               offset: 0,
               value: 90,
@@ -101,6 +102,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           },
           move: {
             ...baseConfig.particles.move,
+            direction: 'bottom-right',
             angle: {
               offset: 0,
               value: 165,
