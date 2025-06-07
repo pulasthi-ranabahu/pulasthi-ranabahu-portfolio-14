@@ -1,4 +1,3 @@
-
 import React, { useCallback } from 'react';
 import Particles from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
@@ -43,10 +42,10 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
             width: 1000,
             height: 1000,
           },
-          value: 20, // Significantly reduced for better performance
+          value: 20,
         },
         opacity: {
-          value: 0.3, // Reduced opacity
+          value: 0.3,
         },
         size: {
           value: { min: 1, max: 2 },
@@ -58,7 +57,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
             default: "out",
           },
           random: false,
-          speed: 0.5, // Slower speed
+          speed: 0.5,
           straight: false,
         },
       },
@@ -98,7 +97,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           },
           move: {
             ...baseConfig.particles.move,
-            direction: "bottom-right" as const,
+            direction: "bottomRight" as const, // ✅ FIXED
             speed: 2,
           },
         },
