@@ -13,7 +13,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
   }, []);
 
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    // Particles loaded callback
+    // Optional: handle loaded container
   }, []);
 
   const getParticleConfig = () => {
@@ -21,28 +21,41 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
       background: {
         opacity: 0,
       },
-      fpsLimit: 30, // Reduced for better performance
+      fpsLimit: 60,
       interactivity: {
         events: {
-          onClick: {
-            enable: false,
-          },
+          onClick: { enable: false },
           onHover: {
-            enable: false,
-          },
-          resize: {
             enable: true,
+            mode: 'bubble', // water-wave-like effect
+            parallax: { enable: true, force: 40, smooth: 10 }
           },
+          resize: true,
         },
+        modes: {
+          bubble: {
+            distance: 100,
+            duration: 1,
+            size: 6,
+            opacity: 0.6,
+            speed: 3
+          }
+        }
       },
       particles: {
         number: {
+          value: 20,
           density: {
             enable: true,
-            width: 1000,
-            height: 1000,
-          },
-          value: 20,
+            width: 800,
+            height: 800
+          }
+        },
+        color: {
+          value: '#ffffff',
+        },
+        shape: {
+          type: 'circle',
         },
         opacity: {
           value: 0.3,
@@ -56,51 +69,26 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           outModes: {
             default: "out",
           },
-          random: false,
           speed: 0.5,
           straight: false,
-        },
+        }
       },
-      detectRetina: true,
+      detectRetina: true
     };
-
-    if (effect === 'snow') {
-      return {
-        ...baseConfig,
-        particles: {
-          ...baseConfig.particles,
-          color: {
-            value: '#ffffff',
-          },
-          shape: {
-            type: 'circle',
-          },
-          move: {
-            ...baseConfig.particles.move,
-            direction: "bottom" as const,
-            drift: 0.2,
-          },
-        },
-      };
-    }
 
     if (effect === 'rain') {
       return {
         ...baseConfig,
         particles: {
           ...baseConfig.particles,
-          color: {
-            value: '#4fc3f7',
-          },
-          shape: {
-            type: 'line',
-          },
+          color: { value: '#4fc3f7' },
+          shape: { type: 'line' },
           move: {
             ...baseConfig.particles.move,
-            direction: "bottomRight" as const, // ✅ FIXED
+            direction: "bottomRight",
             speed: 2,
-          },
-        },
+          }
+        }
       };
     }
 
@@ -109,19 +97,15 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
         ...baseConfig,
         particles: {
           ...baseConfig.particles,
-          color: {
-            value: ['#f093fb', '#667eea', '#764ba2'],
-          },
-          shape: {
-            type: 'circle',
-          },
+          color: { value: ['#f093fb', '#667eea', '#764ba2'] },
+          shape: { type: 'circle' },
           move: {
             ...baseConfig.particles.move,
-            direction: "none" as const,
+            direction: "none",
             random: true,
             speed: 0.3,
-          },
-        },
+          }
+        }
       };
     }
 
