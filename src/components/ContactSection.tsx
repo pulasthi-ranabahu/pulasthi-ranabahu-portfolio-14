@@ -49,14 +49,15 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="relative min-h-screen overflow-hidden">
-      {/* Spline 3D Background */}
+      {/* New Spline 3D Background */}
       <div className="spline-container">
         <iframe 
-          src='https://my.spline.design/robotfollowcursorforlandingpage-19EOkEmE3u4DcTVzAh0AhIeF/' 
+          src='https://my.spline.design/genkubgreetingrobot-dQd6mswKKCijQDbJG0ctf0xX/' 
           frameBorder='0' 
           width='100%' 
           height='100%'
           className="w-full h-full"
+          loading="lazy"
         />
       </div>
 
@@ -72,19 +73,8 @@ const ContactSection = () => {
               Feel free to reach out through any of these platforms.
             </p>
 
-            {/* Profile Image */}
-            <div className={`mb-12 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
-              <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-purple-500/50 shadow-2xl">
-                <img
-                  src="/lovable-uploads/827170ec-a073-47ee-aae0-dd725898d637.png"
-                  alt="Pulasthi Ranabahu"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
             {/* Social Links */}
-            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-16">
               {socialLinks.map((link, index) => {
                 const IconComponent = link.icon;
                 return (
@@ -115,7 +105,7 @@ const ContactSection = () => {
             </div>
 
             {/* Email Contact */}
-            <div className={`mt-16 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.5s' }}>
+            <div className={`${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.5s' }}>
               <div className="glass-card p-8 max-w-md mx-auto">
                 <h3 className="text-2xl font-bold text-white mb-4">Get In Touch</h3>
                 <p className="text-gray-300 mb-6">

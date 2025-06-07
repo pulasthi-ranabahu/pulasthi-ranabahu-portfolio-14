@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { FileText, Download } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 const CVSection = () => {
   const [showCV, setShowCV] = useState(false);
@@ -15,6 +15,7 @@ const CVSection = () => {
           width='100%' 
           height='100%'
           className="w-full h-full"
+          loading="lazy"
         />
       </div>
 
@@ -27,10 +28,10 @@ const CVSection = () => {
               My Curriculum Vitae
             </h2>
             <p className="text-xl text-gray-200 mb-12 max-w-3xl mx-auto">
-              Download or view my complete professional profile and achievements
+              View my complete professional profile and achievements
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex justify-center">
               <button
                 onClick={() => setShowCV(!showCV)}
                 className="flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:scale-105 transition-transform duration-300 shadow-lg"
@@ -38,15 +39,6 @@ const CVSection = () => {
                 <FileText className="mr-3" size={24} />
                 {showCV ? 'Hide CV' : 'View My CV'}
               </button>
-              
-              <a
-                href="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"
-                download="Pulasthi_Ranabahu_CV.png"
-                className="flex items-center px-8 py-4 border border-purple-500 text-white font-semibold rounded-lg hover:bg-purple-500/20 transition-colors duration-300"
-              >
-                <Download className="mr-3" size={24} />
-                Download CV
-              </a>
             </div>
           </div>
 
@@ -58,6 +50,7 @@ const CVSection = () => {
                   src="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"
                   alt="Pulasthi Ranabahu CV"
                   className="w-full h-auto rounded-lg shadow-2xl"
+                  loading="lazy"
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Shield, Key, Lock, Search } from 'lucide-react';
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,43 +23,40 @@ const ProjectsSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const projects = [
+  const features = [
     {
-      title: "Network Security Analysis Tool",
-      description: "A comprehensive tool for analyzing network vulnerabilities and generating security reports with real-time monitoring capabilities.",
-      technologies: ["Python", "Scapy", "Flask", "SQLite"],
-      delay: "0.1s"
+      icon: Lock,
+      title: "Text Encryption",
+      description: "Encrypt and decrypt text using AES, DES, and RSA algorithms"
     },
     {
-      title: "Cybersecurity Dashboard",
-      description: "Interactive dashboard for monitoring security metrics, threat intelligence, and incident response workflows.",
-      technologies: ["React", "Node.js", "MongoDB", "D3.js"],
-      delay: "0.2s"
+      icon: Key,
+      title: "Keylogger Software", 
+      description: "Track keystrokes and monitor user input for security research"
     },
     {
-      title: "Vulnerability Assessment Framework",
-      description: "Automated framework for conducting security assessments and penetration testing with detailed reporting.",
-      technologies: ["Python", "Nmap", "OpenVAS", "Docker"],
-      delay: "0.3s"
+      icon: Shield,
+      title: "Image Encryption",
+      description: "Secure image files with encryption to protect visual data"
     },
     {
-      title: "Secure File Transfer System",
-      description: "End-to-end encrypted file transfer system with user authentication and access control mechanisms.",
-      technologies: ["Java", "Spring Boot", "PostgreSQL", "AES"],
-      delay: "0.4s"
+      icon: Search,
+      title: "Password Analyzer",
+      description: "Evaluate password strength and get recommendations for better security"
     }
   ];
 
   return (
     <section id="projects" className="relative min-h-screen overflow-hidden py-20">
-      {/* Spline 3D Background */}
+      {/* New Spline 3D Background */}
       <div className="spline-container">
         <iframe 
-          src='https://my.spline.design/robotfollowcursorforlandingpage-19EOkEmE3u4DcTVzAh0AhIeF/' 
+          src='https://my.spline.design/nexbotrobotcharacterconcept-rnHkRS5qqMHTA3B0eLXG2HsP/' 
           frameBorder='0' 
           width='100%' 
           height='100%'
           className="w-full h-full"
+          loading="lazy"
         />
       </div>
 
@@ -68,55 +65,93 @@ const ProjectsSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-              Featured Projects
+              Featured Project
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Innovative solutions and projects that showcase my technical skills and cybersecurity expertise
+              Real-world cybersecurity tools and practical learning resources
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className={`glass-card p-8 hover:scale-105 transition-all duration-300 group ${
-                  isVisible ? 'animate-zoom-in' : 'opacity-0'
-                }`}
-                style={{ animationDelay: project.delay }}
-              >
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-purple-600/30 text-purple-300 text-sm rounded-full border border-purple-500/50"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+          {/* Main Project Card */}
+          <div className={`glass-card p-8 md:p-12 mb-12 hover:scale-105 transition-all duration-300 ${
+            isVisible ? 'animate-zoom-in' : 'opacity-0'
+          }`}>
+            <div className="flex items-center mb-6">
+              <Shield className="text-purple-400 mr-4" size={32} />
+              <h3 className="text-3xl font-bold text-white">
+                🛡️ Pinnacle Labs Cyber Security Internship 2025
+              </h3>
+            </div>
+            
+            <p className="text-gray-300 mb-8 text-lg leading-relaxed">
+              Welcome to the official repository for the Pinnacle Labs 2025 Cyber Security Internship Program! 
+              This repository contains all the scripts and tools you need to complete your internship tasks and 
+              showcase your cybersecurity skills.
+            </p>
 
-                <div className="flex gap-4">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:scale-105 transition-transform animate-bounce-hover">
-                    <Github size={16} />
-                    Code
-                  </button>
-                  <button className="flex items-center gap-2 px-4 py-2 border border-purple-500 text-purple-300 rounded-lg hover:bg-purple-500/20 transition-colors">
-                    <ExternalLink size={16} />
-                    Demo
-                  </button>
-                </div>
+            <div className="mb-8">
+              <h4 className="text-xl font-semibold text-white mb-4">📝 About</h4>
+              <p className="text-gray-300 leading-relaxed">
+                This repository is your one-stop resource for completing the Pinnacle Labs internship tasks. 
+                Each script is designed for practical learning, security research, and demonstration. 
+                You can use these tools individually or as part of a larger security toolkit.
+              </p>
+            </div>
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
+            {/* Features Grid */}
+            <div className="mb-8">
+              <h4 className="text-xl font-semibold text-white mb-6">🚀 Features & Task List</h4>
+              <div className="grid md:grid-cols-2 gap-4">
+                {features.map((feature, index) => {
+                  const IconComponent = feature.icon;
+                  return (
+                    <div key={index} className="flex items-start p-4 bg-white/5 rounded-lg border border-purple-500/20">
+                      <IconComponent className="text-purple-400 mr-3 mt-1 flex-shrink-0" size={20} />
+                      <div>
+                        <h5 className="font-semibold text-white mb-1">{feature.title}</h5>
+                        <p className="text-gray-300 text-sm">{feature.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            ))}
+            </div>
+
+            {/* Installation & Usage */}
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white/5 p-6 rounded-lg border border-purple-500/20">
+                <h4 className="text-lg font-semibold text-white mb-3">⚙️ Installation</h4>
+                <div className="bg-black/20 p-3 rounded text-sm text-gray-300 font-mono">
+                  <div>git clone https://github.com/pulasthi-ranabahu/Pinnacle_Labs_Cyber_Security</div>
+                  <div className="mt-2">pip install cryptography pycryptodome pynput</div>
+                </div>
+              </div>
+              
+              <div className="bg-white/5 p-6 rounded-lg border border-purple-500/20">
+                <h4 className="text-lg font-semibold text-white mb-3">💡 Usage</h4>
+                <div className="bg-black/20 p-3 rounded text-sm text-gray-300 font-mono">
+                  <div>python Text_Encrypter/Text_Encrypter.py</div>
+                  <div className="mt-2 text-xs">Follow interactive prompts</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://github.com/pulasthi-ranabahu/Pinnacle_Labs_Cyber_Security"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:scale-105 transition-transform animate-bounce-hover"
+              >
+                <Github size={20} />
+                View Repository
+              </a>
+              <button className="flex items-center gap-2 px-8 py-4 border border-purple-500 text-purple-300 rounded-lg hover:bg-purple-500/20 transition-colors">
+                <ExternalLink size={20} />
+                Live Demo
+              </button>
+            </div>
           </div>
         </div>
       </div>

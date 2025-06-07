@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
@@ -10,10 +10,25 @@ import ProjectsSection from '../components/ProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
 import CustomCursor from '../components/CustomCursor';
+import ParticleBackground from '../components/ParticleBackground';
 
 const Index = () => {
+  const [particleEffect, setParticleEffect] = useState<'snow' | 'rain' | 'asteroids'>('snow');
+
+  useEffect(() => {
+    // Randomly select particle effect on page load
+    const effects: ('snow' | 'rain' | 'asteroids')[] = ['snow', 'rain', 'asteroids'];
+    const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+    setParticleEffect(randomEffect);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Particle Background Effect */}
+      <div className="fixed inset-0 z-0">
+        <ParticleBackground effect={particleEffect} />
+      </div>
+      
       <CustomCursor />
       <Navigation />
       <HeroSection />
