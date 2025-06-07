@@ -102,8 +102,8 @@
   /* Enhanced About Me Card with Frosted Glass Effect */
   .about-me-card {
     background: rgba(30, 30, 40, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(20px); /* Increased from 8px to 20px for a more pronounced blur effect */
+    -webkit-backdrop-filter: blur(20px);
     border: 2px solid rgba(162, 89, 236, 0.4);
     border-radius: 18px;
     box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25);
@@ -111,6 +111,8 @@
     transform: translateZ(0);
     will-change: transform;
     contain: layout style paint;
+  }
+
   }
   
   /* Enhanced Education Card with Frosted Glass Effect */
