@@ -46,12 +46,12 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* About Content with Frosted Glass Effect */}
+            {/* About Content with Enhanced Frosted Glass Effect */}
             <div className={`${isVisible ? 'animate-slide-right' : 'opacity-0'}`}>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
                 About Me
               </h2>
-              <div className="p-8 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-lg">
+              <div className="p-8 rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg">
                 <p className="text-lg text-gray-200 leading-relaxed mb-6">
                   Dedicated ICT undergraduate passionate about cybersecurity, teamwork, and innovative projects. 
                   Skilled in network security, technical support, and collaborative problem-solving.
@@ -62,11 +62,11 @@ const AboutSection = () => {
                   meaningfully to the field of information security while building robust, scalable solutions.
                 </p>
                 <div className="grid grid-cols-2 gap-4 mt-8">
-                  <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/10">
+                  <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-md border border-white/10">
                     <h3 className="text-2xl font-bold text-purple-400">50+</h3>
                     <p className="text-sm text-gray-300">Projects Completed</p>
                   </div>
-                  <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/10">
+                  <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-md border border-white/10">
                     <h3 className="text-2xl font-bold text-blue-400">8+</h3>
                     <p className="text-sm text-gray-300">Certifications</p>
                   </div>
