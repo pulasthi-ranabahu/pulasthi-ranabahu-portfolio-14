@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import LazySplineEmbed from './LazySplineEmbed';
 
@@ -47,8 +46,8 @@ const EducationSection = () => {
     {
       institution: "University of Kelaniya",
       period: "2023 - Present",
-      qualification: "B/Dharamapala M.V",
-      description: "BICT (Hons) Undergraduate - Pursuing Bachelor of Science in Information and Communication Technology with focus on Cybersecurity.",
+      qualification: "BICT (Hons)",
+      description: "Undergraduate - Pursuing Bachelor of Science in Information and Communication Technology with focus on Cybersecurity.",
       logo: "/lovable-uploads/77a8850d-5392-4bc6-bbf9-55885e84b707.png",
       accentColor: "border-yellow-500",
       animationDelay: "0.6s"
@@ -57,9 +56,9 @@ const EducationSection = () => {
 
   return (
     <section id="education" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Lazy Loaded Spline 3D Background */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/" 
+      {/* Background */}
+      <LazySplineEmbed
+        src="https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/"
         className="opacity-70"
       />
 
@@ -76,29 +75,35 @@ const EducationSection = () => {
           </div>
 
           <div className="relative">
-            {/* Timeline Progress Bar */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-500/50 h-full">
-              <div 
-                className="timeline-progress transition-all duration-2000 ease-out"
+            {/* Vertical Timeline Bar */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-500/50 h-full z-0">
+              <div
+                className="timeline-progress transition-all duration-2000 ease-out bg-gradient-to-b from-purple-500 to-blue-500"
                 style={{ height: isVisible ? `${progressHeight}%` : '0%' }}
               />
             </div>
 
-            {/* Education Cards with Enhanced Frosted Glass */}
-            <div className="space-y-16">
+            {/* Timeline Entries */}
+            <div className="space-y-16 relative z-10">
               {educationData.map((education, index) => (
                 <div
                   key={index}
-                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} ${
-                    isVisible ? (index % 2 === 0 ? 'animate-slide-left' : 'animate-slide-right') : 'opacity-0'
+                  className={`flex items-center ${
+                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                  } ${
+                    isVisible
+                      ? index % 2 === 0
+                        ? 'animate-slide-left'
+                        : 'animate-slide-right'
+                      : 'opacity-0'
                   }`}
                   style={{ animationDelay: education.animationDelay }}
                 >
                   <div className="w-1/2 px-8">
-                    <div className={`education-card p-8 ${education.accentColor} border-2 hover:scale-105 transition-transform duration-300 gpu-accelerated`}>
+                    <div className={`p-8 ${education.accentColor} border-2 rounded-xl bg-white/10 backdrop-blur-md shadow-lg transition-transform duration-300 hover:scale-105`}>
                       <div className="flex items-center mb-6">
-                        <img 
-                          src={education.logo} 
+                        <img
+                          src={education.logo}
                           alt={`${education.institution} logo`}
                           className="w-20 h-20 object-contain mr-6"
                           loading="lazy"
@@ -118,10 +123,10 @@ const EducationSection = () => {
                       </p>
                     </div>
                   </div>
-                  
-                  {/* Timeline Node */}
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full border-4 border-white shadow-lg z-10 gpu-accelerated" />
-                  
+
+                  {/* Timeline Dot */}
+                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full border-4 border-white shadow-lg z-10" />
+
                   <div className="w-1/2" />
                 </div>
               ))}
