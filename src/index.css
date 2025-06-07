@@ -101,11 +101,31 @@
     contain: layout style;
   }
   
-  .content-overlay-light {
-    position: relative;
-    z-index: 10;
-    /* Performance optimization */
-    contain: layout style;
+  /* Enhanced About Me Card with Frosted Glass Effect */
+  .about-me-card {
+    background: rgba(30, 30, 40, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(162, 89, 236, 0.4);
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25);
+    /* Performance optimizations */
+    transform: translateZ(0);
+    will-change: transform;
+    contain: layout style paint;
+  }
+  
+  /* Enhanced Education Card with Frosted Glass Effect */
+  .education-card {
+    background: rgba(30, 30, 40, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25);
+    /* Performance optimizations */
+    transform: translateZ(0);
+    will-change: transform;
+    contain: layout style paint;
   }
   
   /* Enhanced frosted glass effect for cards with better performance */
@@ -116,19 +136,6 @@
     border: 2px solid rgba(162, 89, 236, 0.3);
     border-radius: 18px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-    /* Performance optimizations */
-    transform: translateZ(0);
-    will-change: transform;
-    contain: layout style paint;
-  }
-  
-  .glass-card-light {
-    background: rgba(30, 30, 40, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 2px solid rgba(162, 89, 236, 0.4);
-    border-radius: 18px;
-    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.15);
     /* Performance optimizations */
     transform: translateZ(0);
     will-change: transform;
@@ -212,15 +219,6 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    /* Performance optimization */
-    will-change: transform;
-    contain: layout style paint;
-  }
-
-  /* Optimized particle background container */
-  #particle-background {
-    pointer-events: none;
-    opacity: 0.4; /* Reduced for better visibility of content */
     /* Performance optimization */
     will-change: transform;
     contain: layout style paint;
@@ -389,14 +387,10 @@
     cursor: auto !important; /* Restore default cursor on mobile */
   }
 
-  /* Reduce particle effects on mobile for performance */
-  #particle-background {
-    opacity: 0.2;
-  }
-
   /* Disable expensive effects on mobile */
-  .glass-card,
-  .glass-card-light {
+  .about-me-card,
+  .education-card,
+  .glass-card {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     background: rgba(30, 30, 40, 0.8);
@@ -424,10 +418,6 @@
   
   .custom-cursor,
   .cursor-ripple {
-    display: none !important;
-  }
-  
-  #particle-background {
     display: none !important;
   }
 

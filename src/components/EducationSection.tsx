@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const EducationSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,7 +32,6 @@ const EducationSection = () => {
       qualification: "G.C.E. O/L",
       description: "4 A's, 3 B's, 2 C's (A's in English & Math)",
       logo: "/lovable-uploads/2b87cbc4-a907-4f1d-9418-8ef4484da68c.png",
-      color: "bg-red-900/20",
       accentColor: "border-red-500",
       animationDelay: "0.2s"
     },
@@ -41,7 +41,6 @@ const EducationSection = () => {
       qualification: "G.C.E. A/L",
       description: "3 B's (Engineering Technology)",
       logo: "/lovable-uploads/2b87cbc4-a907-4f1d-9418-8ef4484da68c.png",
-      color: "bg-red-900/20",
       accentColor: "border-red-500",
       animationDelay: "0.4s"
     },
@@ -51,7 +50,6 @@ const EducationSection = () => {
       qualification: "B/Dharamapala M.V",
       description: "BICT (Hons) Undergraduate - Pursuing Bachelor of Science in Information and Communication Technology with focus on Cybersecurity.",
       logo: "/lovable-uploads/77a8850d-5392-4bc6-bbf9-55885e84b707.png",
-      color: "bg-yellow-600/20",
       accentColor: "border-yellow-500",
       animationDelay: "0.6s"
     }
@@ -59,19 +57,14 @@ const EducationSection = () => {
 
   return (
     <section id="education" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Spline 3D Background - More Visible */}
-      <div className="spline-container opacity-80">
-        <iframe 
-          src='https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/' 
-          frameBorder='0' 
-          width='100%' 
-          height='100%'
-          className="w-full h-full"
-        />
-      </div>
+      {/* Lazy Loaded Spline 3D Background */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/" 
+        className="opacity-70"
+      />
 
-      {/* Content Overlay - More Transparent */}
-      <div className="content-overlay-light w-full min-h-screen flex items-center">
+      {/* Content Overlay */}
+      <div className="content-overlay w-full min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
@@ -91,7 +84,7 @@ const EducationSection = () => {
               />
             </div>
 
-            {/* Education Cards */}
+            {/* Education Cards with Enhanced Frosted Glass */}
             <div className="space-y-16">
               {educationData.map((education, index) => (
                 <div
@@ -102,12 +95,13 @@ const EducationSection = () => {
                   style={{ animationDelay: education.animationDelay }}
                 >
                   <div className="w-1/2 px-8">
-                    <div className={`glass-card-light p-8 ${education.accentColor} border-2 hover:scale-105 transition-transform duration-300`}>
+                    <div className={`education-card p-8 ${education.accentColor} border-2 hover:scale-105 transition-transform duration-300 gpu-accelerated`}>
                       <div className="flex items-center mb-6">
                         <img 
                           src={education.logo} 
                           alt={`${education.institution} logo`}
                           className="w-20 h-20 object-contain mr-6"
+                          loading="lazy"
                         />
                         <div>
                           <h3 className="text-2xl font-bold text-white mb-2">
@@ -126,7 +120,7 @@ const EducationSection = () => {
                   </div>
                   
                   {/* Timeline Node */}
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full border-4 border-white shadow-lg z-10" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full border-4 border-white shadow-lg z-10 gpu-accelerated" />
                   
                   <div className="w-1/2" />
                 </div>

@@ -22,7 +22,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
       background: {
         opacity: 0,
       },
-      fpsLimit: 60,
+      fpsLimit: 30, // Reduced for better performance
       interactivity: {
         events: {
           onClick: {
@@ -43,23 +43,23 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
             width: 1000,
             height: 1000,
           },
-          value: effect === 'snow' ? 40 : effect === 'rain' ? 75 : 30, // Reduced for better performance
+          value: 20, // Significantly reduced for better performance
         },
         opacity: {
-          value: effect === 'snow' ? 0.7 : effect === 'rain' ? 0.5 : 0.8,
+          value: 0.3, // Reduced opacity
         },
         size: {
-          value: effect === 'snow' ? { min: 1, max: 3 } : effect === 'rain' ? { min: 1, max: 2 } : { min: 2, max: 4 },
+          value: { min: 1, max: 2 },
         },
         move: {
-          direction: effect === 'rain' ? 'bottom-right' : 'bottom',
+          direction: "bottom" as const,
           enable: true,
           outModes: {
-            default: 'out',
+            default: "out",
           },
-          random: effect === 'asteroids',
-          speed: effect === 'snow' ? 1 : effect === 'rain' ? 6 : 0.5,
-          straight: effect === 'rain',
+          random: false,
+          speed: 0.5, // Slower speed
+          straight: false,
         },
       },
       detectRetina: true,
@@ -78,12 +78,8 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           },
           move: {
             ...baseConfig.particles.move,
-            direction: 'bottom',
-            angle: {
-              offset: 0,
-              value: 90,
-            },
-            drift: 0.5,
+            direction: "bottom" as const,
+            drift: 0.2,
           },
         },
       };
@@ -102,11 +98,8 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           },
           move: {
             ...baseConfig.particles.move,
-            direction: 'bottom-right',
-            angle: {
-              offset: 0,
-              value: 165,
-            },
+            direction: "bottom-right" as const,
+            speed: 2,
           },
         },
       };
@@ -125,15 +118,9 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           },
           move: {
             ...baseConfig.particles.move,
-            direction: 'none',
-            drift: 1,
-          },
-          twinkle: {
-            particles: {
-              enable: true,
-              frequency: 0.05,
-              opacity: 0.4,
-            },
+            direction: "none" as const,
+            random: true,
+            speed: 0.3,
           },
         },
       };
@@ -148,7 +135,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
       init={particlesInit}
       loaded={particlesLoaded}
       options={getParticleConfig()}
-      className="absolute inset-0 z-0"
+      className="absolute inset-0 z-0 opacity-20"
     />
   );
 };

@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,38 +25,34 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Spline 3D Background - More Visible */}
-      <div className="spline-container opacity-80">
-        <iframe 
-          src='https://my.spline.design/claritystream-N2n7bKB5Yezl1lpHkkzzwWQH/' 
-          frameBorder='0' 
-          width='100%' 
-          height='100%'
-          className="w-full h-full"
-        />
-      </div>
+      {/* Lazy Loaded Spline 3D Background */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/claritystream-N2n7bKB5Yezl1lpHkkzzwWQH/" 
+        className="opacity-70"
+      />
 
-      {/* Content Overlay - More Transparent */}
-      <div className="content-overlay-light w-full min-h-screen flex items-center">
+      {/* Content Overlay */}
+      <div className="content-overlay w-full min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Profile Image */}
             <div className={`text-center md:text-left ${isVisible ? 'animate-slide-left' : 'opacity-0'}`}>
-              <div className="w-64 h-64 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-blue-500/50 shadow-2xl">
+              <div className="w-64 h-64 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-blue-500/50 shadow-2xl gpu-accelerated">
                 <img
                   src="/lovable-uploads/827170ec-a073-47ee-aae0-dd725898d637.png"
                   alt="Pulasthi Ranabahu"
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
             </div>
 
-            {/* About Content */}
+            {/* About Content with Enhanced Frosted Glass */}
             <div className={`${isVisible ? 'animate-slide-right' : 'opacity-0'}`}>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
                 About Me
               </h2>
-              <div className="glass-card-light p-8">
+              <div className="about-me-card p-8 gpu-accelerated">
                 <p className="text-lg text-gray-200 leading-relaxed mb-6">
                   Dedicated ICT undergraduate passionate about cybersecurity, teamwork, and innovative projects. 
                   Skilled in network security, technical support, and collaborative problem-solving.
@@ -66,11 +63,11 @@ const AboutSection = () => {
                   meaningfully to the field of information security while building robust, scalable solutions.
                 </p>
                 <div className="grid grid-cols-2 gap-4 mt-8">
-                  <div className="text-center p-4 bg-white/10 rounded-lg">
+                  <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm">
                     <h3 className="text-2xl font-bold text-purple-400">50+</h3>
                     <p className="text-sm text-gray-300">Projects Completed</p>
                   </div>
-                  <div className="text-center p-4 bg-white/10 rounded-lg">
+                  <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm">
                     <h3 className="text-2xl font-bold text-blue-400">8+</h3>
                     <p className="text-sm text-gray-300">Certifications</p>
                   </div>
