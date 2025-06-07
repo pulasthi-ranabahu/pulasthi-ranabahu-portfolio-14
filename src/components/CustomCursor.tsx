@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 const CustomCursor = () => {
@@ -8,13 +7,28 @@ const CustomCursor = () => {
   const animationFrameRef = useRef<number>();
   const cursorRef = useRef<HTMLDivElement>(null);
 
+  const addRipple = (x: number, y: number) => {
+    const newRipple = {
+      id: Date.now() + Math.random(),
+      x,
+      y,
+    };
+
+    setRipples((prev) => [...prev.slice(-4), newRipple]);
+
+    setTimeout(() => {
+      setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
+    }, 500);
+  };
+
   const updateCursor = useCallback((e: MouseEvent) => {
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
     }
-    
+
     animationFrameRef.current = requestAnimationFrame(() => {
       setPosition({ x: e.clientX, y: e.clientY });
+      addRipple(e.clientX, e.clientY); // ripple on move
       if (!isVisible) setIsVisible(true);
     });
   }, [isVisible]);
@@ -23,24 +37,11 @@ const CustomCursor = () => {
   const handleMouseLeave = useCallback(() => setIsVisible(false), []);
 
   const handleClick = useCallback((e: MouseEvent) => {
-    const newRipple = {
-      id: Date.now() + Math.random(),
-      x: e.clientX,
-      y: e.clientY
-    };
-    
-    setRipples(prev => [...prev.slice(-2), newRipple]); // Limit to 3 ripples max
-    
-    setTimeout(() => {
-      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
-    }, 600);
+    addRipple(e.clientX, e.clientY); // Extra ripple on click
   }, []);
 
   useEffect(() => {
-    // Check if on mobile device
-    if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) {
-      return;
-    }
+    if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) return;
 
     document.addEventListener('mousemove', updateCursor, { passive: true });
     document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
@@ -48,9 +49,7 @@ const CustomCursor = () => {
     document.addEventListener('click', handleClick, { passive: true });
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
       document.removeEventListener('mousemove', updateCursor);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -58,7 +57,6 @@ const CustomCursor = () => {
     };
   }, [updateCursor, handleMouseEnter, handleMouseLeave, handleClick]);
 
-  // Don't render on mobile
   if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) {
     return null;
   }
@@ -75,16 +73,16 @@ const CustomCursor = () => {
           }}
         />
       )}
-      
-      {ripples.map(ripple => (
+
+      {ripples.map((ripple) => (
         <div
           key={ripple.id}
           className="cursor-ripple gpu-accelerated"
           style={{
-            left: ripple.x - 25,
-            top: ripple.y - 25,
-            width: 50,
-            height: 50
+            left: ripple.x - 15,
+            top: ripple.y - 15,
+            width: 30,
+            height: 30,
           }}
         />
       ))}
