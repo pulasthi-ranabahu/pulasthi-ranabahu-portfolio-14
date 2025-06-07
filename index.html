@@ -15,10 +15,81 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <style>
+      /* Particle container styles */
+      #particle-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="particle-background"></div>
+    <div id="root" style="position: relative; z-index: 1;"></div>
+
+    <!-- particles.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+      /*
+      Minimal particle config for snow effect optimized for performance
+      */
+      particlesJS('particle-background', {
+        particles: {
+          number: {
+            value: 30, // Low number for minimal performance impact
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: '#ffffff' // White for snow effect
+          },
+          shape: {
+            type: 'circle' // Simple shape for snow
+          },
+          opacity: {
+            value: 0.3, // Low opacity to avoid visual clutter
+            random: true
+          },
+          size: {
+            value: 2, // Small size for minimal rendering load
+            random: true
+          },
+          move: {
+            enable: true,
+            speed: 1, // Slow speed for subtle effect
+            direction: 'bottom',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: {
+              enable: false // Disable interaction to save resources
+            },
+            onclick: {
+              enable: false // Disable interaction to save resources
+            },
+            resize: true
+          }
+        },
+        retina_detect: true
+      });
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
