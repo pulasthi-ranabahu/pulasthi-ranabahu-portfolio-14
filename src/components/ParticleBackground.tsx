@@ -1,8 +1,8 @@
 
 import React, { useCallback } from 'react';
-import Particles from 'react-tsparticles';
-import { loadSlim } from 'tsparticles/slim';
-import type { Container, Engine } from 'tsparticles-engine';
+import Particles from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
+import type { Container, Engine } from '@tsparticles/engine';
 
 interface ParticleBackgroundProps {
   effect?: 'snow' | 'rain' | 'asteroids';
@@ -31,14 +31,17 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ effect = 'snow'
           onHover: {
             enable: false,
           },
-          resize: true,
+          resize: {
+            enable: true,
+          },
         },
       },
       particles: {
         number: {
           density: {
             enable: true,
-            area: 1000,
+            width: 1000,
+            height: 1000,
           },
           value: effect === 'snow' ? 80 : effect === 'rain' ? 150 : 60,
         },
