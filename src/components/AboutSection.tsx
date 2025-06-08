@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import LazySplineEmbed from './LazySplineEmbed';
 
@@ -39,9 +40,11 @@ const AboutSection = () => {
               <div className="w-64 h-64 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-blue-500/50 shadow-2xl">
                 <img
                   src="/lovable-uploads/827170ec-a073-47ee-aae0-dd725898d637.png"
-                  alt="Pulasthi Ranabahu"
+                  alt="Pulasthi Ranabahu - ICT undergraduate and cybersecurity enthusiast"
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  width="256"
+                  height="256"
                 />
               </div>
             </div>
@@ -63,11 +66,11 @@ const AboutSection = () => {
                 </p>
                 <div className="grid grid-cols-2 gap-4 mt-8">
                   <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-xl border border-white/10">
-                    <h3 className="text-2xl font-bold text-purple-400">50+</h3>
+                    <h3 className="text-2xl font-bold text-purple-400" aria-label="Number of projects completed">50+</h3>
                     <p className="text-sm text-gray-300">Projects Completed</p>
                   </div>
                   <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-xl border border-white/10">
-                    <h3 className="text-2xl font-bold text-blue-400">8+</h3>
+                    <h3 className="text-2xl font-bold text-blue-400" aria-label="Number of certifications earned">8+</h3>
                     <p className="text-sm text-gray-300">Certifications</p>
                   </div>
                 </div>

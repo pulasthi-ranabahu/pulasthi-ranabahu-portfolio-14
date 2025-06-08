@@ -19,12 +19,12 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           // Delay loading slightly to ensure smooth scrolling
           setTimeout(() => {
             setIsLoaded(true);
-          }, 100);
+          }, 200);
         }
       },
       {
         threshold: 0.1,
-        rootMargin: '50px',
+        rootMargin: '100px',
       }
     );
 
@@ -40,7 +40,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
   }, [isInView]);
 
   return (
-    <div ref={embedRef} className={`spline-container ${className}`}>
+    <div ref={embedRef} className={`spline-container ${className}`} aria-hidden="true">
       {isLoaded ? (
         <iframe
           src={src}
@@ -49,10 +49,11 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           height="100%"
           className="w-full h-full gpu-accelerated"
           loading="lazy"
+          title="3D Background Animation"
         />
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
-          <div className="animate-pulse">
+          <div className="animate-pulse" aria-label="Loading 3D background">
             <div className="w-16 h-16 bg-purple-500/30 rounded-full"></div>
           </div>
         </div>

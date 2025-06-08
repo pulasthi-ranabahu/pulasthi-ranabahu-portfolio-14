@@ -1,106 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pulasthi-ranabahu-portfolio-3d</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <title>Pulasthi Ranabahu | Portfolio</title>
+    <meta name="description" content="Portfolio of Pulasthi Ranabahu, ICT undergraduate and cybersecurity enthusiast. View projects, skills, and contact information." />
+    <meta name="keywords" content="Pulasthi Ranabahu, portfolio, ICT, cybersecurity, projects, education, contact, University of Kelaniya, network security, technical support" />
+    <meta name="author" content="Pulasthi Ranabahu" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://pulasthi-ranabahu.github.io/" />
 
-    <meta property="og:title" content="pulasthi-ranabahu-portfolio-3d" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Pulasthi Ranabahu | Portfolio" />
+    <meta property="og:description" content="Portfolio of Pulasthi Ranabahu, ICT undergraduate and cybersecurity enthusiast. View projects, skills, and contact information." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://pulasthi-ranabahu.github.io/" />
+    <meta property="og:image" content="/lovable-uploads/827170ec-a073-47ee-aae0-dd725898d637.png" />
 
+    <!-- Twitter Card meta tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:title" content="Pulasthi Ranabahu | Portfolio" />
+    <meta name="twitter:description" content="Portfolio of Pulasthi Ranabahu, ICT undergraduate and cybersecurity enthusiast." />
+    <meta name="twitter:image" content="/lovable-uploads/827170ec-a073-47ee-aae0-dd725898d637.png" />
 
-    <style>
-      /* Particle container styles */
-      #particle-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-        z-index: 5; /* Increased to ensure it's above background layers */
-      }
-      /* Ensure background is below particles */
-      #spline-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1; /* Lowest layer for background */
-        opacity: 0.6; /* Reduced opacity to make particles more visible */
-      }
-    </style>
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://my.spline.design" />
   </head>
 
   <body>
-    <div id="spline-background"></div> <!-- Background layer (e.g., Spline embed) -->
-    <div id="particle-background"></div> <!-- Particle effect layer -->
-    <div id="root" style="position: relative; z-index: 10;"></div> <!-- Main content layer -->
-
-    <!-- particles.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-    <script>
-      /*
-      Minimal particle config for snow effect optimized for performance
-      */
-      particlesJS('particle-background', {
-        particles: {
-          number: {
-            value: 40, // Slightly increased for better visibility
-            density: {
-              enable: true,
-              value_area: 800
-            }
-          },
-          color: {
-            value: '#ffffff' // White for snow effect
-          },
-          shape: {
-            type: 'circle' // Simple shape for snow
-          },
-          opacity: {
-            value: 0.5, // Slightly increased opacity for visibility
-            random: true
-          },
-          size: {
-            value: 2.5, // Slightly larger size for visibility
-            random: true
-          },
-          move: {
-            enable: true,
-            speed: 1.2, // Slightly faster for a more noticeable effect
-            direction: 'bottom',
-            random: false,
-            straight: false,
-            out_mode: 'out',
-            bounce: false
-          }
-        },
-        interactivity: {
-          detect_on: 'canvas',
-          events: {
-            onhover: {
-              enable: false // Disable interaction to save resources
-            },
-            onclick: {
-              enable: false // Disable interaction to save resources
-            },
-            resize: true
-          }
-        },
-        retina_detect: true
-      });
-    </script>
-
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -15,18 +15,46 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <CustomCursor />
-      <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <EducationSection />
-      <CVSection />
-      <CertificationsSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <ContactSection />
+      
+      {/* Main content with semantic HTML structure */}
+      <header>
+        <Navigation />
+      </header>
+      
+      <main>
+        <HeroSection />
+        
+        <section aria-label="About Pulasthi Ranabahu">
+          <AboutSection />
+        </section>
+        
+        <section aria-label="Education Background">
+          <EducationSection />
+        </section>
+        
+        <section aria-label="Curriculum Vitae">
+          <CVSection />
+        </section>
+        
+        <section aria-label="Professional Certifications">
+          <CertificationsSection />
+        </section>
+        
+        <section aria-label="Projects Portfolio">
+          <ProjectsSection />
+        </section>
+        
+        <section aria-label="Technical Skills">
+          <SkillsSection />
+        </section>
+        
+        <section aria-label="Contact Information">
+          <ContactSection />
+        </section>
+      </main>
       
       {/* Footer */}
-      <footer className="relative bg-black/20 border-t border-white/10 py-8">
+      <footer className="relative bg-black/20 border-t border-white/10 py-8" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-gray-400">
