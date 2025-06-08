@@ -85,7 +85,7 @@ const DiplomasSection = () => {
   return (
     <section id="diplomas" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Professional Diplomas
@@ -95,17 +95,17 @@ const DiplomasSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="flex flex-wrap justify-center gap-8">
           {diplomas.map((diploma, index) => (
             <div
               key={index}
-              className={`glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${diploma.accentColor} border-2 ${
+              className={`glass-card w-48 p-5 hover:scale-105 transition-all duration-300 cursor-pointer group ${diploma.accentColor} border-2 ${
                 isVisible ? 'animate-zoom-in' : 'opacity-0'
               }`}
               style={{ animationDelay: diploma.delay }}
             >
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-lg overflow-hidden bg-white p-2 flex items-center justify-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-lg overflow-hidden bg-white p-2 flex items-center justify-center">
                   <img
                     src={diploma.logo}
                     alt={`${diploma.institution} logo`}
@@ -113,18 +113,18 @@ const DiplomasSection = () => {
                     loading="lazy"
                   />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                <h3 className="text-base font-bold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
                   {diploma.title}
                 </h3>
-                <h4 className="text-md font-semibold text-gray-200 mb-2">
+                <h4 className="text-sm font-semibold text-gray-200 mb-3">
                   {diploma.institution}
                 </h4>
-                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                   diploma.status === 'Reading' 
                     ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30' 
                     : 'bg-green-500/20 text-green-300 border border-green-500/30'
                 }`}>
-                  <GraduationCap size={16} className="mr-2" />
+                  <GraduationCap size={12} className="mr-1" />
                   {diploma.status}
                 </span>
               </div>

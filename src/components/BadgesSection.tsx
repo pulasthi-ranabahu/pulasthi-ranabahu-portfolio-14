@@ -101,7 +101,7 @@ const BadgesSection = () => {
   return (
     <section id="badges" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Badges & Achievements
@@ -111,19 +111,19 @@ const BadgesSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="flex flex-wrap justify-center gap-8">
           {badges.map((badge, index) => {
             const IconComponent = badge.icon;
             return (
               <div
                 key={index}
-                className={`glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer group border-2 border-purple-500/30 ${
+                className={`glass-card w-48 p-5 hover:scale-105 transition-all duration-300 cursor-pointer group border-2 border-purple-500/30 ${
                   isVisible ? 'animate-zoom-in' : 'opacity-0'
                 }`}
                 style={{ animationDelay: badge.delay }}
               >
                 <div className="text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-lg overflow-hidden bg-white/10 p-2 flex items-center justify-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-lg overflow-hidden bg-white/10 p-2 flex items-center justify-center">
                     <img
                       src={badge.image}
                       alt={`${badge.name} badge`}
@@ -133,14 +133,14 @@ const BadgesSection = () => {
                   </div>
                   <div className="flex items-center justify-center mb-2">
                     <IconComponent 
-                      size={20} 
+                      size={16} 
                       className={`${badge.color} mr-2`}
                     />
-                    <h3 className="text-lg font-semibold text-white group-hover:text-purple-300 transition-colors">
+                    <h3 className="text-base font-semibold text-white group-hover:text-purple-300 transition-colors leading-tight">
                       {badge.name}
                     </h3>
                   </div>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="text-gray-400 text-xs leading-relaxed">
                     {badge.description}
                   </p>
                 </div>

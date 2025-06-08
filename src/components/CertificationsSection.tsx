@@ -120,7 +120,7 @@ const CertificationsSection = () => {
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Professional Certifications
@@ -130,28 +130,28 @@ const CertificationsSection = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-8">
             {certifications.map((cert, index) => {
               const IconComponent = cert.icon;
               return (
                 <div
                   key={index}
-                  className={`glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${
+                  className={`glass-card w-48 p-5 hover:scale-105 transition-all duration-300 cursor-pointer group ${
                     isVisible ? 'animate-zoom-in' : 'opacity-0'
                   }`}
                   style={{ animationDelay: cert.delay }}
                 >
                   <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-lg bg-white/10 flex items-center justify-center">
+                    <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-white/10 flex items-center justify-center">
                       <IconComponent 
-                        size={32} 
+                        size={24} 
                         className={`${cert.color} group-hover:scale-110 transition-transform duration-300`}
                       />
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                    <h3 className="text-base font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
                       {cert.name}
                     </h3>
-                    <p className="text-gray-400 text-sm">{cert.issuer}</p>
+                    <p className="text-gray-400 text-xs">{cert.issuer}</p>
                   </div>
                   
                   {/* Hover overlay */}

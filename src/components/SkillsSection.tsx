@@ -66,7 +66,7 @@ const SkillsSection = () => {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-black/40" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Technical Skills
@@ -76,25 +76,25 @@ const SkillsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-8 justify-center">
           {skillCategories.map((category, categoryIndex) => (
             <div
               key={categoryIndex}
-              className={`glass-card p-8 ${
+              className={`glass-card p-6 ${
                 isVisible ? 'animate-slide-up' : 'opacity-0'
               }`}
               style={{ animationDelay: `${categoryIndex * 0.2}s` }}
             >
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+              <h3 className="text-xl font-bold text-white mb-6 text-center">
                 {category.title}
               </h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skillIndex} className="group">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-300 font-medium">{skill.name}</span>
-                      <span className="text-purple-400 text-sm">{skill.level}%</span>
+                      <span className="text-gray-300 font-medium text-sm">{skill.name}</span>
+                      <span className="text-purple-400 text-xs">{skill.level}%</span>
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div
