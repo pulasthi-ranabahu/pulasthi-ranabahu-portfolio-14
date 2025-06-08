@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import LazySplineEmbed from './LazySplineEmbed';
 
@@ -32,7 +33,7 @@ const EducationSection = () => {
       description: "4 A's, 3 B's, 2 C's (A's in English & Math)",
       logo: "/lovable-uploads/2b87cbc4-a907-4f1d-9418-8ef4484da68c.png",
       accentColor: "border-red-500",
-      animationDelay: "0.2s"
+      animationDelay: "0.1s"
     },
     {
       institution: "Bandarawela Dharmapala College",
@@ -41,7 +42,7 @@ const EducationSection = () => {
       description: "3 B's (Engineering Technology)",
       logo: "/lovable-uploads/2b87cbc4-a907-4f1d-9418-8ef4484da68c.png",
       accentColor: "border-red-500",
-      animationDelay: "0.4s"
+      animationDelay: "0.2s"
     },
     {
       institution: "University of Kelaniya",
@@ -50,7 +51,70 @@ const EducationSection = () => {
       description: "Undergraduate - Pursuing Bachelor of Science in Information and Communication Technology with focus on Cybersecurity.",
       logo: "/lovable-uploads/77a8850d-5392-4bc6-bbf9-55885e84b707.png",
       accentColor: "border-yellow-500",
+      animationDelay: "0.3s"
+    },
+    {
+      institution: "NYSCO",
+      period: "Reading",
+      qualification: "Diploma In HRM",
+      description: "Currently pursuing Diploma in Human Resource Management",
+      logo: "/lovable-uploads/89634842-2c38-4fdc-b239-8079f65ec368.png",
+      accentColor: "border-gray-400",
+      animationDelay: "0.4s"
+    },
+    {
+      institution: "NYSCO",
+      period: "Reading",
+      qualification: "Diploma in Law",
+      description: "Currently pursuing Diploma in Law",
+      logo: "/lovable-uploads/89634842-2c38-4fdc-b239-8079f65ec368.png",
+      accentColor: "border-gray-400",
+      animationDelay: "0.5s"
+    },
+    {
+      institution: "NYSCO",
+      period: "Reading",
+      qualification: "Diploma In Psychology",
+      description: "Currently pursuing Diploma in Psychology",
+      logo: "/lovable-uploads/89634842-2c38-4fdc-b239-8079f65ec368.png",
+      accentColor: "border-gray-400",
       animationDelay: "0.6s"
+    },
+    {
+      institution: "SITC Campus",
+      period: "2024",
+      qualification: "Diploma In English",
+      description: "Diploma in English Language and Literature",
+      logo: "/lovable-uploads/95314e21-6992-43d9-b883-30e3a64dc96b.png",
+      accentColor: "border-blue-600",
+      animationDelay: "0.7s"
+    },
+    {
+      institution: "LLSOI Campus",
+      period: "2024",
+      qualification: "Diploma in Criminal Psychology",
+      description: "Specialized study in Criminal Psychology and Behavioral Analysis",
+      logo: "/lovable-uploads/da159bf0-e1eb-4172-af5b-92265c64856d.png",
+      accentColor: "border-yellow-500",
+      animationDelay: "0.8s"
+    },
+    {
+      institution: "LLSOI Campus",
+      period: "2024",
+      qualification: "Diploma in Sociology",
+      description: "Comprehensive study of Social Sciences and Sociology",
+      logo: "/lovable-uploads/da159bf0-e1eb-4172-af5b-92265c64856d.png",
+      accentColor: "border-yellow-500",
+      animationDelay: "0.9s"
+    },
+    {
+      institution: "Institute of Politics",
+      period: "2024",
+      qualification: "Diploma in Politics",
+      description: "Political Science and Public Administration studies",
+      logo: "/lovable-uploads/6f6d6681-cdc4-4385-9c51-adc129e996b6.png",
+      accentColor: "border-purple-500",
+      animationDelay: "1.0s"
     }
   ];
 
@@ -70,67 +134,45 @@ const EducationSection = () => {
               Education Journey
             </h2>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-              My academic path that shaped my passion for technology and cybersecurity
+              My academic path that shaped my passion for technology, law, psychology, and social sciences
             </p>
           </div>
 
-          <div className="relative">
-            {/* Vertical Timeline Bar */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-500/50 h-full z-0">
+          {/* Grid Layout for Better Organization */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {educationData.map((education, index) => (
               <div
-                className="timeline-progress transition-all duration-2000 ease-out bg-gradient-to-b from-purple-500 to-blue-500"
-                style={{ height: isVisible ? `${progressHeight}%` : '0%' }}
-              />
-            </div>
-
-            {/* Timeline Entries */}
-            <div className="space-y-16 relative z-10">
-              {educationData.map((education, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center ${
-                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                  } ${
-                    isVisible
-                      ? index % 2 === 0
-                        ? 'animate-slide-left'
-                        : 'animate-slide-right'
-                      : 'opacity-0'
-                  }`}
-                  style={{ animationDelay: education.animationDelay }}
-                >
-                  <div className="w-1/2 px-8">
-                    <div className={`p-8 ${education.accentColor} border-2 rounded-xl bg-white/10 backdrop-blur-md shadow-lg transition-transform duration-300 hover:scale-105`}>
-                      <div className="flex items-center mb-6">
-                        <img
-                          src={education.logo}
-                          alt={`${education.institution} logo`}
-                          className="w-20 h-20 object-contain mr-6"
-                          loading="lazy"
-                        />
-                        <div>
-                          <h3 className="text-2xl font-bold text-white mb-2">
-                            {education.institution}
-                          </h3>
-                          <h4 className="text-xl font-semibold text-gray-200 mb-1">
-                            {education.qualification}
-                          </h4>
-                          <p className="text-lg text-gray-300">{education.period}</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-200 leading-relaxed text-lg">
-                        {education.description}
-                      </p>
-                    </div>
+                key={index}
+                className={`glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${education.accentColor} border-2 ${
+                  isVisible ? 'animate-zoom-in' : 'opacity-0'
+                }`}
+                style={{ animationDelay: education.animationDelay }}
+              >
+                <div className="text-center">
+                  <div className="w-20 h-20 mx-auto mb-4 rounded-lg overflow-hidden bg-white p-2 flex items-center justify-center">
+                    <img
+                      src={education.logo}
+                      alt={`${education.institution} logo`}
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                    />
                   </div>
-
-                  {/* Timeline Dot */}
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full border-4 border-white shadow-lg z-10" />
-
-                  <div className="w-1/2" />
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                    {education.qualification}
+                  </h3>
+                  <h4 className="text-lg font-semibold text-gray-200 mb-2">
+                    {education.institution}
+                  </h4>
+                  <p className="text-md text-gray-300 mb-3">{education.period}</p>
+                  <p className="text-gray-300 leading-relaxed text-sm">
+                    {education.description}
+                  </p>
                 </div>
-              ))}
-            </div>
+                
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
+              </div>
+            ))}
           </div>
         </div>
       </div>
