@@ -1,10 +1,13 @@
+
 import React from 'react';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import EducationSection from '../components/EducationSection';
+import DiplomasSection from '../components/DiplomasSection';
 import CVSection from '../components/CVSection';
 import CertificationsSection from '../components/CertificationsSection';
+import BadgesSection from '../components/BadgesSection';
 import ProjectsSection from '../components/ProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
@@ -31,12 +34,20 @@ const Index = () => {
           <EducationSection />
         </section>
         
+        <section aria-label="Professional Diplomas">
+          <DiplomasSection />
+        </section>
+        
         <section aria-label="Curriculum Vitae">
           <CVSection />
         </section>
         
         <section aria-label="Professional Certifications">
           <CertificationsSection />
+        </section>
+        
+        <section aria-label="Badges and Achievements">
+          <BadgesSection />
         </section>
         
         <section aria-label="Projects Portfolio">
