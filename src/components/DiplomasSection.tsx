@@ -42,15 +42,15 @@ const DiplomasSection = () => {
     },
     {
       title: "Diploma In Psychology",
-      status: "Reading",
+      status: "Complete",
       institution: "NYSCO",
       logo: "/lovable-uploads/89634842-2c38-4fdc-b239-8079f65ec368.png",
-      accentColor: "border-gray-400",
+      accentColor: "border-green-500",
       delay: "0.3s"
     },
     {
       title: "Diploma In English",
-      status: "Completed",
+      status: "Complete",
       institution: "SITC Campus",
       logo: "/lovable-uploads/95314e21-6992-43d9-b883-30e3a64dc96b.png",
       accentColor: "border-blue-600",
@@ -58,7 +58,7 @@ const DiplomasSection = () => {
     },
     {
       title: "Diploma in Criminal Psychology",
-      status: "Completed",
+      status: "Complete",
       institution: "LLSOI Campus",
       logo: "/lovable-uploads/da159bf0-e1eb-4172-af5b-92265c64856d.png",
       accentColor: "border-yellow-500",
@@ -66,7 +66,7 @@ const DiplomasSection = () => {
     },
     {
       title: "Diploma in Sociology",
-      status: "Completed",
+      status: "Complete",
       institution: "LLSOI Campus",
       logo: "/lovable-uploads/da159bf0-e1eb-4172-af5b-92265c64856d.png",
       accentColor: "border-yellow-500",
@@ -74,7 +74,7 @@ const DiplomasSection = () => {
     },
     {
       title: "Diploma in Politics",
-      status: "Completed",
+      status: "Complete",
       institution: "Institute of Politics",
       logo: "/lovable-uploads/6f6d6681-cdc4-4385-9c51-adc129e996b6.png",
       accentColor: "border-purple-500",

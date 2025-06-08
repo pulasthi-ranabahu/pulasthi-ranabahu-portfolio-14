@@ -49,12 +49,28 @@ const BadgesSection = () => {
       delay: "0.3s"
     },
     {
+      name: "Cisco CyberOps Associate",
+      image: "/lovable-uploads/d8438f08-957f-4891-badf-42326eb73744.png",
+      description: "Cisco Networking Academy Verified",
+      icon: Award,
+      color: "text-cyan-500",
+      delay: "0.4s"
+    },
+    {
+      name: "Cisco Network Security Associate",
+      image: "/lovable-uploads/95435644-85cc-48c8-8d8d-54d14aaab080.png",
+      description: "Cisco Networking Academy Verified",
+      icon: Trophy,
+      color: "text-cyan-500",
+      delay: "0.5s"
+    },
+    {
       name: "Fortinet Cybersecurity Fundamentals",
       image: "/lovable-uploads/5ab6c9d7-4edd-4aae-997d-0a50aa4725f8.png",
       description: "Certified Fundamentals in Cybersecurity",
       icon: Award,
       color: "text-teal-500",
-      delay: "0.4s"
+      delay: "0.6s"
     },
     {
       name: "Fortinet Cybersecurity Associate",
@@ -62,7 +78,7 @@ const BadgesSection = () => {
       description: "Certified Associate in Cybersecurity",
       icon: Trophy,
       color: "text-purple-500",
-      delay: "0.5s"
+      delay: "0.7s"
     },
     {
       name: "AWS Cloud Computing 101",
@@ -70,7 +86,7 @@ const BadgesSection = () => {
       description: "Cloud Computing Fundamentals",
       icon: Star,
       color: "text-yellow-500",
-      delay: "0.6s"
+      delay: "0.8s"
     },
     {
       name: "IBM Cloud Essentials",
@@ -78,7 +94,7 @@ const BadgesSection = () => {
       description: "Skills Network Foundational",
       icon: Award,
       color: "text-cyan-500",
-      delay: "0.7s"
+      delay: "0.9s"
     }
   ];
 
