@@ -101,7 +101,7 @@ const BadgesSection = () => {
   return (
     <section id="badges" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Badges & Achievements
@@ -117,7 +117,7 @@ const BadgesSection = () => {
             return (
               <div
                 key={index}
-                className={`glass-card w-48 p-5 hover:scale-105 transition-all duration-300 cursor-pointer group border-2 border-purple-500/30 ${
+                className={`glass-card w-48 p-6 hover:scale-105 transition-all duration-300 cursor-pointer group border-2 border-purple-500/30 ${
                   isVisible ? 'animate-zoom-in' : 'opacity-0'
                 }`}
                 style={{ animationDelay: badge.delay }}
@@ -127,7 +127,7 @@ const BadgesSection = () => {
                     <img
                       src={badge.image}
                       alt={`${badge.name} badge`}
-                      className="card-logo"
+                      className="badge-logo"
                       loading="lazy"
                     />
                   </div>

@@ -85,7 +85,7 @@ const DiplomasSection = () => {
   return (
     <section id="diplomas" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Professional Diplomas
@@ -99,7 +99,7 @@ const DiplomasSection = () => {
           {diplomas.map((diploma, index) => (
             <div
               key={index}
-              className={`glass-card w-48 p-5 hover:scale-105 transition-all duration-300 cursor-pointer group ${diploma.accentColor} border-2 ${
+              className={`glass-card w-48 p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${diploma.accentColor} border-2 ${
                 isVisible ? 'animate-zoom-in' : 'opacity-0'
               }`}
               style={{ animationDelay: diploma.delay }}
@@ -109,7 +109,7 @@ const DiplomasSection = () => {
                   <img
                     src={diploma.logo}
                     alt={`${diploma.institution} logo`}
-                    className="card-logo bg-white p-2"
+                    className="diploma-logo bg-white p-2 rounded-lg"
                     loading="lazy"
                   />
                 </div>

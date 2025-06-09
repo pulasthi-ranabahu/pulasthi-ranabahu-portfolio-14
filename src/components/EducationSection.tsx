@@ -102,11 +102,11 @@ const EducationSection = () => {
                     style={{ animationDelay: `${(index + 1) * 0.2}s` }}
                   >
                     <div className="flex flex-col md:flex-row items-center text-center md:text-left">
-                      <div className="w-20 h-20 mb-6 md:mb-0 md:mr-6 rounded-lg overflow-hidden bg-white p-2 flex items-center justify-center flex-shrink-0">
+                      <div className="mb-6 md:mb-0 md:mr-6 rounded-lg overflow-hidden bg-white p-2 flex items-center justify-center flex-shrink-0">
                         <img
                           src={education.logo}
                           alt={`${education.institution} logo`}
-                          className="w-full h-full object-contain"
+                          className="education-logo object-contain"
                           loading="lazy"
                         />
                       </div>

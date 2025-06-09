@@ -37,7 +37,7 @@
     
     --radius: 0.5rem;
     
-    /* Custom gradient variables */
+    /* Custom gradient variables - Dark Theme */
     --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -45,23 +45,23 @@
   }
 
   [data-theme="light"] {
-    --background: 210 40% 98%;
-    --foreground: 220 25% 8%;
+    --background: 240 20% 97%;
+    --foreground: 220 25% 15%;
     
-    --card: 210 40% 95%;
-    --card-foreground: 220 25% 8%;
+    --card: 240 20% 95%;
+    --card-foreground: 220 25% 15%;
     
-    --popover: 210 40% 95%;
-    --popover-foreground: 220 25% 8%;
+    --popover: 240 20% 95%;
+    --popover-foreground: 220 25% 15%;
     
     --primary: 250 75% 60%;
     --primary-foreground: 210 40% 98%;
     
-    --secondary: 210 40% 90%;
-    --secondary-foreground: 220 25% 8%;
+    --secondary: 240 20% 90%;
+    --secondary-foreground: 220 25% 15%;
     
-    --muted: 210 40% 90%;
-    --muted-foreground: 215 20.2% 35%;
+    --muted: 240 20% 90%;
+    --muted-foreground: 215 20.2% 45%;
     
     --accent: 250 75% 60%;
     --accent-foreground: 210 40% 98%;
@@ -69,15 +69,15 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 210 40% 85%;
-    --input: 210 40% 85%;
+    --border: 240 20% 85%;
+    --input: 240 20% 85%;
     --ring: 250 75% 60%;
     
-    /* Light theme gradients */
-    --gradient-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
-    --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-text: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    /* Light theme gradients with soft, complementary colors */
+    --gradient-primary: linear-gradient(135deg, #F5F5F7 0%, #EDE4E0 50%, #E8E0F0 100%);
+    --gradient-secondary: linear-gradient(135deg, #C8B6FF 0%, #B6D0E2 100%);
+    --gradient-accent: linear-gradient(135deg, #E8D5FF 0%, #D5E8FF 100%);
+    --gradient-text: linear-gradient(135deg, #8B7FD7 0%, #7B9CD9 50%, #9B87E8 100%);
   }
 }
 
@@ -152,22 +152,40 @@
   }
 
   [data-theme="light"] .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    border: 2px solid rgba(162, 89, 236, 0.4);
+    background: rgba(224, 224, 229, 0.6);
+    border: 2px solid rgba(200, 182, 255, 0.4);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   }
 
-  /* Logo sizing class for cards */
+  /* Enhanced logo sizing class for better visibility */
   .card-logo {
-    width: 64px !important;
-    height: 64px !important;
+    width: 80px !important;
+    height: 80px !important;
     object-fit: contain;
     border-radius: 8px;
     transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto 1rem auto;
   }
 
   .card-logo:hover {
     transform: scale(1.05);
+  }
+
+  /* Specific logo sizes for different sections */
+  .education-logo {
+    width: 85px !important;
+    height: 85px !important;
+  }
+
+  .diploma-logo {
+    width: 75px !important;
+    height: 75px !important;
+  }
+
+  .badge-logo {
+    width: 70px !important;
+    height: 70px !important;
   }
   
   .timeline-progress {
@@ -254,17 +272,17 @@
   }
 
   [data-theme="light"] .frosted-nav {
-    background: rgba(248, 250, 252, 0.8);
+    background: rgba(245, 245, 247, 0.8);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  /* Theme toggle button */
+  /* Enhanced theme toggle button */
   .theme-toggle {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1000;
-    padding: 8px;
+    padding: 12px;
     border-radius: 50%;
     background: rgba(30, 30, 40, 0.8);
     backdrop-filter: blur(10px);
@@ -272,17 +290,24 @@
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   [data-theme="light"] .theme-toggle {
-    background: rgba(255, 255, 255, 0.8);
-    color: black;
-    border: 2px solid rgba(162, 89, 236, 0.4);
+    background: rgba(245, 245, 247, 0.9);
+    color: #333333;
+    border: 2px solid rgba(200, 182, 255, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .theme-toggle:hover {
     transform: scale(1.1);
     background: rgba(162, 89, 236, 0.8);
+    color: white;
+  }
+
+  [data-theme="light"] .theme-toggle:hover {
+    background: rgba(200, 182, 255, 0.8);
     color: white;
   }
 }
@@ -457,12 +482,27 @@
   }
 
   [data-theme="light"] .glass-card {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(224, 224, 229, 0.9);
   }
 
   .card-logo {
-    width: 48px !important;
-    height: 48px !important;
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .education-logo {
+    width: 65px !important;
+    height: 65px !important;
+  }
+
+  .diploma-logo {
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  .badge-logo {
+    width: 50px !important;
+    height: 50px !important;
   }
 }
 
