@@ -37,7 +37,7 @@
     
     --radius: 0.5rem;
     
-    /* Custom gradient variables - Dark Theme */
+    /* Custom gradient variables - Dark Theme (DEFAULT) */
     --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -45,23 +45,23 @@
   }
 
   [data-theme="light"] {
-    --background: 240 20% 97%;
-    --foreground: 220 25% 15%;
+    --background: 0 0% 98%;
+    --foreground: 220 25% 10%;
     
-    --card: 240 20% 95%;
-    --card-foreground: 220 25% 15%;
+    --card: 0 0% 96%;
+    --card-foreground: 220 25% 10%;
     
-    --popover: 240 20% 95%;
-    --popover-foreground: 220 25% 15%;
+    --popover: 0 0% 96%;
+    --popover-foreground: 220 25% 10%;
     
     --primary: 250 75% 60%;
     --primary-foreground: 210 40% 98%;
     
-    --secondary: 240 20% 90%;
-    --secondary-foreground: 220 25% 15%;
+    --secondary: 0 0% 92%;
+    --secondary-foreground: 220 25% 10%;
     
-    --muted: 240 20% 90%;
-    --muted-foreground: 215 20.2% 45%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 215 20.2% 40%;
     
     --accent: 250 75% 60%;
     --accent-foreground: 210 40% 98%;
@@ -69,15 +69,15 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 240 20% 85%;
-    --input: 240 20% 85%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
     --ring: 250 75% 60%;
     
-    /* Light theme gradients with soft, complementary colors */
-    --gradient-primary: linear-gradient(135deg, #F5F5F7 0%, #EDE4E0 50%, #E8E0F0 100%);
-    --gradient-secondary: linear-gradient(135deg, #C8B6FF 0%, #B6D0E2 100%);
-    --gradient-accent: linear-gradient(135deg, #E8D5FF 0%, #D5E8FF 100%);
-    --gradient-text: linear-gradient(135deg, #8B7FD7 0%, #7B9CD9 50%, #9B87E8 100%);
+    /* Brighter light theme gradients with more vibrant colors */
+    --gradient-primary: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 50%, #F0F2F5 100%);
+    --gradient-secondary: linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 100%);
+    --gradient-accent: linear-gradient(135deg, #FFF3E0 0%, #F9FBE7 100%);
+    --gradient-text: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
   }
 }
 
@@ -170,9 +170,9 @@
   }
 
   [data-theme="light"] .glass-card {
-    background: rgba(224, 224, 229, 0.6);
-    border: 2px solid rgba(200, 182, 255, 0.4);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   }
 
   /* Enhanced logo sizing class for better visibility */
@@ -290,8 +290,8 @@
   }
 
   [data-theme="light"] .frosted-nav {
-    background: rgba(245, 245, 247, 0.8);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   /* Enhanced theme toggle button */
@@ -312,9 +312,9 @@
   }
 
   [data-theme="light"] .theme-toggle {
-    background: rgba(245, 245, 247, 0.9);
-    color: #333333;
-    border: 2px solid rgba(200, 182, 255, 0.5);
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a1a2e;
+    border: 2px solid rgba(99, 102, 241, 0.3);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
@@ -325,7 +325,7 @@
   }
 
   [data-theme="light"] .theme-toggle:hover {
-    background: rgba(200, 182, 255, 0.8);
+    background: rgba(99, 102, 241, 0.8);
     color: white;
   }
 }
@@ -500,7 +500,7 @@
   }
 
   [data-theme="light"] .glass-card {
-    background: rgba(224, 224, 229, 0.9);
+    background: rgba(255, 255, 255, 0.9);
   }
 
   .card-logo {
