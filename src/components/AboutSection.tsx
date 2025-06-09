@@ -35,16 +35,16 @@ const AboutSection = () => {
       <div className="content-overlay w-full min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Profile Image */}
-            <div className={`text-center md:text-left ${isVisible ? 'animate-slide-left' : 'opacity-0'}`}>
-              <div className="w-64 h-64 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-blue-500/50 shadow-2xl">
+            {/* Profile Image - Centered and Larger */}
+            <div className={`flex justify-center md:justify-center ${isVisible ? 'animate-slide-left' : 'opacity-0'}`}>
+              <div className="w-80 h-80 rounded-full overflow-hidden border-4 border-blue-500/50 shadow-2xl">
                 <img
                   src="/lovable-uploads/827170ec-a073-47ee-aae0-dd725898d637.png"
                   alt="Pulasthi Ranabahu - ICT undergraduate and cybersecurity enthusiast"
                   className="w-full h-full object-cover"
                   loading="lazy"
-                  width="256"
-                  height="256"
+                  width="320"
+                  height="320"
                 />
               </div>
             </div>

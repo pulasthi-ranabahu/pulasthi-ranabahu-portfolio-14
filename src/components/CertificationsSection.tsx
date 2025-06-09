@@ -120,7 +120,7 @@ const CertificationsSection = () => {
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Professional Certifications
@@ -142,10 +142,10 @@ const CertificationsSection = () => {
                   style={{ animationDelay: cert.delay }}
                 >
                   <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-white/10 flex items-center justify-center">
+                    <div className="flex justify-center mb-4 rounded-lg bg-white/10 p-3">
                       <IconComponent 
-                        size={24} 
-                        className={`${cert.color} group-hover:scale-110 transition-transform duration-300`}
+                        size={32} 
+                        className={`${cert.color} group-hover:scale-110 transition-transform duration-300 card-logo`}
                       />
                     </div>
                     <h3 className="text-base font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">

@@ -85,7 +85,7 @@ const DiplomasSection = () => {
   return (
     <section id="diplomas" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Professional Diplomas
@@ -105,11 +105,11 @@ const DiplomasSection = () => {
               style={{ animationDelay: diploma.delay }}
             >
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-lg overflow-hidden bg-white p-2 flex items-center justify-center">
+                <div className="flex justify-center mb-4">
                   <img
                     src={diploma.logo}
                     alt={`${diploma.institution} logo`}
-                    className="w-full h-full object-contain"
+                    className="card-logo bg-white p-2"
                     loading="lazy"
                   />
                 </div>

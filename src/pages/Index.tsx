@@ -12,11 +12,13 @@ import ProjectsSection from '../components/ProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
 import CustomCursor from '../components/CustomCursor';
+import ThemeToggle from '../components/ThemeToggle';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <CustomCursor />
+      <ThemeToggle />
       
       {/* Main content with semantic HTML structure */}
       <header>
