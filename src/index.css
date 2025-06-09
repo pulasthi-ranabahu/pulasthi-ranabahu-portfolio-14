@@ -127,6 +127,24 @@
     contain: layout style paint;
     will-change: transform;
   }
+
+  /* Light theme overlay for 3D backgrounds */
+  [data-theme="light"] .spline-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Alternative filter approach for iframe backgrounds */
+  [data-theme="light"] .spline-container iframe {
+    filter: brightness(60%) contrast(120%);
+  }
   
   /* Content overlays with optimized performance */
   .content-overlay {
