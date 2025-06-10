@@ -1,14 +1,10 @@
 
 import React from 'react';
-import { Moon } from 'lucide-react';
 
+// Theme toggle component has been removed as requested
+// The site now uses only the default dark theme
 const ThemeToggle = () => {
-  // Component now only shows the moon icon as decoration since we only have dark theme
-  return (
-    <div className="theme-toggle">
-      <Moon size={20} />
-    </div>
-  );
+  return null;
 };
 
 export default ThemeToggle;
