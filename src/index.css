@@ -60,6 +60,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Improved scrolling performance */
+    overflow-x: hidden;
   }
   
   html {
@@ -85,8 +87,22 @@
     height: 100%;
     z-index: 0;
     overflow: hidden;
-    /* Performance optimizations */
+    /* Enhanced performance optimizations */
     contain: layout style paint;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Improved spline iframe performance */
+  .spline-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transform: translateZ(0);
+    will-change: transform;
+    /* GPU acceleration */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
   
   /* Content overlays with optimized performance */
@@ -95,28 +111,32 @@
     z-index: 10;
     /* Performance optimization */
     contain: layout style;
+    transform: translateZ(0);
   }
   
-  /* Simplified frosted glass effect for better performance */
+  /* Enhanced frosted glass effect with better visibility */
   .glass-card {
-    background: rgba(30, 30, 40, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(162, 89, 236, 0.3);
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  /* Simplified About Me card */
-  .about-me-card {
-    background: rgba(30, 30, 40, 0.9);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(30, 30, 40, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(162, 89, 236, 0.4);
     border-radius: 12px;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    /* Performance optimization */
+    will-change: transform;
+  }
+
+  /* Enhanced About Me card with better contrast */
+  .about-me-card {
+    background: rgba(30, 30, 40, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(162, 89, 236, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    will-change: transform;
   }
 
   /* Enhanced logo sizing class for better visibility */
@@ -125,9 +145,10 @@
     height: 80px !important;
     object-fit: contain;
     border-radius: 8px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     margin: 0 auto 1rem auto;
+    will-change: transform;
   }
 
   .card-logo:hover {
@@ -171,7 +192,7 @@
   
   .nav-link {
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .nav-link::after {
@@ -182,7 +203,7 @@
     width: 0;
     height: 2px;
     background: var(--gradient-secondary);
-    transition: width 0.3s ease;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .nav-link:hover::after,
@@ -200,8 +221,9 @@
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.05s ease-out;
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
     mix-blend-mode: screen;
+    will-change: transform;
   }
 
   .custom-cursor::after {
@@ -225,12 +247,12 @@
     animation: ripple-effect 0.6s ease-out forwards;
   }
 
-  /* Frosted navigation bar */
+  /* Enhanced frosted navigation bar */
   .frosted-nav {
-    background: rgba(26, 26, 46, 0.9);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     transition: background 0.3s ease;
   }
 }
@@ -238,23 +260,23 @@
 @layer utilities {
   /* Optimized animations using transform and opacity only */
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-slide-up {
-    animation: slideUp 0.6s ease-out forwards;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-slide-left {
-    animation: slideLeft 0.6s ease-out forwards;
+    animation: slideLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-slide-right {
-    animation: slideRight 0.6s ease-out forwards;
+    animation: slideRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-zoom-in {
-    animation: zoomIn 0.4s ease-out forwards;
+    animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 }
 
@@ -306,7 +328,7 @@
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
@@ -344,7 +366,8 @@
 @media (max-width: 768px) {
   .spline-container iframe {
     height: 100vh;
-    /* Reduce quality on mobile */
+    /* Optimize for mobile performance */
+    transform: scale(0.9);
     image-rendering: optimizeSpeed;
   }
   
@@ -357,16 +380,16 @@
     cursor: auto !important; /* Restore default cursor on mobile */
   }
 
-  /* Disable expensive effects on mobile */
+  /* Simplified effects on mobile for better performance */
   .glass-card {
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     background: rgba(30, 30, 40, 0.9);
   }
 
   .about-me-card {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .card-logo {
@@ -397,10 +420,10 @@
   }
 }
 
-/* Performance optimizations for all elements */
-.spline-container iframe {
-  transform: translateZ(0);
-  contain: layout style paint;
+/* Enhanced performance optimizations */
+.spline-container {
+  contain: strict;
+  isolation: isolate;
 }
 
 /* Reduce motion for users who prefer it */
@@ -422,13 +445,6 @@
   * {
     transition: none !important;
     animation: none !important;
-  }
-}
-
-/* Optimize fonts loading */
-@media (max-width: 768px) {
-  body {
-    font-display: swap;
   }
 }
 

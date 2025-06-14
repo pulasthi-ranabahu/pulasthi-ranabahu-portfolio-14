@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
 import LazySplineEmbed from './LazySplineEmbed';
@@ -106,10 +105,10 @@ const CertificationsSection = () => {
 
   return (
     <section id="certifications" className="relative min-h-screen overflow-hidden py-20">
-      {/* 3D Background */}
+      {/* 3D Background - Made more visible */}
       <LazySplineEmbed 
         src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
-        className="opacity-35"
+        className="opacity-50"
       />
 
       {/* Content Overlay */}
@@ -161,4 +160,3 @@ const CertificationsSection = () => {
 };
 
 export default CertificationsSection;
-

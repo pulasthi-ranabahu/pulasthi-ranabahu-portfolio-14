@@ -16,15 +16,15 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
       ([entry]) => {
         if (entry.isIntersecting && !isInView) {
           setIsInView(true);
-          // Delay loading more to ensure other content loads first
+          // Reduced delay for faster loading
           setTimeout(() => {
             setIsLoaded(true);
-          }, 500);
+          }, 200);
         }
       },
       {
-        threshold: 0.1,
-        rootMargin: '50px',
+        threshold: 0.05, // Reduced threshold for earlier loading
+        rootMargin: '100px', // Increased margin for preloading
       }
     );
 
@@ -50,11 +50,15 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           className="w-full h-full"
           loading="lazy"
           title="3D Background Animation"
+          style={{
+            transform: 'translateZ(0)', // Hardware acceleration
+            willChange: 'transform', // Optimize for animations
+          }}
         />
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
+        <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center">
           <div className="animate-pulse" aria-label="Loading 3D background">
-            <div className="w-16 h-16 bg-purple-500/30 rounded-full"></div>
+            <div className="w-20 h-20 bg-purple-500/40 rounded-full"></div>
           </div>
         </div>
       )}

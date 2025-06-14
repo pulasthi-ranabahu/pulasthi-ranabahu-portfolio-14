@@ -8,10 +8,10 @@ const CVSection = () => {
 
   return (
     <section id="cv" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* 3D Background */}
+      {/* 3D Background - Made more visible */}
       <LazySplineEmbed 
         src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
-        className="opacity-40"
+        className="opacity-55"
       />
 
       {/* Content Overlay */}
@@ -57,4 +57,3 @@ const CVSection = () => {
 };
 
 export default CVSection;
-

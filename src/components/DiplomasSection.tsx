@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { GraduationCap } from 'lucide-react';
 import LazySplineEmbed from './LazySplineEmbed';
@@ -86,10 +84,10 @@ const DiplomasSection = () => {
 
   return (
     <section id="diplomas" className="relative min-h-screen overflow-hidden py-20">
-      {/* 3D Background */}
+      {/* 3D Background - Made more visible */}
       <LazySplineEmbed 
         src="https://my.spline.design/retrofuturismbganimation-9ueB2d5ZszdhgZH1dSd2rzPU/" 
-        className="opacity-30"
+        className="opacity-45"
       />
 
       {/* Content Overlay */}
@@ -150,4 +148,3 @@ const DiplomasSection = () => {
 };
 
 export default DiplomasSection;
-

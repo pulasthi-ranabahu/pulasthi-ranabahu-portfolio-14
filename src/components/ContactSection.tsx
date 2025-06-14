@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Linkedin, Github, Award } from 'lucide-react';
 import LazySplineEmbed from './LazySplineEmbed';
@@ -50,10 +49,10 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="relative min-h-screen overflow-hidden">
-      {/* 3D Background */}
+      {/* 3D Background - Made more visible */}
       <LazySplineEmbed 
         src="https://my.spline.design/genkubgreetingrobot-dQd6mswKKCijQDbJG0ctf0xX/" 
-        className="opacity-50"
+        className="opacity-60"
       />
 
       {/* Content Overlay */}

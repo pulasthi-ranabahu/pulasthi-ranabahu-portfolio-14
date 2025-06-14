@@ -25,10 +25,10 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* 3D Background */}
+      {/* 3D Background - Made more visible */}
       <LazySplineEmbed 
         src="https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/" 
-        className="opacity-30"
+        className="opacity-50"
       />
 
       {/* Content Overlay */}
