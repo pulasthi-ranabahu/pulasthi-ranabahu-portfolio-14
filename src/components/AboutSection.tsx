@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import LazySplineEmbed from './LazySplineEmbed';
 
@@ -26,7 +27,7 @@ const AboutSection = () => {
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
       {/* 3D Background */}
       <LazySplineEmbed 
-        src="https://my.spline.design/untitled-cloned-4b8ca4ee94e6b5e3e859c9685c4e9cf3/" 
+        src="https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/" 
         className="opacity-30"
       />
 
