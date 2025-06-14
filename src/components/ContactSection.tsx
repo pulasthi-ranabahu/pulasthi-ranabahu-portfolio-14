@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Linkedin, Github, Award } from 'lucide-react';
 import LazySplineEmbed from './LazySplineEmbed';
@@ -12,7 +13,7 @@ const ContactSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3, rootMargin: '50px' }
     );
 
     const element = document.getElementById('contact');
@@ -49,11 +50,13 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="relative min-h-screen overflow-hidden">
-      {/* 3D Background - Made more visible */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/genkubgreetingrobot-dQd6mswKKCijQDbJG0ctf0xX/" 
-        className="opacity-60"
-      />
+      {/* 3D Background - Stable positioning to prevent flicker */}
+      <div className="absolute inset-0 w-full h-full">
+        <LazySplineEmbed 
+          src="https://my.spline.design/genkubgreetingrobot-dQd6mswKKCijQDbJG0ctf0xX/" 
+          className="opacity-60"
+        />
+      </div>
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">

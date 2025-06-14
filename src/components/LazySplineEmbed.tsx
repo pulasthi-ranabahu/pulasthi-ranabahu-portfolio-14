@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 interface LazySplineEmbedProps {
   src: string;
@@ -18,6 +18,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
   const [isInView, setIsInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const embedRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     // Check if device is mobile for performance optimization
@@ -31,34 +32,37 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
+    if (entry.isIntersecting && !isInView) {
+      setIsInView(true);
+      // Faster loading for badges/diplomas when fastLoad is true
+      const delay = fastLoad ? (isMobile ? 100 : 25) : (isMobile ? 800 : 300);
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, delay);
+    }
+  }, [isInView, isMobile, fastLoad]);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isInView) {
-          setIsInView(true);
-          // Faster loading for badges/diplomas when fastLoad is true
-          const delay = fastLoad ? (isMobile ? 100 : 25) : (isMobile ? 800 : 300);
-          setTimeout(() => {
-            setIsLoaded(true);
-          }, delay);
-        }
-      },
-      {
-        threshold: fastLoad ? 0.01 : 0.05, // Even earlier loading for fast sections
-        rootMargin: fastLoad ? '300px' : '100px', // More aggressive preloading for fast sections
-      }
-    );
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(handleIntersection, {
+      threshold: fastLoad ? 0.01 : 0.05, // Even earlier loading for fast sections
+      rootMargin: fastLoad ? '300px' : '100px', // More aggressive preloading for fast sections
+    });
 
     if (embedRef.current) {
-      observer.observe(embedRef.current);
+      observerRef.current.observe(embedRef.current);
     }
 
     return () => {
-      if (embedRef.current) {
-        observer.unobserve(embedRef.current);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
       }
     };
-  }, [isInView, isMobile, fastLoad]);
+  }, [handleIntersection, fastLoad]);
 
   return (
     <div ref={embedRef} className={`spline-container ${className}`} aria-hidden="true">

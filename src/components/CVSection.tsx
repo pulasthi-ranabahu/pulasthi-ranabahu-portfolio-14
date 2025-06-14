@@ -1,21 +1,14 @@
 
 import React, { useState } from 'react';
 import { FileText } from 'lucide-react';
-import LazySplineEmbed from './LazySplineEmbed';
 
 const CVSection = () => {
   const [showCV, setShowCV] = useState(false);
 
   return (
-    <section id="cv" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* 3D Background - Made more visible */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
-        className="opacity-55"
-      />
-
-      {/* Content Overlay */}
-      <div className="content-overlay w-full min-h-screen flex items-center">
+    <section id="cv" className="relative min-h-screen flex items-center bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+      {/* Content */}
+      <div className="w-full min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           {/* Frosted Glass Card for CV Content */}
           <div className="glass-card p-8 md:p-12 text-center">
