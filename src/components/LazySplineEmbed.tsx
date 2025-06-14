@@ -4,9 +4,10 @@ import React, { useState, useRef, useEffect } from 'react';
 interface LazySplineEmbedProps {
   src: string;
   className?: string;
+  fastLoad?: boolean; // New prop for faster loading
 }
 
-const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }) => {
+const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '', fastLoad = false }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -29,16 +30,16 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
       ([entry]) => {
         if (entry.isIntersecting && !isInView) {
           setIsInView(true);
-          // Faster loading for better UX with progressive loading
-          const delay = isMobile ? 800 : 300;
+          // Faster loading for badges/diplomas when fastLoad is true
+          const delay = fastLoad ? (isMobile ? 200 : 50) : (isMobile ? 800 : 300);
           setTimeout(() => {
             setIsLoaded(true);
           }, delay);
         }
       },
       {
-        threshold: 0.05, // Load when 5% visible for better performance
-        rootMargin: '100px', // Start loading slightly before visible
+        threshold: fastLoad ? 0.02 : 0.05, // Earlier loading for fast sections
+        rootMargin: fastLoad ? '200px' : '100px', // More aggressive preloading for fast sections
       }
     );
 
@@ -51,7 +52,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
         observer.unobserve(embedRef.current);
       }
     };
-  }, [isInView, isMobile]);
+  }, [isInView, isMobile, fastLoad]);
 
   return (
     <div ref={embedRef} className={`spline-container ${className}`} aria-hidden="true">
@@ -67,12 +68,11 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           style={{
             transform: 'translateZ(0)',
             willChange: 'transform',
-            // Fixed: Use valid imageRendering values
-            imageRendering: isMobile ? 'auto' : 'auto',
-            // Additional mobile optimizations
+            // Enhanced mobile optimizations for fast load
+            imageRendering: 'auto',
             ...(isMobile && {
-              filter: 'brightness(0.9)', // Slightly dimmed on mobile for performance
-              transform: 'scale(0.95) translateZ(0)', // Slightly smaller on mobile
+              filter: fastLoad ? 'brightness(0.95)' : 'brightness(0.9)',
+              transform: fastLoad ? 'scale(0.98) translateZ(0)' : 'scale(0.95) translateZ(0)',
             }),
           }}
           onLoad={() => {
@@ -85,9 +85,9 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center">
           <div className="animate-pulse flex flex-col items-center" aria-label="Loading 3D background">
-            <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r from-purple-500/40 to-blue-500/40 rounded-full mb-4"></div>
+            <div className={`${fastLoad ? 'w-12 h-12 md:w-16 md:h-16' : 'w-16 h-16 md:w-24 md:h-24'} bg-gradient-to-r from-purple-500/40 to-blue-500/40 rounded-full mb-4`}></div>
             <div className="text-purple-300/70 text-sm font-medium">
-              {isMobile ? 'Loading...' : 'Loading 3D Background...'}
+              {fastLoad ? 'Loading...' : (isMobile ? 'Loading...' : 'Loading 3D Background...')}
             </div>
           </div>
         </div>

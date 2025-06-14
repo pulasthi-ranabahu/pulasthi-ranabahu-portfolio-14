@@ -100,10 +100,11 @@ const BadgesSection = () => {
 
   return (
     <section id="badges" className="relative min-h-screen overflow-hidden py-20">
-      {/* 3D Background - Made more visible */}
+      {/* 3D Background - Optimized for faster loading */}
       <LazySplineEmbed 
         src="https://my.spline.design/retrofuturismbganimation-9ueB2d5ZszdhgZH1dSd2rzPU/" 
         className="opacity-45"
+        fastLoad={true}
       />
 
       {/* Content Overlay */}
