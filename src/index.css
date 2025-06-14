@@ -62,12 +62,18 @@
     text-rendering: optimizeLegibility;
     /* Improved scrolling performance */
     overflow-x: hidden;
+    /* Prevent horizontal scroll on all devices */
+    width: 100%;
+    max-width: 100vw;
   }
   
   html {
     scroll-behavior: smooth;
     /* Performance optimization */
     -webkit-overflow-scrolling: touch;
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+    width: 100%;
   }
 }
 
@@ -91,6 +97,8 @@
     contain: layout style paint;
     transform: translateZ(0);
     will-change: transform;
+    /* Improved mobile performance */
+    image-rendering: optimizeSpeed;
   }
   
   /* Improved spline iframe performance */
@@ -103,6 +111,8 @@
     /* GPU acceleration */
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    /* Mobile optimizations */
+    image-rendering: optimizeSpeed;
   }
   
   /* Content overlays with optimized performance */
@@ -112,6 +122,9 @@
     /* Performance optimization */
     contain: layout style;
     transform: translateZ(0);
+    /* Ensure full width on all devices */
+    width: 100%;
+    min-width: 100%;
   }
   
   /* Enhanced frosted glass effect with better visibility */
@@ -125,6 +138,9 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
     /* Performance optimization */
     will-change: transform;
+    /* Responsive adjustments */
+    width: 100%;
+    max-width: 100%;
   }
 
   /* Enhanced About Me card with better contrast */
@@ -137,6 +153,9 @@
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
     will-change: transform;
+    /* Responsive adjustments */
+    width: 100%;
+    max-width: 100%;
   }
 
   /* Enhanced logo sizing class for better visibility */
@@ -363,7 +382,20 @@
 }
 
 /* Responsive breakpoints with performance considerations */
+@media (max-width: 1024px) {
+  .spline-container iframe {
+    /* Optimize for tablet performance */
+    transform: scale(0.95);
+    image-rendering: optimizeSpeed;
+  }
+}
+
 @media (max-width: 768px) {
+  .spline-container {
+    /* Reduce complexity on mobile */
+    opacity: 0.8;
+  }
+  
   .spline-container iframe {
     height: 100vh;
     /* Optimize for mobile performance */
@@ -385,11 +417,13 @@
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     background: rgba(30, 30, 40, 0.9);
+    margin: 0 0.5rem; /* Add margins on mobile */
   }
 
   .about-me-card {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    margin: 0 0.5rem; /* Add margins on mobile */
   }
 
   .card-logo {
@@ -417,6 +451,34 @@
   .badge-logo {
     width: 50px !important;
     height: 50px !important;
+  }
+
+  /* Mobile text optimizations */
+  .gradient-text {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  /* Mobile section padding */
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .spline-container {
+    /* Further reduce on very small screens */
+    opacity: 0.6;
+  }
+  
+  .glass-card {
+    margin: 0 0.25rem;
+    padding: 1rem;
+  }
+
+  .about-me-card {
+    margin: 0 0.25rem;
+    padding: 1rem;
   }
 }
 
@@ -452,5 +514,20 @@
 @media screen and (min-width: 1024px) {
   .spline-container {
     contain: strict;
+  }
+}
+
+/* Ultra-wide screen support */
+@media (min-width: 1920px) {
+  .max-w-7xl {
+    max-width: 1400px; /* Prevent content from being too wide */
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .spline-container iframe {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
   }
 }
