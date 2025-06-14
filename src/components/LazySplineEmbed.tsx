@@ -5,9 +5,15 @@ interface LazySplineEmbedProps {
   src: string;
   className?: string;
   fastLoad?: boolean; // New prop for faster loading
+  biggerSize?: boolean; // New prop for larger animations
 }
 
-const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '', fastLoad = false }) => {
+const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ 
+  src, 
+  className = '', 
+  fastLoad = false,
+  biggerSize = false 
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -31,15 +37,15 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '', 
         if (entry.isIntersecting && !isInView) {
           setIsInView(true);
           // Faster loading for badges/diplomas when fastLoad is true
-          const delay = fastLoad ? (isMobile ? 200 : 50) : (isMobile ? 800 : 300);
+          const delay = fastLoad ? (isMobile ? 100 : 25) : (isMobile ? 800 : 300);
           setTimeout(() => {
             setIsLoaded(true);
           }, delay);
         }
       },
       {
-        threshold: fastLoad ? 0.02 : 0.05, // Earlier loading for fast sections
-        rootMargin: fastLoad ? '200px' : '100px', // More aggressive preloading for fast sections
+        threshold: fastLoad ? 0.01 : 0.05, // Even earlier loading for fast sections
+        rootMargin: fastLoad ? '300px' : '100px', // More aggressive preloading for fast sections
       }
     );
 
@@ -66,11 +72,13 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '', 
           loading="lazy"
           title="3D Background Animation"
           style={{
-            transform: 'translateZ(0)',
+            transform: biggerSize 
+              ? (isMobile ? 'scale(1.1) translateZ(0)' : 'scale(1.2) translateZ(0)')
+              : 'translateZ(0)',
             willChange: 'transform',
-            // Enhanced mobile optimizations for fast load
             imageRendering: 'auto',
-            ...(isMobile && {
+            transformOrigin: 'center center',
+            ...(isMobile && !biggerSize && {
               filter: fastLoad ? 'brightness(0.95)' : 'brightness(0.9)',
               transform: fastLoad ? 'scale(0.98) translateZ(0)' : 'scale(0.95) translateZ(0)',
             }),

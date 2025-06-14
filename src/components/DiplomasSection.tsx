@@ -12,7 +12,7 @@ const DiplomasSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
 
     const element = document.getElementById('diplomas');
@@ -84,11 +84,12 @@ const DiplomasSection = () => {
 
   return (
     <section id="diplomas" className="relative min-h-screen overflow-hidden py-20">
-      {/* 3D Background - Optimized for faster loading */}
+      {/* 3D Background - Bigger and faster loading */}
       <LazySplineEmbed 
         src="https://my.spline.design/retrofuturismbganimation-9ueB2d5ZszdhgZH1dSd2rzPU/" 
-        className="opacity-45"
+        className="opacity-60"
         fastLoad={true}
+        biggerSize={true}
       />
 
       {/* Content Overlay */}
