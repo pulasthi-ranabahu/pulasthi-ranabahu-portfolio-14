@@ -1,15 +1,18 @@
 
 import React, { useState } from 'react';
 import { FileText } from 'lucide-react';
-import OptimizedBackground from './OptimizedBackground';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const CVSection = () => {
   const [showCV, setShowCV] = useState(false);
 
   return (
     <section id="cv" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Optimized Background */}
-      <OptimizedBackground variant="accent" />
+      {/* 3D Background */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
+        className="opacity-40"
+      />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">

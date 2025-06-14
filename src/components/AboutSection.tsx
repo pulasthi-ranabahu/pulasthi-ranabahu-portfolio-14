@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import OptimizedBackground from './OptimizedBackground';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,8 +25,11 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Optimized Background */}
-      <OptimizedBackground variant="secondary" />
+      {/* 3D Background */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
+        className="opacity-30"
+      />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">

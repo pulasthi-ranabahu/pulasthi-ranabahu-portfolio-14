@@ -50,7 +50,6 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           className="w-full h-full"
           loading="lazy"
           title="3D Background Animation"
-          style={{ imageRendering: 'optimizeSpeed' }}
         />
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">

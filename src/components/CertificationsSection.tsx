@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
-import OptimizedBackground from './OptimizedBackground';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const CertificationsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -106,8 +106,11 @@ const CertificationsSection = () => {
 
   return (
     <section id="certifications" className="relative min-h-screen overflow-hidden py-20">
-      {/* Optimized Background */}
-      <OptimizedBackground variant="secondary" />
+      {/* 3D Background */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
+        className="opacity-35"
+      />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">

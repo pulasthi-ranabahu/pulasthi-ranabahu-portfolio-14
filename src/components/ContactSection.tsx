@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Linkedin, Github, Award } from 'lucide-react';
-import OptimizedBackground from './OptimizedBackground';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,8 +50,11 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="relative min-h-screen overflow-hidden">
-      {/* Optimized Background */}
-      <OptimizedBackground variant="primary" />
+      {/* 3D Background */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
+        className="opacity-50"
+      />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">
