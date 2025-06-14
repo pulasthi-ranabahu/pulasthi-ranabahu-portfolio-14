@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { FileText } from 'lucide-react';
 import LazySplineEmbed from './LazySplineEmbed';
@@ -9,7 +10,7 @@ const CVSection = () => {
     <section id="cv" className="relative min-h-screen flex items-center overflow-hidden">
       {/* 3D Background */}
       <LazySplineEmbed 
-        src="https://my.spline.design/gameboy-6ac5e7e6c8e91d4e29e462e5e8e9e2f5/" 
+        src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
         className="opacity-40"
       />
 
@@ -56,3 +57,4 @@ const CVSection = () => {
 };
 
 export default CVSection;
+

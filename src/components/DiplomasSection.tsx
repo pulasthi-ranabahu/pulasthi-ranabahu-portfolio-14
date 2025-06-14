@@ -1,6 +1,8 @@
 
+
 import React, { useEffect, useState } from 'react';
 import { GraduationCap } from 'lucide-react';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const DiplomasSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -83,56 +85,64 @@ const DiplomasSection = () => {
   ];
 
   return (
-    <section id="diplomas" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-            Professional Diplomas
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Specialized diplomas across diverse fields including law, psychology, and management
-          </p>
-        </div>
+    <section id="diplomas" className="relative min-h-screen overflow-hidden py-20">
+      {/* 3D Background */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/retrofuturismbganimation-9ueB2d5ZszdhgZH1dSd2rzPU/" 
+        className="opacity-30"
+      />
 
-        <div className="flex flex-wrap justify-center gap-8">
-          {diplomas.map((diploma, index) => (
-            <div
-              key={index}
-              className={`glass-card w-48 p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${diploma.accentColor} border-2 ${
-                isVisible ? 'animate-zoom-in' : 'opacity-0'
-              }`}
-              style={{ animationDelay: diploma.delay }}
-            >
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <img
-                    src={diploma.logo}
-                    alt={`${diploma.institution} logo`}
-                    className="diploma-logo bg-white p-2 rounded-lg"
-                    loading="lazy"
-                  />
+      {/* Content Overlay */}
+      <div className="content-overlay w-full min-h-screen flex items-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+              Professional Diplomas
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Specialized diplomas across diverse fields including law, psychology, and management
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-8">
+            {diplomas.map((diploma, index) => (
+              <div
+                key={index}
+                className={`glass-card w-48 p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${diploma.accentColor} border-2 ${
+                  isVisible ? 'animate-zoom-in' : 'opacity-0'
+                }`}
+                style={{ animationDelay: diploma.delay }}
+              >
+                <div className="text-center">
+                  <div className="flex justify-center mb-4">
+                    <img
+                      src={diploma.logo}
+                      alt={`${diploma.institution} logo`}
+                      className="diploma-logo bg-white p-2 rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 className="text-base font-bold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
+                    {diploma.title}
+                  </h3>
+                  <h4 className="text-sm font-semibold text-gray-200 mb-3">
+                    {diploma.institution}
+                  </h4>
+                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                    diploma.status === 'Reading' 
+                      ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30' 
+                      : 'bg-green-500/20 text-green-300 border border-green-500/30'
+                  }`}>
+                    <GraduationCap size={12} className="mr-1" />
+                    {diploma.status}
+                  </span>
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
-                  {diploma.title}
-                </h3>
-                <h4 className="text-sm font-semibold text-gray-200 mb-3">
-                  {diploma.institution}
-                </h4>
-                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                  diploma.status === 'Reading' 
-                    ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30' 
-                    : 'bg-green-500/20 text-green-300 border border-green-500/30'
-                }`}>
-                  <GraduationCap size={12} className="mr-1" />
-                  {diploma.status}
-                </span>
+                
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
               </div>
-              
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -140,3 +150,4 @@ const DiplomasSection = () => {
 };
 
 export default DiplomasSection;
+
