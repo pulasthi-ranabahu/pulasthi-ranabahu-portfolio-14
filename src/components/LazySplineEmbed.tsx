@@ -29,16 +29,16 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
       ([entry]) => {
         if (entry.isIntersecting && !isInView) {
           setIsInView(true);
-          // Faster loading for better UX
-          const delay = isMobile ? 500 : 100; // Longer delay on mobile for performance
+          // Faster loading for better UX with progressive loading
+          const delay = isMobile ? 800 : 300;
           setTimeout(() => {
             setIsLoaded(true);
           }, delay);
         }
       },
       {
-        threshold: 0.1, // Load when 10% visible
-        rootMargin: '50px', // Reduced margin for faster loading
+        threshold: 0.05, // Load when 5% visible for better performance
+        rootMargin: '100px', // Start loading slightly before visible
       }
     );
 
@@ -67,8 +67,13 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           style={{
             transform: 'translateZ(0)',
             willChange: 'transform',
-            // Optimize for mobile
-            imageRendering: isMobile ? 'optimizeSpeed' : 'auto',
+            // Fixed: Use valid imageRendering values
+            imageRendering: isMobile ? 'auto' : 'auto',
+            // Additional mobile optimizations
+            ...(isMobile && {
+              filter: 'brightness(0.9)', // Slightly dimmed on mobile for performance
+              transform: 'scale(0.95) translateZ(0)', // Slightly smaller on mobile
+            }),
           }}
           onLoad={() => {
             // Additional optimization after iframe loads
@@ -78,9 +83,12 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           }}
         />
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
-          <div className="animate-pulse" aria-label="Loading 3D background">
-            <div className="w-12 h-12 md:w-20 md:h-20 bg-purple-500/30 rounded-full"></div>
+        <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center">
+          <div className="animate-pulse flex flex-col items-center" aria-label="Loading 3D background">
+            <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r from-purple-500/40 to-blue-500/40 rounded-full mb-4"></div>
+            <div className="text-purple-300/70 text-sm font-medium">
+              {isMobile ? 'Loading...' : 'Loading 3D Background...'}
+            </div>
           </div>
         </div>
       )}
