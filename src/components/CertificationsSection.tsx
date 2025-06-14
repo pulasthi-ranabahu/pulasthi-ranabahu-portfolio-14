@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
 import LazySplineEmbed from './LazySplineEmbed';
@@ -108,7 +107,7 @@ const CertificationsSection = () => {
     <section id="certifications" className="relative min-h-screen overflow-hidden py-20">
       {/* 3D Background */}
       <LazySplineEmbed 
-        src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
+        src="https://my.spline.design/robotplaygroundcopy-3d675e7f9f5b9e0e5f5c4e8a71f7b084/" 
         className="opacity-35"
       />
 
