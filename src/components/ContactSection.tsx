@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Linkedin, Github, Award } from 'lucide-react';
+import OptimizedBackground from './OptimizedBackground';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -49,17 +50,8 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="relative min-h-screen overflow-hidden">
-      {/* New Spline 3D Background */}
-      <div className="spline-container">
-        <iframe 
-          src='https://my.spline.design/genkubgreetingrobot-dQd6mswKKCijQDbJG0ctf0xX/' 
-          frameBorder='0' 
-          width='100%' 
-          height='100%'
-          className="w-full h-full"
-          loading="lazy"
-        />
-      </div>
+      {/* Optimized Background */}
+      <OptimizedBackground variant="primary" />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">
@@ -83,7 +75,7 @@ const ContactSection = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`glass-card p-8 hover:scale-110 transition-all duration-300 animate-bounce-hover group ${
+                    className={`glass-card p-8 hover:scale-110 transition-all duration-300 group ${
                       isVisible ? 'animate-zoom-in' : 'opacity-0'
                     }`}
                     style={{ animationDelay: link.delay }}

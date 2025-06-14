@@ -16,15 +16,15 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
       ([entry]) => {
         if (entry.isIntersecting && !isInView) {
           setIsInView(true);
-          // Delay loading slightly to ensure smooth scrolling
+          // Delay loading more to ensure other content loads first
           setTimeout(() => {
             setIsLoaded(true);
-          }, 200);
+          }, 500);
         }
       },
       {
         threshold: 0.1,
-        rootMargin: '100px',
+        rootMargin: '50px',
       }
     );
 
@@ -47,9 +47,10 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ src, className = '' }
           frameBorder="0"
           width="100%"
           height="100%"
-          className="w-full h-full gpu-accelerated"
+          className="w-full h-full"
           loading="lazy"
           title="3D Background Animation"
+          style={{ imageRendering: 'optimizeSpeed' }}
         />
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import LazySplineEmbed from './LazySplineEmbed';
 
@@ -16,10 +15,10 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Lazy Loaded Spline 3D Background */}
+      {/* Keep one Spline background for the hero section only */}
       <LazySplineEmbed 
         src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
-        className="opacity-90"
+        className="opacity-60"
       />
 
       {/* Content Overlay */}
@@ -40,13 +39,13 @@ const HeroSection = () => {
             <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-800 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`} style={{ animationDelay: '600ms' }}>
               <button
                 onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:scale-105 transition-transform duration-300 gpu-accelerated"
+                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:scale-105 transition-transform duration-300"
               >
                 Learn More
               </button>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-3 border border-purple-500 text-white font-semibold rounded-lg hover:bg-purple-500/20 transition-colors duration-300 gpu-accelerated"
+                className="px-8 py-3 border border-purple-500 text-white font-semibold rounded-lg hover:bg-purple-500/20 transition-colors duration-300"
               >
                 Get In Touch
               </button>

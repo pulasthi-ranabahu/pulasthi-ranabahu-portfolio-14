@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import LazySplineEmbed from './LazySplineEmbed';
+import OptimizedBackground from './OptimizedBackground';
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,11 +25,8 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Lazy Loaded Spline 3D Background */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/claritystream-N2n7bKB5Yezl1lpHkkzzwWQH/" 
-        className="opacity-70"
-      />
+      {/* Optimized Background */}
+      <OptimizedBackground variant="secondary" />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">
@@ -54,7 +51,7 @@ const AboutSection = () => {
               <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
                 About Me
               </h2>
-              <div className="about-me-card p-8 rounded-xl bg-white/10 backdrop-blur-[32px] border border-white/20 shadow-lg">
+              <div className="about-me-card p-8 rounded-xl bg-white/10 backdrop-blur-[16px] border border-white/20 shadow-lg">
                 <p className="text-lg text-gray-200 leading-relaxed mb-6">
                   Dedicated ICT undergraduate passionate about cybersecurity, teamwork, and innovative projects. 
                   Skilled in network security, technical support, and collaborative problem-solving.

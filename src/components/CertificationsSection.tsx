@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
+import OptimizedBackground from './OptimizedBackground';
 
 const CertificationsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -105,18 +106,8 @@ const CertificationsSection = () => {
 
   return (
     <section id="certifications" className="relative min-h-screen overflow-hidden py-20">
-      {/* Spline 3D Background */}
-      <div className="spline-container">
-        <iframe 
-          src='https://my.spline.design/interactivekeyboardbyabhinand-Eyk23c94VDt0fOFUoMewDBt7/' 
-          frameBorder='0' 
-          width='100%' 
-          height='100%'
-          className="w-full h-full"
-          loading="lazy"
-          title="3D Background Animation"
-        />
-      </div>
+      {/* Optimized Background */}
+      <OptimizedBackground variant="secondary" />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">

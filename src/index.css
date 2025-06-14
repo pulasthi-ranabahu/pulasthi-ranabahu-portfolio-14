@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -59,7 +60,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    transition: background 0.3s ease, color 0.3s ease;
   }
   
   html {
@@ -75,8 +75,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    /* Performance optimization */
-    will-change: transform;
   }
   
   .spline-container {
@@ -89,7 +87,6 @@
     overflow: hidden;
     /* Performance optimizations */
     contain: layout style paint;
-    will-change: transform;
   }
   
   /* Content overlays with optimized performance */
@@ -100,33 +97,26 @@
     contain: layout style;
   }
   
-  /* Enhanced frosted glass effect for cards with better performance */
+  /* Simplified frosted glass effect for better performance */
   .glass-card {
-    background: rgba(30, 30, 40, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 2px solid rgba(162, 89, 236, 0.3);
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-    /* Performance optimizations */
-    transform: translateZ(0);
-    will-change: transform;
-    contain: layout style paint;
-    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(30, 30, 40, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(162, 89, 236, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  /* Enhanced About Me card with stronger blur effect */
+  /* Simplified About Me card */
   .about-me-card {
-    background: rgba(30, 30, 40, 0.6);
-    backdrop-filter: blur(32px);
-    -webkit-backdrop-filter: blur(32px);
-    border: 2px solid rgba(162, 89, 236, 0.4);
-    border-radius: 18px;
-    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25);
-    transform: translateZ(0);
-    will-change: transform;
-    contain: layout style paint;
-    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(30, 30, 40, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(162, 89, 236, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   /* Enhanced logo sizing class for better visibility */
@@ -179,17 +169,9 @@
     height: 70px !important;
   }
   
-  .timeline-progress {
-    background: var(--gradient-secondary);
-    width: 4px;
-    transition: height 0.5s ease-in-out;
-    will-change: height;
-  }
-  
   .nav-link {
     position: relative;
     transition: all 0.3s ease;
-    will-change: transform;
   }
   
   .nav-link::after {
@@ -201,7 +183,6 @@
     height: 2px;
     background: var(--gradient-secondary);
     transition: width 0.3s ease;
-    will-change: width;
   }
   
   .nav-link:hover::after,
@@ -221,9 +202,6 @@
     transform: translate(-50%, -50%);
     transition: transform 0.05s ease-out;
     mix-blend-mode: screen;
-    /* Performance optimization */
-    will-change: transform;
-    contain: layout style paint;
   }
 
   .custom-cursor::after {
@@ -245,32 +223,19 @@
     pointer-events: none;
     z-index: 9998;
     animation: ripple-effect 0.6s ease-out forwards;
-    /* Performance optimization */
-    will-change: transform, opacity;
-    contain: layout style paint;
   }
 
   /* Frosted navigation bar */
   .frosted-nav {
-    background: rgba(26, 26, 46, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(26, 26, 46, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    /* Performance optimization */
-    will-change: transform;
-    contain: layout style paint;
-    transition: background 0.3s ease, border-color 0.3s ease;
+    transition: background 0.3s ease;
   }
 }
 
 @layer utilities {
-  /* GPU-accelerated performance class */
-  .gpu-accelerated {
-    transform: translateZ(0);
-    will-change: transform;
-    contain: layout style paint;
-  }
-
   /* Optimized animations using transform and opacity only */
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
@@ -291,119 +256,86 @@
   .animate-zoom-in {
     animation: zoomIn 0.4s ease-out forwards;
   }
-  
-  .animate-bounce-hover:hover {
-    animation: bounceHover 0.4s ease forwards;
-  }
-  
-  .animate-flip-card:hover {
-    transform: rotateY(180deg);
-  }
-  
-  .animate-progress-bar {
-    animation: progressBar 1.5s ease-out forwards;
-  }
 }
 
 /* Optimized keyframes using transform and opacity only */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px) translateZ(0);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0);
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px) translateZ(0);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0);
   }
 }
 
 @keyframes slideLeft {
   from {
     opacity: 0;
-    transform: translateX(30px) translateZ(0);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
-    transform: translateX(0) translateZ(0);
+    transform: translateX(0);
   }
 }
 
 @keyframes slideRight {
   from {
     opacity: 0;
-    transform: translateX(-30px) translateZ(0);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
-    transform: translateX(0) translateZ(0);
+    transform: translateX(0);
   }
 }
 
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.9) translateZ(0);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateZ(0);
-  }
-}
-
-@keyframes bounceHover {
-  0%, 20%, 60%, 100% {
-    transform: translateY(0) translateZ(0);
-  }
-  40% {
-    transform: translateY(-8px) translateZ(0);
-  }
-  80% {
-    transform: translateY(-4px) translateZ(0);
-  }
-}
-
-@keyframes progressBar {
-  from {
-    transform: scaleX(0) translateZ(0);
-  }
-  to {
-    transform: scaleX(1) translateZ(0);
+    transform: scale(1);
   }
 }
 
 @keyframes pulse-cursor {
   0% {
-    transform: scale(1) translateZ(0);
+    transform: scale(1);
     opacity: 1;
   }
   50% {
-    transform: scale(1.1) translateZ(0);
+    transform: scale(1.1);
     opacity: 0.8;
   }
   100% {
-    transform: scale(1) translateZ(0);
+    transform: scale(1);
     opacity: 1;
   }
 }
 
 @keyframes ripple-effect {
   0% {
-    transform: scale(0) translateZ(0);
+    transform: scale(0);
     opacity: 1;
   }
   100% {
-    transform: scale(4) translateZ(0);
+    transform: scale(4);
     opacity: 0;
   }
 }
@@ -427,14 +359,14 @@
 
   /* Disable expensive effects on mobile */
   .glass-card {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: rgba(30, 30, 40, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(30, 30, 40, 0.9);
   }
 
   .about-me-card {
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .card-logo {
@@ -467,7 +399,6 @@
 
 /* Performance optimizations for all elements */
 .spline-container iframe {
-  will-change: transform;
   transform: translateZ(0);
   contain: layout style paint;
 }
@@ -478,8 +409,7 @@
   .animate-slide-up,
   .animate-slide-left,
   .animate-slide-right,
-  .animate-zoom-in,
-  .animate-bounce-hover {
+  .animate-zoom-in {
     animation: none !important;
     transition: none !important;
   }
