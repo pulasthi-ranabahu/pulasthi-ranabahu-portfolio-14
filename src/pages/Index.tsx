@@ -12,31 +12,41 @@ import ProjectsSection from '../components/ProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
 import CustomCursor from '../components/CustomCursor';
+import { usePageOptimization } from '../hooks/usePageOptimization';
 
 const Index = () => {
+  // Apply performance optimizations
+  usePageOptimization();
+
   useEffect(() => {
-    // Performance optimizations
+    // Aggressive resource preloading for critical 3D backgrounds
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => {
-        // Preload critical resources
-        const criticalSplineUrls = [
+        const criticalUrls = [
           'https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/',
           'https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/',
+          'https://my.spline.design/genkubgreetingrobot-dQd6mswKKCijQDbJG0ctf0xX/',
         ];
         
-        criticalSplineUrls.forEach(url => {
-          const link = document.createElement('link');
-          link.rel = 'prefetch';
-          link.href = url;
-          document.head.appendChild(link);
+        criticalUrls.forEach(url => {
+          // DNS prefetch
+          const dnsLink = document.createElement('link');
+          dnsLink.rel = 'dns-prefetch';
+          dnsLink.href = url;
+          document.head.appendChild(dnsLink);
+          
+          // Preconnect for faster loading
+          const preconnectLink = document.createElement('link');
+          preconnectLink.rel = 'preconnect';
+          preconnectLink.href = url;
+          document.head.appendChild(preconnectLink);
         });
       });
     }
 
-    // Update document title and meta tags for better SEO
+    // Enhanced SEO and performance meta tags
     document.title = 'Pulasthi Ranabahu | ICT Undergraduate & Cybersecurity Expert | Portfolio';
     
-    // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 
@@ -44,7 +54,7 @@ const Index = () => {
       );
     }
 
-    // Add structured data for SEO
+    // Enhanced structured data for better SEO
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -62,7 +72,7 @@ const Index = () => {
       },
       "knowsAbout": [
         "Cybersecurity",
-        "Network Security",
+        "Network Security", 
         "Cloud Computing",
         "Information Technology",
         "Digital Forensics"
@@ -75,7 +85,6 @@ const Index = () => {
     document.head.appendChild(script);
 
     return () => {
-      // Cleanup
       const existingScript = document.querySelector('script[type="application/ld+json"]');
       if (existingScript) {
         document.head.removeChild(existingScript);
@@ -84,55 +93,26 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground" style={{ transform: 'translateZ(0)' }}>
       <CustomCursor />
       
-      {/* Main content with semantic HTML structure */}
       <header>
         <Navigation />
       </header>
       
-      <main>
+      <main style={{ willChange: 'transform' }}>
         <HeroSection />
-        
-        <section aria-label="About Pulasthi Ranabahu">
-          <AboutSection />
-        </section>
-        
-        <section aria-label="Education Background">
-          <EducationSection />
-        </section>
-        
-        <section aria-label="Professional Diplomas">
-          <DiplomasSection />
-        </section>
-        
-        <section aria-label="Curriculum Vitae">
-          <CVSection />
-        </section>
-        
-        <section aria-label="Professional Certifications">
-          <CertificationsSection />
-        </section>
-        
-        <section aria-label="Badges and Achievements">
-          <BadgesSection />
-        </section>
-        
-        <section aria-label="Projects Portfolio">
-          <ProjectsSection />
-        </section>
-        
-        <section aria-label="Technical Skills">
-          <SkillsSection />
-        </section>
-        
-        <section aria-label="Contact Information">
-          <ContactSection />
-        </section>
+        <AboutSection />
+        <EducationSection />
+        <DiplomasSection />
+        <CVSection />
+        <CertificationsSection />
+        <BadgesSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <ContactSection />
       </main>
       
-      {/* Footer */}
       <footer className="relative bg-black/20 border-t border-white/10 py-8" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">

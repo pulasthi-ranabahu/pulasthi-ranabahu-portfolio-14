@@ -5,7 +5,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* Performance-optimized design system with dark purple/blue gradient theme */
+/* Ultra-optimized CSS with GPU acceleration */
 @layer base {
   :root {
     --background: 220 25% 8%;
@@ -38,7 +38,7 @@
     
     --radius: 0.5rem;
     
-    /* Custom gradient variables - Dark Theme */
+    /* Custom gradient variables */
     --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -56,24 +56,28 @@
     @apply bg-background text-foreground font-['Inter',sans-serif];
     background: var(--gradient-primary);
     min-height: 100vh;
-    /* Performance optimizations */
+    /* Ultra-performance optimizations */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /* Improved scrolling performance */
+    -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
-    /* Prevent horizontal scroll on all devices */
     width: 100%;
     max-width: 100vw;
+    /* GPU acceleration */
+    transform: translateZ(0);
+    will-change: scroll-position;
+    backface-visibility: hidden;
   }
   
   html {
     scroll-behavior: smooth;
-    /* Performance optimization */
     -webkit-overflow-scrolling: touch;
-    /* Prevent horizontal scroll */
     overflow-x: hidden;
     width: 100%;
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 
@@ -93,41 +97,34 @@
     height: 100%;
     z-index: 0;
     overflow: hidden;
-    /* Enhanced performance optimizations */
-    contain: layout style paint;
+    /* Ultra-performance optimizations */
+    contain: strict;
     transform: translateZ(0);
     will-change: transform;
-    /* Improved mobile performance */
+    backface-visibility: hidden;
     image-rendering: optimizeSpeed;
   }
   
-  /* Improved spline iframe performance */
   .spline-container iframe {
     width: 100%;
     height: 100%;
     border: none;
     transform: translateZ(0);
     will-change: transform;
-    /* GPU acceleration */
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    /* Mobile optimizations */
     image-rendering: optimizeSpeed;
   }
   
-  /* Content overlays with optimized performance */
   .content-overlay {
     position: relative;
     z-index: 10;
-    /* Performance optimization */
     contain: layout style;
     transform: translateZ(0);
-    /* Ensure full width on all devices */
     width: 100%;
     min-width: 100%;
   }
   
-  /* Enhanced frosted glass effect with better visibility */
+  /* Enhanced glass effects with better performance */
   .glass-card {
     background: rgba(30, 30, 40, 0.85);
     backdrop-filter: blur(12px);
@@ -135,15 +132,14 @@
     border: 1px solid rgba(162, 89, 236, 0.4);
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-    /* Performance optimization */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
-    /* Responsive adjustments */
+    transform: translateZ(0);
+    backface-visibility: hidden;
     width: 100%;
     max-width: 100%;
   }
 
-  /* Enhanced About Me card with better contrast */
   .about-me-card {
     background: rgba(30, 30, 40, 0.92);
     backdrop-filter: blur(20px);
@@ -151,14 +147,15 @@
     border: 1px solid rgba(162, 89, 236, 0.5);
     border-radius: 12px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
-    /* Responsive adjustments */
+    transform: translateZ(0);
+    backface-visibility: hidden;
     width: 100%;
     max-width: 100%;
   }
 
-  /* Enhanced logo sizing class for better visibility */
+  /* Optimized logo classes */
   .card-logo {
     width: 80px !important;
     height: 80px !important;
@@ -168,22 +165,22 @@
     display: block;
     margin: 0 auto 1rem auto;
     will-change: transform;
+    transform: translateZ(0);
   }
 
   .card-logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(0);
   }
 
-  /* Specific logo sizes for different sections with minimal padding */
   .education-logo {
     width: 85px !important;
     height: 85px !important;
     object-fit: contain;
     padding: 0;
     margin: 0 auto;
+    transform: translateZ(0);
   }
 
-  /* Education logo container with minimal white space */
   .education-logo-container {
     padding: 0.25rem;
     background: white;
@@ -196,22 +193,26 @@
     max-height: 95px;
     max-width: 95px;
     overflow: hidden;
+    transform: translateZ(0);
   }
 
   .diploma-logo {
     width: 70px !important;
     height: 70px !important;
     object-fit: contain;
+    transform: translateZ(0);
   }
 
   .badge-logo {
     width: 70px !important;
     height: 70px !important;
+    transform: translateZ(0);
   }
   
   .nav-link {
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
   }
   
   .nav-link::after {
@@ -223,6 +224,7 @@
     height: 2px;
     background: var(--gradient-secondary);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
   }
   
   .nav-link:hover::after,
@@ -230,54 +232,20 @@
     width: 100%;
   }
 
-  /* Optimized Custom Cursor Styles */
-  .custom-cursor {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.6) 50%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-    mix-blend-mode: screen;
-    will-change: transform;
-  }
-
-  .custom-cursor::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    width: 40px;
-    height: 40px;
-    border: 2px solid rgba(102, 126, 234, 0.3);
-    border-radius: 50%;
-    animation: pulse-cursor 2s infinite;
-  }
-
-  .cursor-ripple {
-    position: fixed;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(240, 147, 251, 0.4) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 9998;
-    animation: ripple-effect 0.6s ease-out forwards;
-  }
-
-  /* Enhanced frosted navigation bar */
+  /* Enhanced frosted navigation */
   .frosted-nav {
     background: rgba(26, 26, 46, 0.95);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     transition: background 0.3s ease;
+    transform: translateZ(0);
+    will-change: transform;
   }
 }
 
 @layer utilities {
-  /* Optimized animations using transform and opacity only */
+  /* Ultra-optimized animations */
   .animate-fade-in {
     animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
@@ -299,196 +267,127 @@
   }
 }
 
-/* Optimized keyframes using transform and opacity only */
+/* GPU-accelerated keyframes */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
 @keyframes slideLeft {
   from {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateX(30px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) translateZ(0);
   }
 }
 
 @keyframes slideRight {
   from {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-30px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) translateZ(0);
   }
 }
 
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.95) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateZ(0);
   }
 }
 
-@keyframes pulse-cursor {
+@keyframes ripple {
   0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes ripple-effect {
-  0% {
-    transform: scale(0);
+    transform: scale(0) translateZ(0);
     opacity: 1;
   }
   100% {
-    transform: scale(4);
+    transform: scale(4) translateZ(0);
     opacity: 0;
   }
 }
 
-/* Responsive breakpoints with performance considerations */
+/* Optimized responsive breakpoints */
 @media (max-width: 1024px) {
   .spline-container iframe {
-    /* Optimize for tablet performance */
-    transform: scale(0.95);
+    transform: scale(0.95) translateZ(0);
     image-rendering: optimizeSpeed;
   }
 }
 
 @media (max-width: 768px) {
   .spline-container {
-    /* Reduce complexity on mobile */
     opacity: 0.8;
   }
   
   .spline-container iframe {
     height: 100vh;
-    /* Optimize for mobile performance */
-    transform: scale(0.9);
+    transform: scale(0.9) translateZ(0);
     image-rendering: optimizeSpeed;
   }
   
-  .custom-cursor,
-  .cursor-ripple {
-    display: none !important; /* Hide custom cursor on mobile */
-  }
-  
   * {
-    cursor: auto !important; /* Restore default cursor on mobile */
+    cursor: auto !important;
   }
 
-  /* Simplified effects on mobile for better performance */
   .glass-card {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     background: rgba(30, 30, 40, 0.9);
-    margin: 0 0.5rem; /* Add margins on mobile */
+    margin: 0 0.5rem;
   }
 
   .about-me-card {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    margin: 0 0.5rem; /* Add margins on mobile */
+    margin: 0 0.5rem;
   }
 
-  .card-logo {
-    width: 60px !important;
-    height: 60px !important;
-  }
+  /* Optimized mobile logo sizes */
+  .car-logo { width: 60px !important; height: 60px !important; }
+  .education-logo { width: 65px !important; height: 65px !important; }
+  .education-logo-container { min-height: 75px; min-width: 75px; max-height: 75px; max-width: 75px; }
+  .diploma-logo { width: 55px !important; height: 55px !important; }
+  .badge-logo { width: 50px !important; height: 50px !important; }
 
-  .education-logo {
-    width: 65px !important;
-    height: 65px !important;
-  }
-
-  .education-logo-container {
-    min-height: 75px;
-    min-width: 75px;
-    max-height: 75px;
-    max-width: 75px;
-  }
-
-  .diploma-logo {
-    width: 55px !important;
-    height: 55px !important;
-  }
-
-  .badge-logo {
-    width: 50px !important;
-    height: 50px !important;
-  }
-
-  /* Mobile text optimizations */
-  .gradient-text {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-
-  /* Mobile section padding */
-  section {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+  .gradient-text { font-size: clamp(2rem, 8vw, 3rem); }
+  section { padding-left: 1rem; padding-right: 1rem; }
 }
 
 @media (max-width: 480px) {
-  .spline-container {
-    /* Further reduce on very small screens */
-    opacity: 0.6;
-  }
-  
-  .glass-card {
-    margin: 0 0.25rem;
-    padding: 1rem;
-  }
-
-  .about-me-card {
-    margin: 0 0.25rem;
-    padding: 1rem;
-  }
+  .spline-container { opacity: 0.6; }
+  .glass-card { margin: 0 0.25rem; padding: 1rem; }
+  .about-me-card { margin: 0 0.25rem; padding: 1rem; }
 }
 
-/* Enhanced performance optimizations */
-.spline-container {
-  contain: strict;
-  isolation: isolate;
-}
-
-/* Reduce motion for users who prefer it */
+/* Performance optimizations for reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in,
   .animate-slide-up,
@@ -499,11 +398,6 @@
     transition: none !important;
   }
   
-  .custom-cursor,
-  .cursor-ripple {
-    display: none !important;
-  }
-
   * {
     transition: none !important;
     animation: none !important;
@@ -512,19 +406,14 @@
 
 /* Critical rendering optimizations */
 @media screen and (min-width: 1024px) {
-  .spline-container {
-    contain: strict;
-  }
+  .spline-container { contain: strict; }
 }
 
-/* Ultra-wide screen support */
 @media (min-width: 1920px) {
-  .max-w-7xl {
-    max-width: 1400px; /* Prevent content from being too wide */
-  }
+  .max-w-7xl { max-width: 1400px; }
 }
 
-/* High DPI display optimizations */
+/* High DPI optimizations */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .spline-container iframe {
     image-rendering: -webkit-optimize-contrast;
