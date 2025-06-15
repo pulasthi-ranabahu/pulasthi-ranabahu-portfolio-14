@@ -45,7 +45,6 @@ export const usePageOptimization = () => {
     
     // Optimize font rendering
     document.documentElement.style.textRendering = 'optimizeSpeed';
-    document.documentElement.style.fontSmooth = 'never';
     
     // Reduce layout thrashing
     if ('CSS' in window && 'supports' in CSS) {

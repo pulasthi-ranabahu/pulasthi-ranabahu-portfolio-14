@@ -134,7 +134,6 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
             transform: 'translateZ(0)',
             willChange: 'transform',
             backfaceVisibility: 'hidden',
-            imageRendering: 'optimizeSpeed',
           }}
         />
       ) : (
