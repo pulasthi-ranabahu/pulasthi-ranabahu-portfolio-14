@@ -8,6 +8,18 @@ const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number>();
   const lastPosition = useRef({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Improved mobile detection
+  const checkIsMobile = useCallback(() => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    const isSmallScreen = window.innerWidth < 768;
+    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    // Only disable on actual mobile devices with touch, not just small screens
+    return isMobileDevice && hasTouchScreen && isSmallScreen;
+  }, []);
 
   const updateCursor = useCallback((e: MouseEvent) => {
     // Cancel previous animation frame
@@ -20,7 +32,7 @@ const CustomCursor = () => {
       const newX = e.clientX;
       const newY = e.clientY;
       
-      // Only update if position actually changed (reduce unnecessary renders)
+      // Only update if position actually changed
       if (lastPosition.current.x !== newX || lastPosition.current.y !== newY) {
         setPosition({ x: newX, y: newY });
         lastPosition.current = { x: newX, y: newY };
@@ -53,8 +65,22 @@ const CustomCursor = () => {
   }, [addRipple]);
 
   useEffect(() => {
-    // Skip on mobile/touch devices for better performance
-    if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) return;
+    // Check if mobile on mount and window resize
+    const updateMobileStatus = () => {
+      setIsMobile(checkIsMobile());
+    };
+
+    updateMobileStatus();
+    window.addEventListener('resize', updateMobileStatus, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', updateMobileStatus);
+    };
+  }, [checkIsMobile]);
+
+  useEffect(() => {
+    // Don't add listeners on mobile devices
+    if (isMobile) return;
 
     // Use passive listeners for better performance
     document.addEventListener('mousemove', updateCursor, { passive: true });
@@ -69,10 +95,10 @@ const CustomCursor = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('click', handleClick);
     };
-  }, [updateCursor, handleMouseEnter, handleMouseLeave, handleClick]);
+  }, [updateCursor, handleMouseEnter, handleMouseLeave, handleClick, isMobile]);
 
-  // Don't render on mobile for better performance
-  if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) {
+  // Don't render on mobile devices
+  if (isMobile) {
     return null;
   }
 
