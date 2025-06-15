@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
@@ -14,6 +14,75 @@ import ContactSection from '../components/ContactSection';
 import CustomCursor from '../components/CustomCursor';
 
 const Index = () => {
+  useEffect(() => {
+    // Performance optimizations
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        // Preload critical resources
+        const criticalSplineUrls = [
+          'https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/',
+          'https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/',
+        ];
+        
+        criticalSplineUrls.forEach(url => {
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = url;
+          document.head.appendChild(link);
+        });
+      });
+    }
+
+    // Update document title and meta tags for better SEO
+    document.title = 'Pulasthi Ranabahu | ICT Undergraduate & Cybersecurity Expert | Portfolio';
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 
+        'Pulasthi Ranabahu - ICT Undergraduate specializing in Cybersecurity at University of Kelaniya. Expert in network security, cloud computing, and digital forensics. View projects, certifications, and professional achievements.'
+      );
+    }
+
+    // Add structured data for SEO
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Pulasthi Ranabahu",
+      "jobTitle": "ICT Undergraduate & Cybersecurity Enthusiast",
+      "url": "https://pulasthi-ranabahu.github.io/",
+      "sameAs": [
+        "https://www.linkedin.com/in/pulasthi-ranabahu/",
+        "https://github.com/pulasthi-ranabahu",
+        "https://www.credly.com/users/pulasthi-ranabahu"
+      ],
+      "alumniOf": {
+        "@type": "Organization",
+        "name": "University of Kelaniya"
+      },
+      "knowsAbout": [
+        "Cybersecurity",
+        "Network Security",
+        "Cloud Computing",
+        "Information Technology",
+        "Digital Forensics"
+      ]
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup
+      const existingScript = document.querySelector('script[type="application/ld+json"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <CustomCursor />
