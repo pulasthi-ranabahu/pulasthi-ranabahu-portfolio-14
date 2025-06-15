@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 
 interface LazySplineEmbedProps {
   src: string;
@@ -8,8 +8,9 @@ interface LazySplineEmbedProps {
   biggerSize?: boolean;
 }
 
-// Simple cache to store loaded iframes
-const iframeCache = new Map<string, boolean>();
+// Enhanced cache with timestamp for better management
+const iframeCache = new Map<string, { loaded: boolean; timestamp: number }>();
+const preloadedSources = new Set<string>();
 
 const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ 
   src, 
@@ -20,54 +21,71 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isPreloading, setIsPreloading] = useState(false);
   const embedRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const loadTimeoutRef = useRef<NodeJS.Timeout>();
 
-  useEffect(() => {
-    // Check if device is mobile for performance optimization
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+  // Memoize mobile detection
+  const deviceInfo = useMemo(() => {
+    if (typeof window === 'undefined') return { isMobile: false };
+    
+    return {
+      isMobile: window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Preload iframe content
-  const preloadIframe = useCallback(() => {
-    if (!isPreloading && !iframeCache.has(src)) {
-      setIsPreloading(true);
-      // Create invisible iframe to preload content
-      const preloadFrame = document.createElement('iframe');
-      preloadFrame.src = src;
-      preloadFrame.style.display = 'none';
-      preloadFrame.onload = () => {
-        iframeCache.set(src, true);
-        document.body.removeChild(preloadFrame);
-      };
-      document.body.appendChild(preloadFrame);
-    }
-  }, [src, isPreloading]);
+  useEffect(() => {
+    setIsMobile(deviceInfo.isMobile);
+  }, [deviceInfo]);
 
+  // Optimized preloading with intelligent caching
+  const preloadIframe = useCallback(() => {
+    if (preloadedSources.has(src)) return;
+    
+    preloadedSources.add(src);
+    
+    // Use link prefetch for better performance
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = src;
+    link.as = 'document';
+    document.head.appendChild(link);
+    
+    // Cache entry
+    iframeCache.set(src, { loaded: true, timestamp: Date.now() });
+  }, [src]);
+
+  // Ultra-optimized intersection handling
   const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
-    if (entry.isIntersecting) {
+    const { isIntersecting, intersectionRatio } = entry;
+    
+    if (isIntersecting && intersectionRatio > 0.1) {
       if (!isInView) {
         setIsInView(true);
         
-        // Check if content is cached
-        const isCached = iframeCache.has(src);
-        const delay = isCached ? 50 : (fastLoad ? (isMobile ? 150 : 100) : (isMobile ? 500 : 200));
+        // Smart loading based on cache and device
+        const cached = iframeCache.get(src);
+        const isCached = cached && (Date.now() - cached.timestamp < 300000); // 5 min cache
         
-        setTimeout(() => {
-          setIsLoaded(true);
+        let delay = 50; // Minimal delay
+        if (!isCached) {
+          delay = fastLoad ? (isMobile ? 100 : 50) : (isMobile ? 200 : 100);
+        }
+        
+        // Clear any existing timeout
+        if (loadTimeoutRef.current) {
+          clearTimeout(loadTimeoutRef.current);
+        }
+        
+        loadTimeoutRef.current = setTimeout(() => {
+          requestAnimationFrame(() => {
+            setIsLoaded(true);
+          });
         }, delay);
       }
-    } else if (entry.intersectionRatio < 0.1) {
-      // Start preloading when element is close to viewport
+    } else if (intersectionRatio < 0.05) {
+      // Aggressive preloading when element approaches viewport
       preloadIframe();
     }
   }, [isInView, isMobile, fastLoad, src, preloadIframe]);
@@ -77,9 +95,10 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
       observerRef.current.disconnect();
     }
 
+    // Ultra-responsive intersection observer
     observerRef.current = new IntersectionObserver(handleIntersection, {
-      threshold: [0.01, 0.1, 0.5], // Multiple thresholds for better control
-      rootMargin: fastLoad ? '400px' : '200px', // Aggressive preloading
+      threshold: [0.01, 0.05, 0.1, 0.3], // Multiple thresholds for precision
+      rootMargin: fastLoad ? '500px' : '300px', // Aggressive preloading
     });
 
     if (embedRef.current) {
@@ -90,43 +109,72 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
+      if (loadTimeoutRef.current) {
+        clearTimeout(loadTimeoutRef.current);
+      }
     };
   }, [handleIntersection, fastLoad]);
 
-  // Optimize iframe loading
+  // Ultra-optimized iframe loading
   const handleIframeLoad = useCallback(() => {
-    // Mark as cached
-    iframeCache.set(src, true);
-    
-    // Optimize iframe after load
     if (iframeRef.current) {
       const iframe = iframeRef.current;
-      iframe.style.transform = 'translateZ(0)';
-      iframe.style.willChange = 'auto';
       
-      // Add performance optimizations
-      if (iframe.contentWindow) {
+      // GPU acceleration
+      iframe.style.transform = 'translate3d(0, 0, 0)';
+      iframe.style.willChange = 'auto';
+      iframe.style.backfaceVisibility = 'hidden';
+      
+      // Performance optimizations
+      requestIdleCallback(() => {
         try {
-          iframe.contentWindow.requestIdleCallback?.(() => {
-            // Additional optimizations can be added here
-          });
+          if (iframe.contentWindow) {
+            // Additional optimizations for iframe content
+            const iframeDoc = iframe.contentDocument;
+            if (iframeDoc) {
+              iframeDoc.body?.style.setProperty('transform', 'translateZ(0)');
+            }
+          }
         } catch (e) {
           // Ignore cross-origin errors
         }
-      }
+      });
     }
+    
+    // Update cache with successful load
+    iframeCache.set(src, { loaded: true, timestamp: Date.now() });
   }, [src]);
+
+  // Optimized styles
+  const containerStyle = useMemo(() => ({
+    transform: 'translate3d(0, 0, 0)',
+    backfaceVisibility: 'hidden' as const,
+    perspective: '1000px',
+    willChange: isLoaded ? 'auto' : 'contents',
+  }), [isLoaded]);
+
+  const iframeStyle = useMemo(() => ({
+    transform: biggerSize 
+      ? (isMobile ? 'scale(1.15) translate3d(0, 0, 0)' : 'scale(1.25) translate3d(0, 0, 0)')
+      : 'translate3d(0, 0, 0)',
+    willChange: 'transform',
+    imageRendering: 'auto' as const,
+    transformOrigin: 'center center',
+    backfaceVisibility: 'hidden' as const,
+    ...(isMobile && !biggerSize && {
+      filter: fastLoad ? 'brightness(0.95)' : 'brightness(0.9)',
+      transform: fastLoad 
+        ? 'scale(1.02) translate3d(0, 0, 0)' 
+        : 'scale(0.98) translate3d(0, 0, 0)',
+    }),
+  }), [biggerSize, isMobile, fastLoad]);
 
   return (
     <div 
       ref={embedRef} 
       className={`spline-container ${className}`} 
       aria-hidden="true"
-      style={{
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden',
-        perspective: '1000px'
-      }}
+      style={containerStyle}
     >
       {isLoaded ? (
         <iframe
@@ -139,26 +187,14 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
           loading="lazy"
           title="3D Background Animation"
           onLoad={handleIframeLoad}
-          style={{
-            transform: biggerSize 
-              ? (isMobile ? 'scale(1.15) translateZ(0)' : 'scale(1.25) translateZ(0)')
-              : 'translateZ(0)',
-            willChange: 'transform',
-            imageRendering: 'auto',
-            transformOrigin: 'center center',
-            backfaceVisibility: 'hidden',
-            ...(isMobile && !biggerSize && {
-              filter: fastLoad ? 'brightness(0.95)' : 'brightness(0.9)',
-              transform: fastLoad ? 'scale(1.02) translateZ(0)' : 'scale(0.98) translateZ(0)',
-            }),
-          }}
+          style={iframeStyle}
         />
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-blue-900/30 flex items-center justify-center">
+        <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
           <div className="animate-pulse flex flex-col items-center" aria-label="Loading 3D background">
-            <div className={`${fastLoad ? 'w-12 h-12 md:w-16 md:h-16' : 'w-16 h-16 md:w-24 md:h-24'} bg-gradient-to-r from-purple-500/40 to-blue-500/40 rounded-full mb-4`}></div>
-            <div className="text-purple-300/70 text-sm font-medium">
-              {isPreloading ? 'Preparing...' : 'Loading...'}
+            <div className={`${fastLoad ? 'w-8 h-8 md:w-12 md:h-12' : 'w-12 h-12 md:w-16 md:h-16'} bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-full mb-2`}></div>
+            <div className="text-purple-300/50 text-xs font-medium">
+              Loading...
             </div>
           </div>
         </div>

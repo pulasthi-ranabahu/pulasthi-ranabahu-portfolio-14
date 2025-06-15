@@ -1,55 +1,98 @@
+
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
-  const animationFrameRef = useRef<number>();
   const cursorRef = useRef<HTMLDivElement>(null);
+  const rippleTimeouts = useRef<Set<NodeJS.Timeout>>(new Set());
+  const lastPosition = useRef({ x: 0, y: 0 });
+  const throttleTimer = useRef<number | null>(null);
 
-  const addRipple = (x: number, y: number) => {
+  // Optimized ripple management with cleanup
+  const addRipple = useCallback((x: number, y: number) => {
     const newRipple = {
       id: Date.now() + Math.random(),
       x,
       y,
     };
 
-    setRipples((prev) => [...prev.slice(-4), newRipple]);
-
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
-    }, 500);
-  };
-
-  const updateCursor = useCallback((e: MouseEvent) => {
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-
-    animationFrameRef.current = requestAnimationFrame(() => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      addRipple(e.clientX, e.clientY); // ripple on move
-      if (!isVisible) setIsVisible(true);
+    setRipples((prev) => {
+      const updated = [...prev.slice(-2), newRipple]; // Limit to 3 ripples
+      return updated;
     });
-  }, [isVisible]);
 
-  const handleMouseEnter = useCallback(() => setIsVisible(true), []);
-  const handleMouseLeave = useCallback(() => setIsVisible(false), []);
+    // Cleanup ripple with timeout tracking
+    const timeout = setTimeout(() => {
+      setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
+      rippleTimeouts.current.delete(timeout);
+    }, 400); // Reduced timeout for faster cleanup
 
-  const handleClick = useCallback((e: MouseEvent) => {
-    addRipple(e.clientX, e.clientY); // Extra ripple on click
+    rippleTimeouts.current.add(timeout);
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) return;
+  // Ultra-smooth cursor movement with RAF and throttling
+  const updateCursor = useCallback((e: MouseEvent) => {
+    const { clientX, clientY } = e;
+    
+    // Skip if position hasn't changed much (micro-optimization)
+    if (Math.abs(clientX - lastPosition.current.x) < 1 && 
+        Math.abs(clientY - lastPosition.current.y) < 1) {
+      return;
+    }
 
-    document.addEventListener('mousemove', updateCursor, { passive: true });
-    document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
-    document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
-    document.addEventListener('click', handleClick, { passive: true });
+    // Throttle updates for performance
+    if (throttleTimer.current) return;
+    
+    throttleTimer.current = requestAnimationFrame(() => {
+      setPosition({ x: clientX, y: clientY });
+      lastPosition.current = { x: clientX, y: clientY };
+      
+      // Less frequent ripples for better performance
+      if (Math.random() > 0.7) {
+        addRipple(clientX, clientY);
+      }
+      
+      if (!isVisible) setIsVisible(true);
+      throttleTimer.current = null;
+    });
+  }, [isVisible, addRipple]);
+
+  const handleMouseEnter = useCallback(() => setIsVisible(true), []);
+  const handleMouseLeave = useCallback(() => {
+    setIsVisible(false);
+    setRipples([]); // Clear ripples when mouse leaves
+  }, []);
+
+  const handleClick = useCallback((e: MouseEvent) => {
+    addRipple(e.clientX, e.clientY);
+  }, [addRipple]);
+
+  useEffect(() => {
+    // Skip on mobile/touch devices
+    if (typeof window !== 'undefined' && 
+        (window.innerWidth <= 768 || 'ontouchstart' in window)) {
+      return;
+    }
+
+    // Use passive listeners for better performance
+    const options = { passive: true, capture: false };
+    
+    document.addEventListener('mousemove', updateCursor, options);
+    document.addEventListener('mouseenter', handleMouseEnter, options);
+    document.addEventListener('mouseleave', handleMouseLeave, options);
+    document.addEventListener('click', handleClick, options);
 
     return () => {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      // Cleanup RAF and timeouts
+      if (throttleTimer.current) {
+        cancelAnimationFrame(throttleTimer.current);
+      }
+      
+      rippleTimeouts.current.forEach(timeout => clearTimeout(timeout));
+      rippleTimeouts.current.clear();
+      
       document.removeEventListener('mousemove', updateCursor);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -57,7 +100,9 @@ const CustomCursor = () => {
     };
   }, [updateCursor, handleMouseEnter, handleMouseLeave, handleClick]);
 
-  if (typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)) {
+  // Don't render on mobile
+  if (typeof window !== 'undefined' && 
+      (window.innerWidth <= 768 || 'ontouchstart' in window)) {
     return null;
   }
 
@@ -66,10 +111,14 @@ const CustomCursor = () => {
       {isVisible && (
         <div
           ref={cursorRef}
-          className="custom-cursor gpu-accelerated"
+          className="fixed pointer-events-none z-[9999] w-6 h-6 rounded-full bg-gradient-to-r from-purple-400 to-blue-400 mix-blend-difference opacity-80"
           style={{
-            left: position.x,
-            top: position.y,
+            left: position.x - 12,
+            top: position.y - 12,
+            transform: 'translate3d(0, 0, 0)',
+            willChange: 'transform',
+            backfaceVisibility: 'hidden',
+            transition: 'opacity 0.15s ease-out',
           }}
         />
       )}
@@ -77,12 +126,16 @@ const CustomCursor = () => {
       {ripples.map((ripple) => (
         <div
           key={ripple.id}
-          className="cursor-ripple gpu-accelerated"
+          className="fixed pointer-events-none z-[9998] rounded-full border border-purple-400/30 animate-ping"
           style={{
             left: ripple.x - 15,
             top: ripple.y - 15,
             width: 30,
             height: 30,
+            transform: 'translate3d(0, 0, 0)',
+            willChange: 'transform, opacity',
+            backfaceVisibility: 'hidden',
+            animationDuration: '0.4s',
           }}
         />
       ))}

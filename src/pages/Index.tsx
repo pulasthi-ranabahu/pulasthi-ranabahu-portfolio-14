@@ -12,31 +12,45 @@ import ProjectsSection from '../components/ProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
 import CustomCursor from '../components/CustomCursor';
+import { usePerformanceOptimization } from '../hooks/usePerformanceOptimization';
 
 const Index = () => {
+  // Apply performance optimizations
+  usePerformanceOptimization();
+
   useEffect(() => {
-    // Performance optimizations
+    // Ultra-aggressive performance optimizations
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => {
-        // Preload critical resources
+        // Preload critical Spline resources
         const criticalSplineUrls = [
           'https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/',
           'https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/',
         ];
         
+        // Use prefetch for better performance
         criticalSplineUrls.forEach(url => {
           const link = document.createElement('link');
           link.rel = 'prefetch';
+          link.href = url;
+          link.as = 'document';
+          document.head.appendChild(link);
+        });
+
+        // DNS prefetch for external resources
+        const dnsUrls = ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
+        dnsUrls.forEach(url => {
+          const link = document.createElement('link');
+          link.rel = 'dns-prefetch';
           link.href = url;
           document.head.appendChild(link);
         });
       });
     }
 
-    // Update document title and meta tags for better SEO
+    // Enhanced SEO and performance meta tags
     document.title = 'Pulasthi Ranabahu | ICT Undergraduate & Cybersecurity Expert | Portfolio';
     
-    // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 
@@ -44,7 +58,7 @@ const Index = () => {
       );
     }
 
-    // Add structured data for SEO
+    // Enhanced structured data for better SEO
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -66,7 +80,8 @@ const Index = () => {
         "Cloud Computing",
         "Information Technology",
         "Digital Forensics"
-      ]
+      ],
+      "description": "ICT Undergraduate specializing in Cybersecurity with expertise in network security, cloud computing, and digital forensics."
     };
 
     const script = document.createElement('script');
@@ -75,7 +90,6 @@ const Index = () => {
     document.head.appendChild(script);
 
     return () => {
-      // Cleanup
       const existingScript = document.querySelector('script[type="application/ld+json"]');
       if (existingScript) {
         document.head.removeChild(existingScript);
@@ -87,7 +101,6 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <CustomCursor />
       
-      {/* Main content with semantic HTML structure */}
       <header>
         <Navigation />
       </header>
@@ -132,7 +145,6 @@ const Index = () => {
         </section>
       </main>
       
-      {/* Footer */}
       <footer className="relative bg-black/20 border-t border-white/10 py-8" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
