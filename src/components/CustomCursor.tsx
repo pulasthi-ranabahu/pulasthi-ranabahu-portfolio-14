@@ -3,17 +3,16 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(true); // Start visible by default
+  const [isVisible, setIsVisible] = useState(true);
   const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
   const cursorRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number>();
-  const lastPosition = useRef({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
-  const isInitialized = useRef(false);
+  const listenersAttached = useRef(false);
 
   // Simplified mobile detection
   const checkIsMobile = useCallback(() => {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && 'ontouchstart' in window;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 'ontouchstart' in window;
   }, []);
 
   const updateCursor = useCallback((e: MouseEvent) => {
@@ -22,18 +21,10 @@ const CustomCursor = () => {
     }
 
     rafId.current = requestAnimationFrame(() => {
-      const newX = e.clientX;
-      const newY = e.clientY;
-      
-      setPosition({ x: newX, y: newY });
-      lastPosition.current = { x: newX, y: newY };
-      
-      // Always ensure cursor is visible when mouse moves
-      if (!isVisible) {
-        setIsVisible(true);
-      }
+      setPosition({ x: e.clientX, y: e.clientY });
+      setIsVisible(true);
     });
-  }, [isVisible]);
+  }, []);
 
   const addRipple = useCallback((x: number, y: number) => {
     const newRipple = {
@@ -49,57 +40,58 @@ const CustomCursor = () => {
     }, 400);
   }, []);
 
-  const handleMouseEnter = useCallback(() => {
-    setIsVisible(true);
-  }, []);
-  
-  const handleMouseLeave = useCallback(() => {
-    // Only hide if mouse actually leaves the window
-    setIsVisible(false);
-  }, []);
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    updateCursor(e);
+  }, [updateCursor]);
   
   const handleClick = useCallback((e: MouseEvent) => {
     addRipple(e.clientX, e.clientY);
-    // Ensure cursor stays visible after click
     setIsVisible(true);
   }, [addRipple]);
 
-  // Initialize cursor position on mount
-  const initializeCursor = useCallback(() => {
-    if (!isInitialized.current) {
-      // Get initial mouse position if available
-      const initialX = window.innerWidth / 2;
-      const initialY = window.innerHeight / 2;
-      setPosition({ x: initialX, y: initialY });
-      setIsVisible(true);
-      isInitialized.current = true;
-    }
+  const handleMouseEnter = useCallback(() => {
+    setIsVisible(true);
   }, []);
 
-  // Add event listeners
-  const addEventListeners = useCallback(() => {
-    document.addEventListener('mousemove', updateCursor, { passive: true });
+  const handleMouseLeave = useCallback(() => {
+    setIsVisible(false);
+  }, []);
+
+  // Attach event listeners
+  const attachListeners = useCallback(() => {
+    if (listenersAttached.current || isMobile) return;
+
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('click', handleClick, { passive: true });
     document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
-    document.addEventListener('click', handleClick, { passive: true });
     
-    // Additional events to ensure cursor visibility
-    window.addEventListener('focus', handleMouseEnter, { passive: true });
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        setIsVisible(true);
-      }
-    }, { passive: true });
-  }, [updateCursor, handleMouseEnter, handleMouseLeave, handleClick]);
+    listenersAttached.current = true;
+    console.log('Cursor listeners attached');
+  }, [handleMouseMove, handleClick, handleMouseEnter, handleMouseLeave, isMobile]);
 
   // Remove event listeners
-  const removeEventListeners = useCallback(() => {
-    document.removeEventListener('mousemove', updateCursor);
+  const removeListeners = useCallback(() => {
+    if (!listenersAttached.current) return;
+
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('click', handleClick);
     document.removeEventListener('mouseenter', handleMouseEnter);
     document.removeEventListener('mouseleave', handleMouseLeave);
-    document.removeEventListener('click', handleClick);
-    window.removeEventListener('focus', handleMouseEnter);
-  }, [updateCursor, handleMouseEnter, handleMouseLeave, handleClick]);
+    
+    listenersAttached.current = false;
+    console.log('Cursor listeners removed');
+  }, [handleMouseMove, handleClick, handleMouseEnter, handleMouseLeave]);
+
+  // Initialize cursor
+  const initializeCursor = useCallback(() => {
+    if (isMobile) return;
+    
+    setPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    setIsVisible(true);
+    attachListeners();
+    console.log('Cursor initialized');
+  }, [isMobile, attachListeners]);
 
   useEffect(() => {
     setIsMobile(checkIsMobile());
@@ -108,29 +100,23 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobile) return;
 
-    // Initialize cursor immediately
+    // Initialize immediately
     initializeCursor();
-    
-    // Add event listeners
-    addEventListeners();
 
-    // Handle route changes and page loads
+    // Handle route changes
     const handleRouteChange = () => {
-      // Small delay to ensure DOM is ready
+      console.log('Route change detected, reinitializing cursor');
       setTimeout(() => {
+        removeListeners();
         initializeCursor();
-        removeEventListeners();
-        addEventListeners();
-        setIsVisible(true);
-      }, 50);
+      }, 100);
     };
 
-    // Listen for various navigation events
+    // Listen for navigation events
     window.addEventListener('popstate', handleRouteChange);
     window.addEventListener('hashchange', handleRouteChange);
-    window.addEventListener('load', handleRouteChange);
     
-    // MutationObserver to detect route changes in SPAs
+    // Watch for DOM changes (SPA navigation)
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'childList' && mutation.target === document.body) {
@@ -141,27 +127,28 @@ const CustomCursor = () => {
     
     observer.observe(document.body, { childList: true, subtree: true });
 
+    // Cleanup
     return () => {
       if (rafId.current) cancelAnimationFrame(rafId.current);
-      removeEventListeners();
+      removeListeners();
       window.removeEventListener('popstate', handleRouteChange);
       window.removeEventListener('hashchange', handleRouteChange);
-      window.removeEventListener('load', handleRouteChange);
       observer.disconnect();
     };
-  }, [isMobile, initializeCursor, addEventListeners, removeEventListeners]);
+  }, [isMobile, initializeCursor, removeListeners]);
 
-  // Force visibility check every few seconds as fallback
+  // Force visibility check
   useEffect(() => {
     if (isMobile) return;
     
-    const visibilityCheck = setInterval(() => {
-      if (!isVisible && !isMobile) {
+    const visibilityInterval = setInterval(() => {
+      if (!isVisible) {
+        console.log('Forcing cursor visibility');
         setIsVisible(true);
       }
-    }, 2000);
+    }, 1000);
 
-    return () => clearInterval(visibilityCheck);
+    return () => clearInterval(visibilityInterval);
   }, [isVisible, isMobile]);
 
   if (isMobile) {
