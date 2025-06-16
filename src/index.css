@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -155,10 +154,10 @@
     max-width: 100%;
   }
 
-  /* Optimized logo classes */
+  /* Optimized logo classes - removed white backgrounds and made bigger */
   .card-logo {
-    width: 80px !important;
-    height: 80px !important;
+    width: 100px !important;
+    height: 100px !important;
     object-fit: contain;
     border-radius: 8px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -166,6 +165,7 @@
     margin: 0 auto 1rem auto;
     will-change: transform;
     transform: translateZ(0);
+    filter: brightness(1.1) contrast(1.1);
   }
 
   .card-logo:hover {
@@ -173,40 +173,44 @@
   }
 
   .education-logo {
-    width: 85px !important;
-    height: 85px !important;
+    width: 110px !important;
+    height: 110px !important;
     object-fit: contain;
-    padding: 0;
+    padding: 0.5rem;
     margin: 0 auto;
     transform: translateZ(0);
+    filter: brightness(1.1) contrast(1.1);
   }
 
   .education-logo-container {
-    padding: 0.25rem;
-    background: white;
-    border-radius: 8px;
+    padding: 0;
+    background: transparent;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 95px;
-    min-width: 95px;
-    max-height: 95px;
-    max-width: 95px;
+    min-height: 120px;
+    min-width: 120px;
+    max-height: 120px;
+    max-width: 120px;
     overflow: hidden;
     transform: translateZ(0);
+    border: 1px solid rgba(162, 89, 236, 0.3);
   }
 
   .diploma-logo {
-    width: 70px !important;
-    height: 70px !important;
+    width: 90px !important;
+    height: 90px !important;
     object-fit: contain;
     transform: translateZ(0);
+    filter: brightness(1.1) contrast(1.1);
   }
 
   .badge-logo {
-    width: 70px !important;
-    height: 70px !important;
+    width: 85px !important;
+    height: 85px !important;
     transform: translateZ(0);
+    filter: brightness(1.1) contrast(1.1);
   }
   
   .nav-link {
@@ -371,11 +375,11 @@
   }
 
   /* Optimized mobile logo sizes */
-  .car-logo { width: 60px !important; height: 60px !important; }
-  .education-logo { width: 65px !important; height: 65px !important; }
-  .education-logo-container { min-height: 75px; min-width: 75px; max-height: 75px; max-width: 75px; }
-  .diploma-logo { width: 55px !important; height: 55px !important; }
-  .badge-logo { width: 50px !important; height: 50px !important; }
+  .card-logo { width: 75px !important; height: 75px !important; }
+  .education-logo { width: 85px !important; height: 85px !important; }
+  .education-logo-container { min-height: 95px; min-width: 95px; max-height: 95px; max-width: 95px; }
+  .diploma-logo { width: 70px !important; height: 70px !important; }
+  .badge-logo { width: 65px !important; height: 65px !important; }
 
   .gradient-text { font-size: clamp(2rem, 8vw, 3rem); }
   section { padding-left: 1rem; padding-right: 1rem; }
