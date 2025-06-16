@@ -1,98 +1,55 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(false);
-  const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
+  const [isClicking, setIsClicking] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check if device is mobile
   useEffect(() => {
     const checkMobile = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-             'ontouchstart' in window || 
-             window.innerWidth <= 768;
+      return window.innerWidth <= 768 || 'ontouchstart' in window;
     };
+    
     setIsMobile(checkMobile());
+    
+    const handleResize = () => setIsMobile(checkMobile());
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Handle mouse movement
-  const handleMouseMove = (e: MouseEvent) => {
-    setPosition({ x: e.clientX, y: e.clientY });
-    setIsVisible(true);
-  };
+  // Optimized mouse move handler
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    requestAnimationFrame(() => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    });
+  }, []);
 
-  // Handle clicks for ripple effect
-  const handleClick = (e: MouseEvent) => {
-    const newRipple = {
-      id: Date.now() + Math.random(),
-      x: e.clientX,
-      y: e.clientY,
-    };
+  // Click handlers for animation
+  const handleMouseDown = useCallback(() => {
+    setIsClicking(true);
+  }, []);
 
-    setRipples(prev => [...prev.slice(-2), newRipple]);
-
-    setTimeout(() => {
-      setRipples(prev => prev.filter(r => r.id !== newRipple.id));
-    }, 400);
-  };
-
-  // Handle mouse enter/leave
-  const handleMouseEnter = () => setIsVisible(true);
-  const handleMouseLeave = () => setIsVisible(false);
+  const handleMouseUp = useCallback(() => {
+    setIsClicking(false);
+  }, []);
 
   useEffect(() => {
     if (isMobile) return;
 
-    // Add event listeners
+    // Add event listeners with passive option for better performance
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('click', handleClick, { passive: true });
-    document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
-    document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    document.addEventListener('mousedown', handleMouseDown, { passive: true });
+    document.addEventListener('mouseup', handleMouseUp, { passive: true });
 
-    // Set initial visibility
-    setIsVisible(true);
-
-    // Cleanup
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('click', handleClick);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isMobile]);
-
-  // Force visibility on route changes
-  useEffect(() => {
-    if (isMobile) return;
-
-    const ensureVisibility = () => {
-      setIsVisible(true);
-      console.log('Cursor forced visible');
-    };
-
-    // Listen for navigation events
-    window.addEventListener('popstate', ensureVisibility);
-    window.addEventListener('hashchange', ensureVisibility);
-    
-    // Watch for DOM changes (SPA navigation)
-    const observer = new MutationObserver(() => {
-      ensureVisibility();
-    });
-    
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // Force visibility every second as backup
-    const visibilityInterval = setInterval(ensureVisibility, 1000);
-
-    return () => {
-      window.removeEventListener('popstate', ensureVisibility);
-      window.removeEventListener('hashchange', ensureVisibility);
-      observer.disconnect();
-      clearInterval(visibilityInterval);
-    };
-  }, [isMobile]);
+  }, [isMobile, handleMouseMove, handleMouseDown, handleMouseUp]);
 
   if (isMobile) {
     return null;
@@ -100,33 +57,34 @@ const CustomCursor = () => {
 
   return (
     <>
+      {/* Main cursor dot */}
       <div
-        className="fixed w-5 h-5 pointer-events-none z-[9999] mix-blend-screen will-change-transform"
+        className="fixed pointer-events-none z-[9999] transition-transform duration-75 ease-out"
         style={{
-          left: position.x - 10,
-          top: position.y - 10,
-          background: 'radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.6) 50%, transparent 70%)',
+          left: position.x - 6,
+          top: position.y - 6,
+          width: '12px',
+          height: '12px',
+          background: 'linear-gradient(45deg, #667eea, #764ba2)',
           borderRadius: '50%',
-          transform: 'translateZ(0)',
-          opacity: isVisible ? 1 : 0,
-          transition: 'opacity 0.2s ease',
+          transform: isClicking ? 'scale(0.8)' : 'scale(1)',
+          boxShadow: '0 0 20px rgba(102, 126, 234, 0.5)',
         }}
       />
-
-      {ripples.map(ripple => (
-        <div
-          key={ripple.id}
-          className="fixed pointer-events-none z-[9998] rounded-full animate-[ripple_0.4s_ease-out_forwards] will-change-transform"
-          style={{
-            left: ripple.x - 15,
-            top: ripple.y - 15,
-            width: 30,
-            height: 30,
-            background: 'radial-gradient(circle, rgba(240, 147, 251, 0.4) 0%, transparent 70%)',
-            transform: 'translateZ(0)',
-          }}
-        />
-      ))}
+      
+      {/* Cursor trail/ring */}
+      <div
+        className="fixed pointer-events-none z-[9998] transition-all duration-300 ease-out"
+        style={{
+          left: position.x - 20,
+          top: position.y - 20,
+          width: '40px',
+          height: '40px',
+          border: '2px solid rgba(102, 126, 234, 0.3)',
+          borderRadius: '50%',
+          transform: isClicking ? 'scale(1.5)' : 'scale(1)',
+        }}
+      />
     </>
   );
 };
