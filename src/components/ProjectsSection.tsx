@@ -1,6 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
 import { ExternalLink, Github, Shield, Key, Lock, Search } from 'lucide-react';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -48,17 +48,12 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="relative min-h-screen overflow-hidden py-20">
-      {/* New Spline 3D Background */}
-      <div className="spline-container">
-        <iframe 
-          src='https://my.spline.design/nexbotrobotcharacterconcept-rnHkRS5qqMHTA3B0eLXG2HsP/' 
-          frameBorder='0' 
-          width='100%' 
-          height='100%'
-          className="w-full h-full"
-          loading="lazy"
-        />
-      </div>
+      {/* Optimized Spline 3D Background with watermark hidden */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/nexbotrobotcharacterconcept-rnHkRS5qqMHTA3B0eLXG2HsP/" 
+        className="opacity-60"
+        fastLoad={true}
+      />
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center">
