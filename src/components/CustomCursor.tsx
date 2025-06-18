@@ -19,7 +19,7 @@ const CustomCursor = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Mouse move handler
+  // Simple mouse move handler without animations
   const handleMouseMove = useCallback((e: MouseEvent) => {
     setPosition({ x: e.clientX, y: e.clientY });
   }, []);
@@ -27,14 +27,10 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobile) return;
 
-    // Hide default cursor
-    document.body.style.cursor = 'none';
-    
     document.addEventListener('mousemove', handleMouseMove);
     
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      document.body.style.cursor = 'auto';
     };
   }, [isMobile, handleMouseMove]);
 
@@ -44,7 +40,7 @@ const CustomCursor = () => {
 
   return (
     <div
-      className="fixed pointer-events-none z-[10000]"
+      className="fixed pointer-events-none z-[9999]"
       style={{
         left: position.x - 8,
         top: position.y - 8,
@@ -53,7 +49,6 @@ const CustomCursor = () => {
         background: '#667eea',
         borderRadius: '50%',
         border: '2px solid #764ba2',
-        transition: 'none',
       }}
     />
   );

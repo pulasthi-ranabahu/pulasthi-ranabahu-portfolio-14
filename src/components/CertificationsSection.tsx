@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
-import LocalSplineBackground from './LocalSplineBackground';
+import LazySplineEmbed from './LazySplineEmbed';
 
 const CertificationsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -106,9 +105,9 @@ const CertificationsSection = () => {
 
   return (
     <section id="certifications" className="relative min-h-screen overflow-hidden py-20">
-      {/* Local 3D-style background */}
-      <LocalSplineBackground 
-        backgroundType="retro"
+      {/* 3D Background - Made more visible */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
         className="opacity-50"
       />
 
