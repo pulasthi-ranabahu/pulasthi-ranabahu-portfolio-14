@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
-import LazySplineEmbed from './LazySplineEmbed';
+import LocalSplineBackground from './LocalSplineBackground';
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,9 +16,9 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Keep one Spline background for the hero section only */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
+      {/* Local 3D-style background */}
+      <LocalSplineBackground 
+        backgroundType="planet"
         className="opacity-60"
       />
 

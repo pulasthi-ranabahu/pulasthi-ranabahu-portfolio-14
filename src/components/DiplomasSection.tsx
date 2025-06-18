@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { GraduationCap } from 'lucide-react';
-import LazySplineEmbed from './LazySplineEmbed';
+import LocalSplineBackground from './LocalSplineBackground';
 
 const DiplomasSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -84,12 +85,10 @@ const DiplomasSection = () => {
 
   return (
     <section id="diplomas" className="relative min-h-screen overflow-hidden py-20">
-      {/* 3D Background - Bigger and faster loading */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/retrofuturismbganimation-9ueB2d5ZszdhgZH1dSd2rzPU/" 
+      {/* Local 3D-style background */}
+      <LocalSplineBackground 
+        backgroundType="retro"
         className="opacity-60"
-        fastLoad={true}
-        biggerSize={true}
       />
 
       {/* Content Overlay */}

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import LazySplineEmbed from './LazySplineEmbed';
+import LocalSplineBackground from './LocalSplineBackground';
 
 const EducationSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -55,9 +55,9 @@ const EducationSection = () => {
 
   return (
     <section id="education" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
-      <LazySplineEmbed
-        src="https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/"
+      {/* Local 3D-style background */}
+      <LocalSplineBackground 
+        backgroundType="particles"
         className="opacity-70"
       />
 
