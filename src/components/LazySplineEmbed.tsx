@@ -120,22 +120,30 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
       }}
     >
       {isLoaded ? (
-        <iframe
-          ref={iframeRef}
-          src={src}
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          className="w-full h-full border-0"
-          loading="lazy"
-          title="3D Background Animation"
-          onLoad={handleIframeLoad}
-          style={{
-            transform: 'translateZ(0)',
-            willChange: 'transform',
-            backfaceVisibility: 'hidden',
-          }}
-        />
+        <>
+          <iframe
+            ref={iframeRef}
+            src={src}
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            className="w-full h-full border-0"
+            loading="lazy"
+            title="3D Background Animation"
+            onLoad={handleIframeLoad}
+            style={{
+              transform: 'translateZ(0)',
+              willChange: 'transform',
+              backfaceVisibility: 'hidden',
+            }}
+          />
+          {/* Overlay to hide "Built with Spline" watermark */}
+          <div className="absolute bottom-2 right-2 bg-gradient-to-l from-black/80 via-black/60 to-transparent backdrop-blur-sm px-4 py-2 rounded-lg pointer-events-none">
+            <span className="text-purple-300 font-semibold text-sm gradient-text">
+              Pulasthi Ranabahu
+            </span>
+          </div>
+        </>
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
           <div className="animate-pulse flex flex-col items-center opacity-50">
