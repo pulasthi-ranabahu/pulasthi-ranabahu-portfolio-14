@@ -84,11 +84,11 @@ export const usePageOptimization = () => {
     document.documentElement.style.backfaceVisibility = 'hidden';
     document.documentElement.style.perspective = '1000px';
     
-    // Optimize font rendering for better performance
+    // Optimize font rendering for better performance using bracket notation for vendor-specific properties
     document.documentElement.style.textRendering = 'optimizeSpeed';
-    document.documentElement.style.fontSmooth = 'always';
-    document.documentElement.style.webkitFontSmoothing = 'antialiased';
-    document.documentElement.style.mozOsxFontSmoothing = 'grayscale';
+    (document.documentElement.style as any)['fontSmooth'] = 'always';
+    (document.documentElement.style as any)['-webkit-font-smoothing'] = 'antialiased';
+    (document.documentElement.style as any)['-moz-osx-font-smoothing'] = 'grayscale';
     
     // Reduce layout thrashing and optimize compositing
     if ('CSS' in window && 'supports' in CSS) {
