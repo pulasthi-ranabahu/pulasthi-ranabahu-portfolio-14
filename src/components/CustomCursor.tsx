@@ -19,7 +19,7 @@ const CustomCursor = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Simple mouse move handler without animations
+  // Mouse move handler for new cursor design
   const handleMouseMove = useCallback((e: MouseEvent) => {
     setPosition({ x: e.clientX, y: e.clientY });
   }, []);
@@ -27,10 +27,17 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobile) return;
 
-    document.addEventListener('mousemove', handleMouseMove);
+    // Hide default cursor
+    document.documentElement.style.cursor = 'none';
+    document.body.style.cursor = 'none';
+
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
     
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      // Restore default cursor when component unmounts
+      document.documentElement.style.cursor = 'auto';
+      document.body.style.cursor = 'auto';
     };
   }, [isMobile, handleMouseMove]);
 
@@ -40,15 +47,17 @@ const CustomCursor = () => {
 
   return (
     <div
-      className="fixed pointer-events-none z-[9999]"
+      className="fixed pointer-events-none z-[99999]"
       style={{
-        left: position.x - 8,
-        top: position.y - 8,
-        width: '16px',
-        height: '16px',
-        background: '#667eea',
+        left: position.x - 12,
+        top: position.y - 12,
+        width: '24px',
+        height: '24px',
+        background: 'linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1)',
         borderRadius: '50%',
-        border: '2px solid #764ba2',
+        border: '3px solid rgba(255, 255, 255, 0.8)',
+        boxShadow: '0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(78, 205, 196, 0.4)',
+        backdropFilter: 'blur(2px)',
       }}
     />
   );
