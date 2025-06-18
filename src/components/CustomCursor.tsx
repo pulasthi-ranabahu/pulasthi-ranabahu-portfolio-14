@@ -3,7 +3,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isClicking, setIsClicking] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check if device is mobile
@@ -20,72 +19,38 @@ const CustomCursor = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Optimized mouse move handler
+  // Simple mouse move handler without animations
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    requestAnimationFrame(() => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    });
-  }, []);
-
-  // Click handlers for animation
-  const handleMouseDown = useCallback(() => {
-    setIsClicking(true);
-  }, []);
-
-  const handleMouseUp = useCallback(() => {
-    setIsClicking(false);
+    setPosition({ x: e.clientX, y: e.clientY });
   }, []);
 
   useEffect(() => {
     if (isMobile) return;
 
-    // Add event listeners with passive option for better performance
-    document.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('mousedown', handleMouseDown, { passive: true });
-    document.addEventListener('mouseup', handleMouseUp, { passive: true });
-
+    document.addEventListener('mousemove', handleMouseMove);
+    
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isMobile, handleMouseMove, handleMouseDown, handleMouseUp]);
+  }, [isMobile, handleMouseMove]);
 
   if (isMobile) {
     return null;
   }
 
   return (
-    <>
-      {/* Main cursor dot */}
-      <div
-        className="fixed pointer-events-none z-[9999] transition-transform duration-75 ease-out"
-        style={{
-          left: position.x - 6,
-          top: position.y - 6,
-          width: '12px',
-          height: '12px',
-          background: 'linear-gradient(45deg, #667eea, #764ba2)',
-          borderRadius: '50%',
-          transform: isClicking ? 'scale(0.8)' : 'scale(1)',
-          boxShadow: '0 0 20px rgba(102, 126, 234, 0.5)',
-        }}
-      />
-      
-      {/* Cursor trail/ring */}
-      <div
-        className="fixed pointer-events-none z-[9998] transition-all duration-300 ease-out"
-        style={{
-          left: position.x - 20,
-          top: position.y - 20,
-          width: '40px',
-          height: '40px',
-          border: '2px solid rgba(102, 126, 234, 0.3)',
-          borderRadius: '50%',
-          transform: isClicking ? 'scale(1.5)' : 'scale(1)',
-        }}
-      />
-    </>
+    <div
+      className="fixed pointer-events-none z-[9999]"
+      style={{
+        left: position.x - 8,
+        top: position.y - 8,
+        width: '16px',
+        height: '16px',
+        background: '#667eea',
+        borderRadius: '50%',
+        border: '2px solid #764ba2',
+      }}
+    />
   );
 };
 
