@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check if device is mobile
@@ -23,10 +23,10 @@ const CustomCursor = () => {
   // Mouse move handler
   const handleMouseMove = useCallback((e: MouseEvent) => {
     setPosition({ x: e.clientX, y: e.clientY });
-    setIsVisible(true);
-  }, []);
+    if (!isVisible) setIsVisible(true);
+  }, [isVisible]);
 
-  // Mouse enter/leave handlers
+  // Mouse enter/leave handlers for the entire document
   const handleMouseEnter = useCallback(() => {
     setIsVisible(true);
   }, []);
@@ -38,19 +38,26 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobile) return;
 
-    // Hide default cursor
-    document.body.style.cursor = 'none';
-    document.documentElement.style.cursor = 'none';
+    // Hide default cursor globally
+    const style = document.createElement('style');
+    style.innerHTML = `
+      *, *::before, *::after {
+        cursor: none !important;
+      }
+      body, html {
+        cursor: none !important;
+      }
+    `;
+    document.head.appendChild(style);
 
-    // Add event listeners
-    document.addEventListener('mousemove', handleMouseMove);
+    // Add global event listeners
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
     
     return () => {
-      // Restore default cursor
-      document.body.style.cursor = 'auto';
-      document.documentElement.style.cursor = 'auto';
+      // Remove the style
+      document.head.removeChild(style);
       
       // Remove event listeners
       document.removeEventListener('mousemove', handleMouseMove);
@@ -66,21 +73,22 @@ const CustomCursor = () => {
 
   return (
     <div
-      className={`fixed pointer-events-none transition-opacity duration-200 ${
+      className={`fixed pointer-events-none transition-opacity duration-150 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       style={{
-        left: position.x - 12,
-        top: position.y - 12,
-        width: '24px',
-        height: '24px',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+        left: position.x - 8,
+        top: position.y - 8,
+        width: '16px',
+        height: '16px',
+        background: 'linear-gradient(135deg, #4c1d95 0%, #1e1b4b 50%, #312e81 100%)',
         borderRadius: '50%',
-        border: '2px solid rgba(255, 255, 255, 0.3)',
-        boxShadow: '0 0 20px rgba(102, 126, 234, 0.6), 0 0 40px rgba(118, 75, 162, 0.3)',
-        zIndex: 99999,
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 0 8px rgba(76, 29, 149, 0.8), 0 0 16px rgba(30, 27, 75, 0.4)',
+        zIndex: 999999,
         transform: 'translate3d(0, 0, 0)',
         backfaceVisibility: 'hidden',
+        willChange: 'transform',
       }}
     />
   );
