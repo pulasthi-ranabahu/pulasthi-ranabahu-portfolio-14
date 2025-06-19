@@ -38,31 +38,63 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobile) return;
 
-    // Hide default cursor globally
+    // Create a unique ID for our cursor style to avoid conflicts
+    const styleId = 'custom-cursor-global-style';
+    
+    // Remove existing style if it exists
+    const existingStyle = document.getElementById(styleId);
+    if (existingStyle) {
+      existingStyle.remove();
+    }
+
+    // Hide default cursor globally with higher specificity
     const style = document.createElement('style');
+    style.id = styleId;
     style.innerHTML = `
-      *, *::before, *::after {
+      * {
         cursor: none !important;
       }
-      body, html {
+      *:hover {
+        cursor: none !important;
+      }
+      body, html, div, section, main, header, footer, nav, aside, article {
+        cursor: none !important;
+      }
+      button:hover, a:hover, input:hover, textarea:hover, select:hover {
         cursor: none !important;
       }
     `;
     document.head.appendChild(style);
 
-    // Add global event listeners
-    document.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    // Add global event listeners with better error handling
+    const addEventListeners = () => {
+      document.addEventListener('mousemove', handleMouseMove, { passive: true });
+      document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
+      document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+      
+      // Also listen on window for better coverage
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    };
+
+    // Add listeners immediately and also after a small delay to ensure they stick
+    addEventListeners();
+    const timeoutId = setTimeout(addEventListeners, 100);
     
     return () => {
+      // Clean up
+      clearTimeout(timeoutId);
+      
       // Remove the style
-      document.head.removeChild(style);
+      const styleToRemove = document.getElementById(styleId);
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
       
       // Remove event listeners
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [isMobile, handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
@@ -85,10 +117,11 @@ const CustomCursor = () => {
         borderRadius: '50%',
         border: '1px solid rgba(255, 255, 255, 0.2)',
         boxShadow: '0 0 8px rgba(76, 29, 149, 0.8), 0 0 16px rgba(30, 27, 75, 0.4)',
-        zIndex: 999999,
+        zIndex: 2147483647, // Maximum z-index value to ensure it's always on top
         transform: 'translate3d(0, 0, 0)',
         backfaceVisibility: 'hidden',
         willChange: 'transform',
+        position: 'fixed',
       }}
     />
   );
