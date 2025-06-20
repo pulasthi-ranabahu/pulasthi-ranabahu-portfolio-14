@@ -14,11 +14,11 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-slate-900/90 via-purple-900/80 to-slate-900/70">
       {/* Keep one Spline background for the hero section only */}
       <LazySplineEmbed 
         src="https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/" 
-        className="opacity-60"
+        className="opacity-40"
       />
 
       {/* Content Overlay */}

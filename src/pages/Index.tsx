@@ -151,12 +151,12 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground" style={{ transform: 'translateZ(0)' }}>      
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" style={{ transform: 'translateZ(0)' }}>      
       <header>
         <Navigation />
       </header>
       
-      <main style={{ willChange: 'transform' }}>
+      <main style={{ willChange: 'transform' }} className="seamless-sections">
         <HeroSection />
         <AboutSection />
         <EducationSection />

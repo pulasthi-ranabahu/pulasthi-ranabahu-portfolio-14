@@ -6,7 +6,7 @@ const CVSection = () => {
   const [showCV, setShowCV] = useState(false);
 
   return (
-    <section id="cv" className="relative min-h-screen flex items-center bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+    <section id="cv" className="relative min-h-screen flex items-center bg-gradient-to-b from-indigo-900/70 via-blue-900/60 to-cyan-900/70 py-0">
       {/* Content */}
       <div className="w-full min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
