@@ -54,11 +54,11 @@ const EducationSection = () => {
   ];
 
   return (
-    <section id="education" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-blue-900/50 via-indigo-900/60 to-purple-900/70 py-0">
+    <section id="education" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background */}
       <LazySplineEmbed
         src="https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/"
-        className="opacity-30"
+        className="opacity-70"
       />
 
       {/* Content Overlay */}

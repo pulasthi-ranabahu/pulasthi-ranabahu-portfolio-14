@@ -24,11 +24,11 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-slate-900/70 via-purple-900/60 to-blue-900/50 py-0">
+    <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
       {/* 3D Background - Made more visible */}
       <LazySplineEmbed 
         src="https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/" 
-        className="opacity-30"
+        className="opacity-50"
       />
 
       {/* Content Overlay */}

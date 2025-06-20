@@ -37,8 +37,8 @@
     
     --radius: 0.5rem;
     
-    /* Enhanced gradient variables for seamless flow */
-    --gradient-primary: linear-gradient(180deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+    /* Custom gradient variables */
+    --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --gradient-text: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
@@ -53,7 +53,7 @@
   
   body {
     @apply bg-background text-foreground font-['Inter',sans-serif];
-    background: linear-gradient(180deg, #0f172a 0%, #581c87 25%, #1e1b4b 50%, #581c87 75%, #0f172a 100%);
+    background: var(--gradient-primary);
     min-height: 100vh;
     /* Ultra-performance optimizations */
     -webkit-font-smoothing: antialiased;
@@ -81,29 +81,6 @@
 }
 
 @layer components {
-  /* Seamless sections styling */
-  .seamless-sections {
-    background: linear-gradient(
-      180deg,
-      rgba(15, 23, 42, 0.9) 0%,
-      rgba(88, 28, 135, 0.8) 12.5%,
-      rgba(30, 27, 75, 0.7) 25%,
-      rgba(59, 130, 246, 0.6) 37.5%,
-      rgba(99, 102, 241, 0.7) 50%,
-      rgba(139, 92, 246, 0.8) 62.5%,
-      rgba(168, 85, 247, 0.7) 75%,
-      rgba(88, 28, 135, 0.8) 87.5%,
-      rgba(15, 23, 42, 0.9) 100%
-    );
-  }
-
-  .seamless-sections > section {
-    border: none !important;
-    margin: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
   .gradient-text {
     background: var(--gradient-text);
     -webkit-background-clip: text;
@@ -148,12 +125,12 @@
   
   /* Enhanced glass effects with better performance */
   .glass-card {
-    background: rgba(30, 30, 40, 0.75);
+    background: rgba(30, 30, 40, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(162, 89, 236, 0.3);
+    border: 1px solid rgba(162, 89, 236, 0.4);
     border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     transform: translateZ(0);
@@ -163,12 +140,12 @@
   }
 
   .about-me-card {
-    background: rgba(30, 30, 40, 0.85);
+    background: rgba(30, 30, 40, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(162, 89, 236, 0.4);
+    border: 1px solid rgba(162, 89, 236, 0.5);
     border-radius: 12px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     transform: translateZ(0);
@@ -363,18 +340,6 @@
 
 /* Optimized responsive breakpoints */
 @media (max-width: 1024px) {
-  .seamless-sections {
-    background: linear-gradient(
-      180deg,
-      rgba(15, 23, 42, 0.95) 0%,
-      rgba(88, 28, 135, 0.85) 20%,
-      rgba(59, 130, 246, 0.75) 40%,
-      rgba(139, 92, 246, 0.85) 60%,
-      rgba(88, 28, 135, 0.85) 80%,
-      rgba(15, 23, 42, 0.95) 100%
-    );
-  }
-  
   .spline-container iframe {
     transform: scale(0.95) translateZ(0);
     image-rendering: optimizeSpeed;
@@ -382,17 +347,6 @@
 }
 
 @media (max-width: 768px) {
-  .seamless-sections {
-    background: linear-gradient(
-      180deg,
-      rgba(15, 23, 42, 0.98) 0%,
-      rgba(88, 28, 135, 0.9) 25%,
-      rgba(59, 130, 246, 0.8) 50%,
-      rgba(88, 28, 135, 0.9) 75%,
-      rgba(15, 23, 42, 0.98) 100%
-    );
-  }
-
   .spline-container {
     opacity: 0.8;
   }

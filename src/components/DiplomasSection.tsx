@@ -83,11 +83,11 @@ const DiplomasSection = () => {
   ];
 
   return (
-    <section id="diplomas" className="relative min-h-screen overflow-hidden bg-gradient-to-b from-purple-900/70 via-violet-900/60 to-indigo-900/70 py-0">
+    <section id="diplomas" className="relative min-h-screen overflow-hidden py-20">
       {/* 3D Background - Bigger and faster loading */}
       <LazySplineEmbed 
         src="https://my.spline.design/retrofuturismbganimation-9ueB2d5ZszdhgZH1dSd2rzPU/" 
-        className="opacity-25"
+        className="opacity-60"
         fastLoad={true}
         biggerSize={true}
       />
