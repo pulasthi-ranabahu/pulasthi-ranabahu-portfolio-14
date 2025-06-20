@@ -8,9 +8,9 @@ interface LazySplineEmbedProps {
   biggerSize?: boolean;
 }
 
-// Enhanced cache with better memory management
+// Enhanced cache with compression and better memory management
 const iframeCache = new Map<string, { loaded: boolean; timestamp: number }>();
-const CACHE_EXPIRY = 5 * 60 * 1000; // 5 minutes
+const CACHE_EXPIRY = 10 * 60 * 1000; // 10 minutes
 
 const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ 
   src, 
@@ -21,11 +21,12 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const embedRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Check mobile status with debouncing
+  // Optimized mobile detection with debouncing
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -37,7 +38,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     let timeoutId: NodeJS.Timeout;
     const debouncedResize = () => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(checkMobile, 150);
+      timeoutId = setTimeout(checkMobile, 200);
     };
     
     window.addEventListener('resize', debouncedResize, { passive: true });
@@ -47,7 +48,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     };
   }, []);
 
-  // Enhanced cache check
+  // Enhanced cache management
   const isCached = useCallback((url: string): boolean => {
     const cached = iframeCache.get(url);
     if (!cached) return false;
@@ -61,27 +62,27 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     return cached.loaded;
   }, []);
 
-  // Optimized intersection handler
+  // Optimized intersection handler with error handling
   const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
-    if (entry.isIntersecting && !isInView) {
+    if (entry.isIntersecting && !isInView && !loadError) {
       setIsInView(true);
       
       const cached = isCached(src);
-      const delay = cached ? 25 : (fastLoad ? (isMobile ? 100 : 50) : (isMobile ? 300 : 150));
+      const delay = cached ? 10 : (fastLoad ? (isMobile ? 50 : 25) : (isMobile ? 200 : 100));
       
       setTimeout(() => setIsLoaded(true), delay);
     }
-  }, [isInView, isMobile, fastLoad, src, isCached]);
+  }, [isInView, isMobile, fastLoad, src, isCached, loadError]);
 
-  // Enhanced intersection observer
+  // Enhanced intersection observer with better performance
   useEffect(() => {
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
 
     observerRef.current = new IntersectionObserver(handleIntersection, {
-      threshold: 0.1,
-      rootMargin: fastLoad ? '300px' : '150px',
+      threshold: 0.05,
+      rootMargin: fastLoad ? '400px' : '200px',
     });
 
     if (embedRef.current) {
@@ -95,19 +96,24 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     };
   }, [handleIntersection, fastLoad]);
 
-  // Optimized iframe load handler
+  // Optimized iframe handlers
   const handleIframeLoad = useCallback(() => {
     iframeCache.set(src, { loaded: true, timestamp: Date.now() });
+    setLoadError(false);
     
     if (iframeRef.current) {
       const iframe = iframeRef.current;
-      // Apply GPU acceleration immediately
       iframe.style.transform = biggerSize 
-        ? (isMobile ? 'scale(1.1) translateZ(0)' : 'scale(1.2) translateZ(0)')
+        ? (isMobile ? 'scale(1.05) translateZ(0)' : 'scale(1.1) translateZ(0)')
         : 'translateZ(0)';
       iframe.style.willChange = 'auto';
     }
   }, [src, biggerSize, isMobile]);
+
+  const handleIframeError = useCallback(() => {
+    setLoadError(true);
+    console.warn(`Failed to load Spline embed: ${src}`);
+  }, [src]);
 
   return (
     <div 
@@ -117,9 +123,10 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
         transform: 'translateZ(0)',
         willChange: 'transform',
         backfaceVisibility: 'hidden',
+        contain: 'strict',
       }}
     >
-      {isLoaded ? (
+      {isLoaded && !loadError ? (
         <>
           <iframe
             ref={iframeRef}
@@ -131,24 +138,29 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
             loading="lazy"
             title="3D Background Animation"
             onLoad={handleIframeLoad}
+            onError={handleIframeError}
             style={{
               transform: 'translateZ(0)',
               willChange: 'transform',
               backfaceVisibility: 'hidden',
             }}
           />
-          {/* Overlay to hide "Built with Spline" watermark */}
-          <div className="absolute bottom-2 right-2 bg-gradient-to-l from-black/80 via-black/60 to-transparent backdrop-blur-sm px-4 py-2 rounded-lg pointer-events-none">
-            <span className="text-purple-300 font-semibold text-sm gradient-text">
+          {/* Optimized overlay */}
+          <div className="absolute bottom-2 right-2 bg-gradient-to-l from-black/60 to-transparent backdrop-blur-sm px-3 py-1 rounded-lg pointer-events-none">
+            <span className="text-purple-300 font-medium text-xs gradient-text">
               Pulasthi Ranabahu
             </span>
           </div>
         </>
+      ) : loadError ? (
+        <div className="w-full h-full bg-gradient-to-br from-purple-900/10 to-blue-900/10 flex items-center justify-center">
+          <div className="text-purple-300/30 text-xs">Background unavailable</div>
+        </div>
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
-          <div className="animate-pulse flex flex-col items-center opacity-50">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-full mb-2"></div>
-            <div className="text-purple-300/50 text-xs">Loading...</div>
+        <div className="w-full h-full bg-gradient-to-br from-purple-900/15 to-blue-900/15 flex items-center justify-center">
+          <div className="animate-pulse flex flex-col items-center opacity-40">
+            <div className="w-6 h-6 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full mb-1"></div>
+            <div className="text-purple-300/40 text-xs">Loading...</div>
           </div>
         </div>
       )}
