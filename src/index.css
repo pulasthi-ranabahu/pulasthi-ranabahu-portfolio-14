@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -92,10 +93,10 @@
 }
 
 @layer components {
-  /* Container width optimization for cozy feel */
+  /* Smaller container width for more compact feel */
   .container-cozy {
-    max-width: 1200px;
-    width: 90%;
+    max-width: 1000px;
+    width: 85%;
     margin: 0 auto;
     padding: 0 1rem;
   }
@@ -173,44 +174,22 @@
     max-width: 100%;
   }
 
-  /* Clear watermark overlay with no blur */
-  .watermark-overlay {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    background: rgba(30, 30, 40, 0.95);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: 1px solid rgba(162, 89, 236, 0.6);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    z-index: 50;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  .watermark-text {
-    color: rgba(162, 89, 236, 0.9);
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-shadow: none;
-    filter: none;
-  }
-
-  /* Global Spline watermark cover - covers all Spline watermarks across all pages */
+  /* Global Spline watermark blur cover - hides all Spline watermarks across all pages */
   .spline-watermark-cover {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    width: 160px;
-    height: 40px;
-    background: rgba(30, 30, 40, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(162, 89, 236, 0.3);
+    bottom: 8px;
+    right: 8px;
+    width: 180px;
+    height: 45px;
+    background: rgba(30, 30, 40, 0.98);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(162, 89, 236, 0.2);
     border-radius: 8px;
-    z-index: 9999;
+    z-index: 10000;
     pointer-events: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    opacity: 0.95;
   }
 
   /* Optimized logo classes - removed white backgrounds and made bigger */
@@ -405,7 +384,7 @@
   }
   
   .container-cozy {
-    width: 95%;
+    width: 90%;
     padding: 0 0.75rem;
   }
 }
@@ -435,7 +414,7 @@
   }
 
   .container-cozy {
-    width: 100%;
+    width: 95%;
     padding: 0 1rem;
   }
 
@@ -451,10 +430,10 @@
 
   /* Adjust watermark cover for mobile */
   .spline-watermark-cover {
-    width: 140px;
-    height: 35px;
-    bottom: 8px;
-    right: 8px;
+    width: 160px;
+    height: 40px;
+    bottom: 6px;
+    right: 6px;
   }
 }
 
@@ -464,16 +443,16 @@
   .about-me-card { margin: 0 0.25rem; padding: 1rem; }
   
   .container-cozy {
-    width: 100%;
+    width: 98%;
     padding: 0 0.5rem;
   }
 
   /* Smaller watermark cover for very small screens */
   .spline-watermark-cover {
-    width: 120px;
-    height: 30px;
-    bottom: 5px;
-    right: 5px;
+    width: 140px;
+    height: 35px;
+    bottom: 4px;
+    right: 4px;
   }
 }
 
@@ -500,7 +479,7 @@
 }
 
 @media (min-width: 1920px) {
-  .container-cozy { max-width: 1200px; }
+  .container-cozy { max-width: 1000px; }
 }
 
 /* High DPI optimizations */
