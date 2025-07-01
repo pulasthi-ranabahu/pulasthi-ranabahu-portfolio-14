@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 interface LazySplineEmbedProps {
@@ -142,15 +141,9 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
             style={{
               transform: 'translateZ(0)',
               willChange: 'transform',
-              backfaceVisibility: 'hidden',
+              backface-visibility: 'hidden',
             }}
           />
-          {/* Optimized overlay */}
-          <div className="absolute bottom-2 right-2 bg-gradient-to-l from-black/60 to-transparent backdrop-blur-sm px-3 py-1 rounded-lg pointer-events-none">
-            <span className="text-purple-300 font-medium text-xs gradient-text">
-              Pulasthi Ranabahu
-            </span>
-          </div>
         </>
       ) : loadError ? (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/10 to-blue-900/10 flex items-center justify-center">

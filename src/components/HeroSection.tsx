@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import LazySplineEmbed from './LazySplineEmbed';
 
@@ -23,7 +24,7 @@ const HeroSection = () => {
 
       {/* Content Overlay */}
       <div className="content-overlay w-full min-h-screen flex items-center justify-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="container-cozy py-20">
           <div className="text-center">
             {/* Name with Gradient Text */}
             <h1 className={`text-5xl md:text-7xl font-bold mb-6 transition-all duration-800 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
@@ -52,6 +53,11 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Clear watermark without blur */}
+      <div className="watermark-overlay">
+        <span className="watermark-text">Built with ❤️ by Pulasthi Ranabahu</span>
       </div>
     </section>
   );
