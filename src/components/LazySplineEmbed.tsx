@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 interface LazySplineEmbedProps {
@@ -141,7 +142,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
             style={{
               transform: 'translateZ(0)',
               willChange: 'transform',
-              backface-visibility: 'hidden',
+              backfaceVisibility: 'hidden',
             }}
           />
         </>
