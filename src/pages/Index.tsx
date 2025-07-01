@@ -169,10 +169,21 @@ const Index = () => {
         <ContactSection />
       </main>
       
-      {/* Enhanced Spline watermark cover with custom text */}
-      <div className="spline-watermark-cover">
-        <div className="watermark-text">Pulasthi Ranabahu</div>
-      </div>
+      {/* Global Spline watermark cover - covers all Spline watermarks */}
+      <div className="spline-watermark-cover"></div>
+      
+      <footer className="relative bg-black/20 border-t border-white/10 py-8" role="contentinfo">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-gray-400">
+              © 2024 Pulasthi Ranabahu. All rights reserved.
+            </p>
+            <p className="text-gray-500 text-sm mt-2">
+              Designed with passion for cybersecurity and innovation
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
