@@ -169,6 +169,9 @@ const Index = () => {
         <ContactSection />
       </main>
       
+      {/* Global Spline watermark cover - covers all Spline watermarks */}
+      <div className="spline-watermark-cover"></div>
+      
       <footer className="relative bg-black/20 border-t border-white/10 py-8" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
