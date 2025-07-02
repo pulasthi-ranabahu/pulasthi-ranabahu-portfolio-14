@@ -151,12 +151,12 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">      
+    <div className="min-h-screen bg-background text-foreground max-w-screen-xl mx-auto">      
       <header>
         <Navigation />
       </header>
       
-      <main>
+      <main className="px-4 lg:px-8">
         <HeroSection />
         <AboutSection />
         <EducationSection />
@@ -169,7 +169,7 @@ const Index = () => {
         <ContactSection />
       </main>
       
-      {/* Blurred overlay for Spline watermark */}
+      {/* Enhanced blurred overlay for Spline watermark */}
       <div className="spline-watermark-overlay">
         <div className="spline-blur-box"></div>
       </div>
