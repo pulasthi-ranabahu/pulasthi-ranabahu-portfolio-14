@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import LazySplineEmbed from './LazySplineEmbed';
 
@@ -53,11 +52,6 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Clear watermark without blur */}
-      <div className="watermark-overlay">
-        <span className="watermark-text">Built with ❤️ by Pulasthi Ranabahu</span>
       </div>
     </section>
   );

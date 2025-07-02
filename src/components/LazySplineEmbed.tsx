@@ -8,9 +8,9 @@ interface LazySplineEmbedProps {
   biggerSize?: boolean;
 }
 
-// Enhanced cache with compression and better memory management
+// Enhanced cache with better performance
 const iframeCache = new Map<string, { loaded: boolean; timestamp: number }>();
-const CACHE_EXPIRY = 10 * 60 * 1000; // 10 minutes
+const CACHE_EXPIRY = 15 * 60 * 1000; // 15 minutes
 
 const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ 
   src, 
@@ -26,10 +26,10 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Optimized mobile detection with debouncing
+  // Enhanced mobile detection with better performance
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
     };
     
@@ -38,7 +38,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     let timeoutId: NodeJS.Timeout;
     const debouncedResize = () => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(checkMobile, 200);
+      timeoutId = setTimeout(checkMobile, 150);
     };
     
     window.addEventListener('resize', debouncedResize, { passive: true });
@@ -62,27 +62,27 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     return cached.loaded;
   }, []);
 
-  // Optimized intersection handler with error handling
+  // Optimized intersection handler
   const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting && !isInView && !loadError) {
       setIsInView(true);
       
       const cached = isCached(src);
-      const delay = cached ? 10 : (fastLoad ? (isMobile ? 50 : 25) : (isMobile ? 200 : 100));
+      const delay = cached ? 5 : (fastLoad ? (isMobile ? 25 : 10) : (isMobile ? 100 : 50));
       
       setTimeout(() => setIsLoaded(true), delay);
     }
   }, [isInView, isMobile, fastLoad, src, isCached, loadError]);
 
-  // Enhanced intersection observer with better performance
+  // Enhanced intersection observer
   useEffect(() => {
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
 
     observerRef.current = new IntersectionObserver(handleIntersection, {
-      threshold: 0.05,
-      rootMargin: fastLoad ? '400px' : '200px',
+      threshold: 0.1,
+      rootMargin: fastLoad ? '300px' : '150px',
     });
 
     if (embedRef.current) {
@@ -104,7 +104,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     if (iframeRef.current) {
       const iframe = iframeRef.current;
       iframe.style.transform = biggerSize 
-        ? (isMobile ? 'scale(1.05) translateZ(0)' : 'scale(1.1) translateZ(0)')
+        ? (isMobile ? 'scale(1.03) translateZ(0)' : 'scale(1.05) translateZ(0)')
         : 'translateZ(0)';
       iframe.style.willChange = 'auto';
     }
@@ -112,8 +112,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
 
   const handleIframeError = useCallback(() => {
     setLoadError(true);
-    console.warn(`Failed to load Spline embed: ${src}`);
-  }, [src]);
+  }, []);
 
   return (
     <div 
@@ -127,25 +126,23 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
       }}
     >
       {isLoaded && !loadError ? (
-        <>
-          <iframe
-            ref={iframeRef}
-            src={src}
-            frameBorder="0"
-            width="100%"
-            height="100%"
-            className="w-full h-full border-0"
-            loading="lazy"
-            title="3D Background Animation"
-            onLoad={handleIframeLoad}
-            onError={handleIframeError}
-            style={{
-              transform: 'translateZ(0)',
-              willChange: 'transform',
-              backfaceVisibility: 'hidden',
-            }}
-          />
-        </>
+        <iframe
+          ref={iframeRef}
+          src={src}
+          frameBorder="0"
+          width="100%"
+          height="100%"
+          className="w-full h-full border-0"
+          loading="lazy"
+          title="3D Background Animation"
+          onLoad={handleIframeLoad}
+          onError={handleIframeError}
+          style={{
+            transform: 'translateZ(0)',
+            willChange: 'transform',
+            backfaceVisibility: 'hidden',
+          }}
+        />
       ) : loadError ? (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/10 to-blue-900/10 flex items-center justify-center">
           <div className="text-purple-300/30 text-xs">Background unavailable</div>
@@ -153,7 +150,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-purple-900/15 to-blue-900/15 flex items-center justify-center">
           <div className="animate-pulse flex flex-col items-center opacity-40">
-            <div className="w-6 h-6 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full mb-1"></div>
+            <div className="w-4 h-4 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full mb-1"></div>
             <div className="text-purple-300/40 text-xs">Loading...</div>
           </div>
         </div>

@@ -5,7 +5,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* Ultra-optimized CSS with GPU acceleration */
+/* Ultra-optimized CSS with GPU acceleration and performance improvements */
 @layer base {
   :root {
     --background: 220 25% 8%;
@@ -49,7 +49,7 @@
 @layer base {
   * {
     @apply border-border;
-    cursor: auto !important; /* Use default system cursor */
+    cursor: auto !important;
   }
   
   body {
@@ -64,11 +64,14 @@
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
-    /* GPU acceleration */
+    /* Enhanced GPU acceleration */
     transform: translateZ(0);
     will-change: scroll-position;
     backface-visibility: hidden;
     cursor: auto !important;
+    /* Performance boost */
+    image-rendering: optimizeSpeed;
+    contain: layout style;
   }
   
   html {
@@ -76,10 +79,13 @@
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     width: 100%;
-    /* GPU acceleration */
+    /* Enhanced GPU acceleration */
     transform: translateZ(0);
     backface-visibility: hidden;
     cursor: auto !important;
+    /* Performance optimizations */
+    image-rendering: optimizeSpeed;
+    contain: layout;
   }
 
   /* Ensure proper cursor behavior */
@@ -143,13 +149,13 @@
     min-width: 100%;
   }
 
-  /* Spline watermark blur overlay */
+  /* Enhanced Spline watermark blur overlay - more effective blurring */
   .spline-watermark-overlay {
     position: fixed;
     bottom: 0.5rem;
     right: 0.5rem;
-    width: 120px;
-    height: 40px;
+    width: 140px;
+    height: 50px;
     z-index: 9999;
     pointer-events: none;
   }
@@ -157,11 +163,12 @@
   .spline-blur-box {
     position: absolute;
     inset: 0;
-    background: rgba(30, 30, 40, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 6px;
-    border: 1px solid rgba(162, 89, 236, 0.3);
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 8px;
+    border: 1px solid rgba(162, 89, 236, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   }
   
   /* Enhanced glass effects with better performance and visibility */
@@ -172,12 +179,13 @@
     border: 1px solid rgba(162, 89, 236, 0.4);
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
     width: 100%;
     max-width: 100%;
+    contain: layout style;
   }
 
   .about-me-card {
@@ -187,49 +195,28 @@
     border: 1px solid rgba(162, 89, 236, 0.5);
     border-radius: 12px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
     width: 100%;
     max-width: 100%;
+    contain: layout style;
   }
 
-  /* Clear watermark overlay with no blur */
-  .watermark-overlay {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    background: rgba(30, 30, 40, 0.95);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: 1px solid rgba(162, 89, 236, 0.6);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    z-index: 50;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  .watermark-text {
-    color: rgba(162, 89, 236, 0.9);
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-shadow: none;
-    filter: none;
-  }
-
-  /* Optimized logo classes - removed white backgrounds and made bigger */
+  /* Optimized logo classes */
   .card-logo {
     width: 100px !important;
     height: 100px !important;
     object-fit: contain;
     border-radius: 8px;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     margin: 0 auto 1rem auto;
     will-change: transform;
     transform: translateZ(0);
     filter: brightness(1.1) contrast(1.1);
+    image-rendering: optimizeSpeed;
   }
 
   .card-logo:hover {
@@ -244,6 +231,7 @@
     margin: 0 auto;
     transform: translateZ(0);
     filter: brightness(1.1) contrast(1.1);
+    image-rendering: optimizeSpeed;
   }
 
   .education-logo-container {
@@ -260,6 +248,7 @@
     overflow: hidden;
     transform: translateZ(0);
     border: 1px solid rgba(162, 89, 236, 0.3);
+    contain: layout;
   }
 
   .diploma-logo {
@@ -268,6 +257,7 @@
     object-fit: contain;
     transform: translateZ(0);
     filter: brightness(1.1) contrast(1.1);
+    image-rendering: optimizeSpeed;
   }
 
   .badge-logo {
@@ -275,11 +265,12 @@
     height: 85px !important;
     transform: translateZ(0);
     filter: brightness(1.1) contrast(1.1);
+    image-rendering: optimizeSpeed;
   }
   
   .nav-link {
     position: relative;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
   }
   
@@ -291,7 +282,7 @@
     width: 0;
     height: 2px;
     background: var(--gradient-secondary);
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
   }
   
@@ -306,40 +297,41 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    transition: background 0.3s ease;
+    transition: background 0.2s ease;
     transform: translateZ(0);
     will-change: transform;
+    contain: layout style;
   }
 }
 
 @layer utilities {
-  /* Ultra-optimized animations */
+  /* Ultra-optimized animations with better performance */
   .animate-fade-in {
-    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-slide-up {
-    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-slide-left {
-    animation: slideLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: slideLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-slide-right {
-    animation: slideRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: slideRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-zoom-in {
-    animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 }
 
-/* GPU-accelerated keyframes */
+/* GPU-accelerated keyframes with better performance */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px) translateZ(0);
+    transform: translateY(15px) translateZ(0);
   }
   to {
     opacity: 1;
@@ -350,7 +342,7 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px) translateZ(0);
+    transform: translateY(20px) translateZ(0);
   }
   to {
     opacity: 1;
@@ -361,7 +353,7 @@
 @keyframes slideLeft {
   from {
     opacity: 0;
-    transform: translateX(30px) translateZ(0);
+    transform: translateX(20px) translateZ(0);
   }
   to {
     opacity: 1;
@@ -372,7 +364,7 @@
 @keyframes slideRight {
   from {
     opacity: 0;
-    transform: translateX(-30px) translateZ(0);
+    transform: translateX(-20px) translateZ(0);
   }
   to {
     opacity: 1;
@@ -383,7 +375,7 @@
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.95) translateZ(0);
+    transform: scale(0.98) translateZ(0);
   }
   to {
     opacity: 1;
@@ -391,21 +383,10 @@
   }
 }
 
-@keyframes ripple {
-  0% {
-    transform: scale(0) translateZ(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(4) translateZ(0);
-    opacity: 0;
-  }
-}
-
-/* Optimized responsive breakpoints */
+/* Optimized responsive breakpoints with better performance */
 @media (max-width: 1024px) {
   .spline-container iframe {
-    transform: scale(0.95) translateZ(0);
+    transform: scale(0.98) translateZ(0);
     image-rendering: optimizeSpeed;
   }
   
@@ -417,25 +398,25 @@
 
 @media (max-width: 768px) {
   .spline-container {
-    opacity: 0.8;
+    opacity: 0.85;
   }
   
   .spline-container iframe {
     height: 100vh;
-    transform: scale(0.9) translateZ(0);
+    transform: scale(0.95) translateZ(0);
     image-rendering: optimizeSpeed;
   }
 
   .glass-card {
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     background: rgba(30, 30, 40, 0.9);
     margin: 0 0.5rem;
   }
 
   .about-me-card {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     margin: 0 0.5rem;
   }
 
@@ -454,17 +435,17 @@
   .gradient-text { font-size: clamp(2rem, 8vw, 3rem); }
   section { padding-left: 1rem; padding-right: 1rem; }
 
-  /* Mobile watermark overlay */
+  /* Enhanced mobile watermark overlay */
   .spline-watermark-overlay {
-    width: 100px;
-    height: 35px;
+    width: 120px;
+    height: 40px;
     bottom: 0.25rem;
     right: 0.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  .spline-container { opacity: 0.6; }
+  .spline-container { opacity: 0.7; }
   .glass-card { margin: 0 0.25rem; padding: 1rem; }
   .about-me-card { margin: 0 0.25rem; padding: 1rem; }
   
@@ -475,8 +456,8 @@
 
   /* Smaller mobile watermark overlay */
   .spline-watermark-overlay {
-    width: 80px;
-    height: 30px;
+    width: 100px;
+    height: 35px;
   }
 }
 
