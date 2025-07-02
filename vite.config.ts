@@ -1,12 +1,12 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// IMPORTANT: Set the base path for GitHub Pages project site
-// If your repo is named "portfolio", use "/portfolio/" as base in production
+// Fix for Netlify deployment - use relative base path
 export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/portfolio/" : "/",
+  base: "./",
   server: {
     host: "::",
     port: 8080,
@@ -18,6 +18,18 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+        },
+      },
     },
   },
 }));
