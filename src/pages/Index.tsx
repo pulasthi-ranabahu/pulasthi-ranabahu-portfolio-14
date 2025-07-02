@@ -151,22 +151,28 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground max-w-screen-xl mx-auto">      
-      <header>
+    <div className="w-full min-h-screen bg-background text-foreground">      
+      {/* Fixed Navigation - doesn't push content down */}
+      <header className="fixed top-0 left-0 right-0 z-50">
         <Navigation />
       </header>
       
-      <main className="px-4 lg:px-8">
-        <HeroSection />
-        <AboutSection />
-        <EducationSection />
-        <DiplomasSection />
-        <CVSection />
-        <CertificationsSection />
-        <BadgesSection />
-        <ProjectsSection />
-        <SkillsSection />
-        <ContactSection />
+      {/* Full viewport hero section */}
+      <HeroSection />
+      
+      {/* Other sections with proper spacing */}
+      <main className="relative z-10">
+        <div className="max-w-6xl mx-auto px-4 lg:px-8">
+          <AboutSection />
+          <EducationSection />
+          <DiplomasSection />
+          <CVSection />
+          <CertificationsSection />
+          <BadgesSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <ContactSection />
+        </div>
       </main>
       
       {/* Enhanced blurred overlay for Spline watermark */}

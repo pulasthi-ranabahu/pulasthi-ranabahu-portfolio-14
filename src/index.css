@@ -51,28 +51,6 @@
     cursor: auto !important;
   }
   
-  body {
-    @apply bg-background text-foreground font-['Inter',sans-serif];
-    background: var(--gradient-primary);
-    min-height: 100vh;
-    /* Ultra-performance optimizations */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    -webkit-overflow-scrolling: touch;
-    overflow-x: hidden;
-    width: 100%;
-    max-width: 100vw;
-    /* Enhanced GPU acceleration */
-    transform: translateZ(0);
-    will-change: scroll-position;
-    backface-visibility: hidden;
-    cursor: auto !important;
-    /* Performance boost */
-    image-rendering: optimizeSpeed;
-    contain: layout style;
-  }
-  
   html {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -85,6 +63,29 @@
     /* Performance optimizations */
     image-rendering: optimizeSpeed;
     contain: layout;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-['Inter',sans-serif];
+    background: var(--gradient-primary);
+    min-height: 100vh;
+    width: 100vw;
+    /* Ultra-performance optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    /* Enhanced GPU acceleration */
+    transform: translateZ(0);
+    will-change: scroll-position;
+    backface-visibility: hidden;
+    cursor: auto !important;
+    /* Performance boost */
+    image-rendering: optimizeSpeed;
+    contain: layout style;
   }
 
   /* Ensure proper cursor behavior */
