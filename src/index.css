@@ -142,6 +142,27 @@
     width: 100%;
     min-width: 100%;
   }
+
+  /* Spline watermark blur overlay */
+  .spline-watermark-overlay {
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 120px;
+    height: 40px;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .spline-blur-box {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 30, 40, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 6px;
+    border: 1px solid rgba(162, 89, 236, 0.3);
+  }
   
   /* Enhanced glass effects with better performance and visibility */
   .glass-card {
@@ -432,6 +453,14 @@
 
   .gradient-text { font-size: clamp(2rem, 8vw, 3rem); }
   section { padding-left: 1rem; padding-right: 1rem; }
+
+  /* Mobile watermark overlay */
+  .spline-watermark-overlay {
+    width: 100px;
+    height: 35px;
+    bottom: 0.25rem;
+    right: 0.25rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -442,6 +471,12 @@
   .container-cozy {
     width: 100%;
     padding: 0 0.5rem;
+  }
+
+  /* Smaller mobile watermark overlay */
+  .spline-watermark-overlay {
+    width: 80px;
+    height: 30px;
   }
 }
 
