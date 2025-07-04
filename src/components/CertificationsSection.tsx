@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
-import LazySplineEmbed from './LazySplineEmbed';
 
 const CertificationsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -104,15 +103,9 @@ const CertificationsSection = () => {
   ];
 
   return (
-    <section id="certifications" className="relative min-h-screen overflow-hidden py-20">
-      {/* 3D Background - Made more visible */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
-        className="opacity-50"
-      />
-
-      {/* Content Overlay */}
-      <div className="content-overlay w-full min-h-screen flex items-center">
+    <section id="certifications" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-black via-gray-900 to-black">
+      {/* Content */}
+      <div className="w-full min-h-screen flex items-center">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
