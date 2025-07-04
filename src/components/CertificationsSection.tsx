@@ -119,37 +119,37 @@ const CertificationsSection = () => {
         <div className="spline-blur-box"></div>
       </div>
 
-      {/* Content Overlay - Centered */}
-      <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+      {/* Content Overlay - Properly Centered */}
+      <div className="relative z-10 w-full h-full flex items-center justify-center px-4">
+        <div className="w-full max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
               Professional Certifications
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Industry-recognized certifications that validate my expertise in cybersecurity, networking, and technology
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
             {certifications.map((cert, index) => {
               const IconComponent = cert.icon;
               return (
                 <div
                   key={index}
-                  className={`glass-card w-48 p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${
+                  className={`glass-card w-44 p-4 hover:scale-105 transition-all duration-300 cursor-pointer group ${
                     isVisible ? 'animate-zoom-in' : 'opacity-0'
                   }`}
                   style={{ animationDelay: cert.delay }}
                 >
                   <div className="text-center">
-                    <div className="flex justify-center mb-4 rounded-lg bg-white/10 p-3">
+                    <div className="flex justify-center mb-3 rounded-lg bg-white/10 p-2">
                       <IconComponent 
-                        size={40} 
+                        size={32} 
                         className={`${cert.color} group-hover:scale-110 transition-transform duration-300`}
                       />
                     </div>
-                    <h3 className="text-base font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
+                    <h3 className="text-sm font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
                       {cert.name}
                     </h3>
                     <p className="text-gray-400 text-xs">{cert.issuer}</p>
