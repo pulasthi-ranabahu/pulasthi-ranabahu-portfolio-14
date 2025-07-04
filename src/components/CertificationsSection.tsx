@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
 import LazySplineEmbed from './LazySplineEmbed';
@@ -105,23 +104,16 @@ const CertificationsSection = () => {
   ];
 
   return (
-    <section id="certifications" className="relative w-screen h-screen flex items-center justify-center overflow-hidden">
-      {/* 3D Background - Full viewport */}
-      <div className="absolute inset-0 w-full h-full">
-        <LazySplineEmbed 
-          src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
-          className="opacity-50 w-full h-full"
-        />
-      </div>
+    <section id="certifications" className="relative min-h-screen overflow-hidden py-20">
+      {/* 3D Background - Made more visible */}
+      <LazySplineEmbed 
+        src="https://my.spline.design/gitnesssplinetest-4n1z6mDatMulpMduLUuMr7fZ/" 
+        className="opacity-50"
+      />
 
-      {/* Spline watermark blur overlay */}
-      <div className="spline-watermark-overlay">
-        <div className="spline-blur-box"></div>
-      </div>
-
-      {/* Content Overlay - Centered */}
-      <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="max-w-6xl mx-auto px-6 py-20">
+      {/* Content Overlay */}
+      <div className="content-overlay w-full min-h-screen flex items-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Professional Certifications

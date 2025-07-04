@@ -6,15 +6,10 @@ const CVSection = () => {
   const [showCV, setShowCV] = useState(false);
 
   return (
-    <section id="cv" className="relative w-screen h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
-      {/* Spline watermark blur overlay */}
-      <div className="spline-watermark-overlay">
-        <div className="spline-blur-box"></div>
-      </div>
-
-      {/* Content - Centered */}
-      <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="max-w-7xl mx-auto px-6 py-20">
+    <section id="cv" className="relative min-h-screen flex items-center bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+      {/* Content */}
+      <div className="w-full min-h-screen flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           {/* Frosted Glass Card for CV Content */}
           <div className="glass-card p-8 md:p-12 text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">

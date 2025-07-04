@@ -62,59 +62,54 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="relative w-screen h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
-      {/* Spline watermark blur overlay */}
-      <div className="spline-watermark-overlay">
-        <div className="spline-blur-box"></div>
-      </div>
+    <section id="skills" className="relative min-h-screen overflow-hidden py-20">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-black/40" />
 
-      {/* Content - Centered */}
-      <div className="relative z-10 flex items-center justify-center w-full h-full">
-        <div className="max-w-5xl mx-auto px-6 py-20">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-              Technical Skills
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Core competencies and technical expertise gained through hands-on experience and continuous learning
-            </p>
-          </div>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+            Technical Skills
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Core competencies and technical expertise gained through hands-on experience and continuous learning
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8 justify-center">
-            {skillCategories.map((category, categoryIndex) => (
-              <div
-                key={categoryIndex}
-                className={`glass-card p-6 ${
-                  isVisible ? 'animate-slide-up' : 'opacity-0'
-                }`}
-                style={{ animationDelay: `${categoryIndex * 0.2}s` }}
-              >
-                <h3 className="text-xl font-bold text-white mb-6 text-center">
-                  {category.title}
-                </h3>
-                
-                <div className="space-y-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="group">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-gray-300 font-medium text-sm">{skill.name}</span>
-                        <span className="text-purple-400 text-xs">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:scale-105"
-                          style={{
-                            width: isVisible ? `${skill.level}%` : '0%',
-                            transitionDelay: `${(categoryIndex * 0.2) + (skillIndex * 0.1)}s`
-                          }}
-                        />
-                      </div>
+        <div className="grid md:grid-cols-2 gap-8 justify-center">
+          {skillCategories.map((category, categoryIndex) => (
+            <div
+              key={categoryIndex}
+              className={`glass-card p-6 ${
+                isVisible ? 'animate-slide-up' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${categoryIndex * 0.2}s` }}
+            >
+              <h3 className="text-xl font-bold text-white mb-6 text-center">
+                {category.title}
+              </h3>
+              
+              <div className="space-y-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <div key={skillIndex} className="group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-300 font-medium text-sm">{skill.name}</span>
+                      <span className="text-purple-400 text-xs">{skill.level}%</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div
+                        className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full transition-all duration-1000 ease-out group-hover:scale-105"
+                        style={{
+                          width: isVisible ? `${skill.level}%` : '0%',
+                          transitionDelay: `${(categoryIndex * 0.2) + (skillIndex * 0.1)}s`
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
