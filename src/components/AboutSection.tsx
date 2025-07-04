@@ -24,16 +24,23 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* 3D Background - Made more visible */}
-      <LazySplineEmbed 
-        src="https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/" 
-        className="opacity-50"
-      />
+    <section id="about" className="relative w-screen h-screen flex items-center justify-center overflow-hidden">
+      {/* 3D Background - Full viewport */}
+      <div className="absolute inset-0 w-full h-full">
+        <LazySplineEmbed 
+          src="https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/" 
+          className="opacity-50 w-full h-full"
+        />
+      </div>
 
-      {/* Content Overlay */}
-      <div className="content-overlay w-full min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* Spline watermark blur overlay */}
+      <div className="spline-watermark-overlay">
+        <div className="spline-blur-box"></div>
+      </div>
+
+      {/* Content Overlay - Centered */}
+      <div className="relative z-10 flex items-center justify-center w-full h-full">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Profile Image - Centered and Larger */}
             <div className={`flex justify-center md:justify-center ${isVisible ? 'animate-slide-left' : 'opacity-0'}`}>

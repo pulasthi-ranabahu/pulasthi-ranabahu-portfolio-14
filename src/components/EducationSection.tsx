@@ -54,16 +54,23 @@ const EducationSection = () => {
   ];
 
   return (
-    <section id="education" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
-      <LazySplineEmbed
-        src="https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/"
-        className="opacity-70"
-      />
+    <section id="education" className="relative w-screen h-screen flex items-center justify-center overflow-hidden">
+      {/* 3D Background - Full viewport */}
+      <div className="absolute inset-0 w-full h-full">
+        <LazySplineEmbed
+          src="https://my.spline.design/particleaibrain-D2sSOzBTgdPmLEGUnqeAnrxc/"
+          className="opacity-70 w-full h-full"
+        />
+      </div>
 
-      {/* Content Overlay */}
-      <div className="content-overlay w-full min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* Spline watermark blur overlay */}
+      <div className="spline-watermark-overlay">
+        <div className="spline-blur-box"></div>
+      </div>
+
+      {/* Content Overlay - Centered */}
+      <div className="relative z-10 flex items-center justify-center w-full h-full">
+        <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Education Journey
