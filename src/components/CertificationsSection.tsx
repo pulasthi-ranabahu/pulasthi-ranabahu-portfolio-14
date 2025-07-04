@@ -106,7 +106,7 @@ const CertificationsSection = () => {
     <section id="certifications" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Content */}
       <div className="w-full min-h-screen flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Professional Certifications
@@ -122,7 +122,7 @@ const CertificationsSection = () => {
               return (
                 <div
                   key={index}
-                  className={`glass-card w-48 p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${
+                  className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl w-48 p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${
                     isVisible ? 'animate-zoom-in' : 'opacity-0'
                   }`}
                   style={{ animationDelay: cert.delay }}

@@ -31,10 +31,10 @@ const AboutSection = () => {
         className="opacity-50"
       />
 
-      {/* Content Overlay */}
+      {/* Content Overlay - Full width */}
       <div className="content-overlay w-full min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
             {/* Profile Image - Centered and Larger */}
             <div className={`flex justify-center md:justify-center ${isVisible ? 'animate-slide-left' : 'opacity-0'}`}>
               <div className="w-80 h-80 rounded-full overflow-hidden border-4 border-blue-500/50 shadow-2xl">

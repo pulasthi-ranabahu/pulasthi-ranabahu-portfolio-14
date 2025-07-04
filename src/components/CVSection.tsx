@@ -9,9 +9,9 @@ const CVSection = () => {
     <section id="cv" className="relative min-h-screen flex items-center bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Content */}
       <div className="w-full min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          {/* Frosted Glass Card for CV Content */}
-          <div className="glass-card p-8 md:p-12 text-center">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-20">
+          {/* Content without glass card */}
+          <div className="p-8 md:p-12 text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               My Curriculum Vitae
             </h2>
@@ -32,7 +32,7 @@ const CVSection = () => {
 
           {/* CV Display */}
           {showCV && (
-            <div className="mt-12 glass-card p-8 max-w-5xl mx-auto animate-fade-in">
+            <div className="mt-12 p-8 max-w-5xl mx-auto animate-fade-in">
               <div className="bg-white/5 rounded-lg p-4">
                 <img
                   src="/lovable-uploads/e2e09118-3251-4691-b277-a9d366d36982.png"

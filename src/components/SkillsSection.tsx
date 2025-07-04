@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 const SkillsSection = () => {
@@ -63,7 +62,7 @@ const SkillsSection = () => {
 
   return (
     <section id="skills" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-black via-gray-900 to-black">
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             Technical Skills
@@ -73,11 +72,11 @@ const SkillsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 justify-center">
+        <div className="grid md:grid-cols-2 gap-8 justify-center max-w-6xl mx-auto">
           {skillCategories.map((category, categoryIndex) => (
             <div
               key={categoryIndex}
-              className={`glass-card p-6 ${
+              className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 ${
                 isVisible ? 'animate-slide-up' : 'opacity-0'
               }`}
               style={{ animationDelay: `${categoryIndex * 0.2}s` }}
