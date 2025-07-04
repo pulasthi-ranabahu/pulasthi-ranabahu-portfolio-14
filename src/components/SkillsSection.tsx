@@ -68,35 +68,35 @@ const SkillsSection = () => {
         <div className="spline-blur-box"></div>
       </div>
 
-      {/* Content - Properly Centered */}
-      <div className="relative z-10 w-full h-full flex items-center justify-center px-4">
-        <div className="w-full max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+      {/* Content - Centered */}
+      <div className="relative z-10 flex items-center justify-center w-full h-full">
+        <div className="max-w-5xl mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Technical Skills
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Core competencies and technical expertise gained through hands-on experience and continuous learning
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-8 justify-center">
             {skillCategories.map((category, categoryIndex) => (
               <div
                 key={categoryIndex}
-                className={`glass-card p-5 ${
+                className={`glass-card p-6 ${
                   isVisible ? 'animate-slide-up' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${categoryIndex * 0.2}s` }}
               >
-                <h3 className="text-lg font-bold text-white mb-4 text-center">
+                <h3 className="text-xl font-bold text-white mb-6 text-center">
                   {category.title}
                 </h3>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {category.skills.map((skill, skillIndex) => (
                     <div key={skillIndex} className="group">
-                      <div className="flex justify-between items-center mb-1">
+                      <div className="flex justify-between items-center mb-2">
                         <span className="text-gray-300 font-medium text-sm">{skill.name}</span>
                         <span className="text-purple-400 text-xs">{skill.level}%</span>
                       </div>

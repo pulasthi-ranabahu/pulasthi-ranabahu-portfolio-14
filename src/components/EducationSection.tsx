@@ -68,30 +68,30 @@ const EducationSection = () => {
         <div className="spline-blur-box"></div>
       </div>
 
-      {/* Content Overlay - Properly Centered */}
-      <div className="relative z-10 w-full h-full flex items-center justify-center px-4">
-        <div className="w-full max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+      {/* Content Overlay - Centered */}
+      <div className="relative z-10 flex items-center justify-center w-full h-full">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Education Journey
             </h2>
-            <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               My academic foundation that sparked my passion for technology and cybersecurity
             </p>
           </div>
 
           {/* Timeline Layout */}
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative">
             {/* Timeline Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-purple-500 to-blue-500 h-full z-0"></div>
 
             {/* Timeline Items */}
-            <div className="space-y-8">
+            <div className="space-y-12">
               {educationData.map((education, index) => (
                 <div
                   key={index}
                   className={`relative flex items-center ${
-                    education.side === 'left' ? 'justify-end pr-8' : 'justify-start pl-8'
+                    education.side === 'left' ? 'justify-end' : 'justify-start'
                   }`}
                 >
                   {/* Timeline Dot */}
@@ -99,7 +99,7 @@ const EducationSection = () => {
 
                   {/* Content Card */}
                   <div
-                    className={`glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer group ${education.accentColor} border-2 w-full max-w-md ${
+                    className={`glass-card p-8 hover:scale-105 transition-all duration-300 cursor-pointer group ${education.accentColor} border-2 w-5/12 ${
                       isVisible 
                         ? education.side === 'left' 
                           ? 'animate-slide-right' 
@@ -108,8 +108,8 @@ const EducationSection = () => {
                     }`}
                     style={{ animationDelay: `${(index + 1) * 0.2}s` }}
                   >
-                    <div className="flex flex-col items-center text-center">
-                      <div className="mb-4 education-logo-container flex-shrink-0">
+                    <div className="flex flex-col md:flex-row items-center text-center md:text-left">
+                      <div className="mb-6 md:mb-0 md:mr-6 education-logo-container flex-shrink-0">
                         <img
                           src={education.logo}
                           alt={`${education.institution} logo`}
@@ -117,14 +117,14 @@ const EducationSection = () => {
                           loading="lazy"
                         />
                       </div>
-                      <div className="w-full">
-                        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
                           {education.qualification}
                         </h3>
-                        <h4 className="text-base font-semibold text-gray-200 mb-2">
+                        <h4 className="text-lg font-semibold text-gray-200 mb-2">
                           {education.institution}
                         </h4>
-                        <p className="text-sm text-gray-300 mb-2">{education.period}</p>
+                        <p className="text-md text-gray-300 mb-3">{education.period}</p>
                         <p className="text-gray-300 leading-relaxed text-sm">
                           {education.description}
                         </p>
