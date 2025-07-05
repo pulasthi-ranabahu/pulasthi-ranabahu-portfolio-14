@@ -24,14 +24,14 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="about" className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center overflow-hidden">
       {/* 3D Background - Made more visible */}
       <LazySplineEmbed 
         src="https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/" 
         className="opacity-50"
       />
 
-      {/* Content Overlay - Full width */}
+      {/* Content Overlay - Full screen */}
       <div className="content-overlay w-full min-h-screen flex items-center">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">

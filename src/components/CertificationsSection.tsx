@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Shield, Award, Globe, Server, Lock, BookOpen, Monitor, Code } from 'lucide-react';
 
@@ -103,8 +104,8 @@ const CertificationsSection = () => {
   ];
 
   return (
-    <section id="certifications" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-black via-gray-900 to-black">
-      {/* Content */}
+    <section id="certifications" className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden py-20">
+      {/* Content - Full screen */}
       <div className="w-full min-h-screen flex items-center">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-16">

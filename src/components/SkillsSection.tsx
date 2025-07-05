@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 const SkillsSection = () => {
@@ -61,7 +62,7 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-br from-black via-gray-900 to-black">
+    <section id="skills" className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden py-20">
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">

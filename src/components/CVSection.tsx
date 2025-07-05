@@ -6,8 +6,8 @@ const CVSection = () => {
   const [showCV, setShowCV] = useState(false);
 
   return (
-    <section id="cv" className="relative min-h-screen flex items-center bg-gradient-to-br from-black via-gray-900 to-black">
-      {/* Content */}
+    <section id="cv" className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center">
+      {/* Content - Full screen */}
       <div className="w-full min-h-screen flex items-center">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-20">
           {/* Content without glass card */}
