@@ -61,9 +61,11 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     cursor: auto !important;
-    /* Performance optimizations */
+    /* Ultra-performance optimizations */
     image-rendering: optimizeSpeed;
-    contain: layout;
+    text-rendering: optimizeSpeed;
+    contain: layout style;
+    will-change: auto;
   }
   
   body {
@@ -74,14 +76,14 @@
     /* Ultra-performance optimizations */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizeSpeed;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
     /* Enhanced GPU acceleration */
     transform: translateZ(0);
-    will-change: scroll-position;
+    will-change: auto;
     backface-visibility: hidden;
     cursor: auto !important;
     /* Performance boost */

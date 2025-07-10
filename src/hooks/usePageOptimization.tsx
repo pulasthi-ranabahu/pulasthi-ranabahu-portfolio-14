@@ -40,41 +40,37 @@ export const usePageOptimization = () => {
     }
   }, []);
 
-  // Enhanced resource preloading for faster loading
+  // Enhanced resource preloading with priority
   const preloadResources = useCallback(() => {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => {
-        // Preload critical Spline URLs
-        const splineUrls = [
-          'https://my.spline.design/worldplanet-4hxZ1pfd6ey7FJAvxeatcrst/',
-          'https://my.spline.design/fireparticleloaderanimationdrstrangeporta-tOX8qzgYedqdJINK28QMLxpZ/',
-          'https://my.spline.design/genkubgreetingrobot-dQd6mswKKCijQDbJG0ctf0xX/',
-          'https://my.spline.design/nexbotrobotcharacterconcept-rnHkRS5qqMHTA3B0eLXG2HsP/'
-        ];
-        
-        splineUrls.forEach(url => {
-          // DNS prefetch for faster resolution
-          const dnsLink = document.createElement('link');
-          dnsLink.rel = 'dns-prefetch';
-          dnsLink.href = url;
-          document.head.appendChild(dnsLink);
-          
-          // Preconnect for faster loading
-          const preconnectLink = document.createElement('link');
-          preconnectLink.rel = 'preconnect';
-          preconnectLink.href = url;
-          preconnectLink.crossOrigin = 'anonymous';
-          document.head.appendChild(preconnectLink);
-        });
+    // Use requestIdleCallback for non-critical preloading
+    const preloadWithPriority = () => {
+      // High priority: DNS prefetch for Spline domain
+      const splineDns = document.createElement('link');
+      splineDns.rel = 'dns-prefetch';
+      splineDns.href = 'https://my.spline.design';
+      document.head.appendChild(splineDns);
+      
+      // Medium priority: Preconnect to Spline
+      const splinePreconnect = document.createElement('link');
+      splinePreconnect.rel = 'preconnect';
+      splinePreconnect.href = 'https://my.spline.design';
+      splinePreconnect.crossOrigin = 'anonymous';
+      document.head.appendChild(splinePreconnect);
 
-        // Preload critical fonts
-        const fontLink = document.createElement('link');
-        fontLink.rel = 'preload';
-        fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap';
-        fontLink.as = 'style';
-        document.head.appendChild(fontLink);
-      });
-    }
+      // Low priority: Font preloading
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          const fontLink = document.createElement('link');
+          fontLink.rel = 'preload';
+          fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap';
+          fontLink.as = 'style';
+          document.head.appendChild(fontLink);
+        });
+      }
+    };
+    
+    // Execute immediately for critical resources
+    preloadWithPriority();
   }, []);
 
   // Ultra-optimize rendering performance

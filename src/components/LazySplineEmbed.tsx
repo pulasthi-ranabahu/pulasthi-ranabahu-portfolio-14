@@ -8,9 +8,10 @@ interface LazySplineEmbedProps {
   biggerSize?: boolean;
 }
 
-// Enhanced cache with better performance
+// Enhanced cache with better performance and reduced memory usage
 const iframeCache = new Map<string, { loaded: boolean; timestamp: number }>();
-const CACHE_EXPIRY = 15 * 60 * 1000; // 15 minutes
+const CACHE_EXPIRY = 30 * 60 * 1000; // 30 minutes
+const MAX_CACHE_SIZE = 10; // Limit cache size
 
 const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({ 
   src, 
@@ -25,6 +26,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
   const embedRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const loadTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Enhanced mobile detection with better performance
   useEffect(() => {
@@ -48,8 +50,17 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     };
   }, []);
 
-  // Enhanced cache management
+  // Enhanced cache management with size limits
   const isCached = useCallback((url: string): boolean => {
+    // Clean old entries if cache is too large
+    if (iframeCache.size > MAX_CACHE_SIZE) {
+      const entries = Array.from(iframeCache.entries());
+      entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+      entries.slice(0, entries.length - MAX_CACHE_SIZE).forEach(([key]) => {
+        iframeCache.delete(key);
+      });
+    }
+    
     const cached = iframeCache.get(url);
     if (!cached) return false;
     
@@ -62,15 +73,23 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     return cached.loaded;
   }, []);
 
-  // Optimized intersection handler
+  // Optimized intersection handler with timeout management
   const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting && !isInView && !loadError) {
       setIsInView(true);
       
       const cached = isCached(src);
-      const delay = cached ? 5 : (fastLoad ? (isMobile ? 25 : 10) : (isMobile ? 100 : 50));
+      const delay = cached ? 0 : (fastLoad ? (isMobile ? 50 : 25) : (isMobile ? 150 : 100));
       
-      setTimeout(() => setIsLoaded(true), delay);
+      // Clear any existing timeout
+      if (loadTimeoutRef.current) {
+        clearTimeout(loadTimeoutRef.current);
+      }
+      
+      loadTimeoutRef.current = setTimeout(() => {
+        setIsLoaded(true);
+        loadTimeoutRef.current = undefined;
+      }, delay);
     }
   }, [isInView, isMobile, fastLoad, src, isCached, loadError]);
 
@@ -92,6 +111,9 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
+      }
+      if (loadTimeoutRef.current) {
+        clearTimeout(loadTimeoutRef.current);
       }
     };
   }, [handleIntersection, fastLoad]);
