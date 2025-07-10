@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
-import EducationSection from '../components/EducationSection';
-import DiplomasSection from '../components/DiplomasSection';
-import CVSection from '../components/CVSection';
-import CertificationsSection from '../components/CertificationsSection';
-import BadgesSection from '../components/BadgesSection';
-import ProjectsSection from '../components/ProjectsSection';
-import SkillsSection from '../components/SkillsSection';
-import ContactSection from '../components/ContactSection';
 import { usePageOptimization } from '../hooks/usePageOptimization';
 import { usePerformanceOptimization } from '../hooks/usePerformanceOptimization';
+
+// Lazy load non-critical sections
+const AboutSection = lazy(() => import('../components/AboutSection'));
+const EducationSection = lazy(() => import('../components/EducationSection'));
+const DiplomasSection = lazy(() => import('../components/DiplomasSection'));
+const CVSection = lazy(() => import('../components/CVSection'));
+const CertificationsSection = lazy(() => import('../components/CertificationsSection'));
+const BadgesSection = lazy(() => import('../components/BadgesSection'));
+const ProjectsSection = lazy(() => import('../components/ProjectsSection'));
+const SkillsSection = lazy(() => import('../components/SkillsSection'));
+const ContactSection = lazy(() => import('../components/ContactSection'));
 
 const Index = () => {
   // Apply performance optimizations
@@ -165,15 +167,17 @@ const Index = () => {
       {/* Other sections with proper spacing */}
       <main className="relative z-10">
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
-          <AboutSection />
-          <EducationSection />
-          <DiplomasSection />
-          <CVSection />
-          <CertificationsSection />
-          <BadgesSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <ContactSection />
+          <Suspense fallback={<div className="h-20 animate-pulse bg-background/50" />}>
+            <AboutSection />
+            <EducationSection />
+            <DiplomasSection />
+            <CVSection />
+            <CertificationsSection />
+            <BadgesSection />
+            <ProjectsSection />
+            <SkillsSection />
+            <ContactSection />
+          </Suspense>
         </div>
       </main>
       
