@@ -93,15 +93,15 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
     }
   }, [isInView, isMobile, fastLoad, src, isCached, loadError]);
 
-  // Enhanced intersection observer
+  // Enhanced intersection observer with improved loading
   useEffect(() => {
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
 
     observerRef.current = new IntersectionObserver(handleIntersection, {
-      threshold: 0.1,
-      rootMargin: fastLoad ? '300px' : '150px',
+      threshold: 0.05,
+      rootMargin: fastLoad ? '400px' : '200px',
     });
 
     if (embedRef.current) {
@@ -155,10 +155,11 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
           width="100%"
           height="100%"
           className="w-full h-full border-0"
-          loading="lazy"
+          loading="eager"
           title="3D Background Animation"
           onLoad={handleIframeLoad}
           onError={handleIframeError}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           style={{
             transform: 'translateZ(0)',
             willChange: 'transform',
@@ -166,14 +167,14 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
           }}
         />
       ) : loadError ? (
-        <div className="w-full h-full bg-gradient-to-br from-purple-900/10 to-blue-900/10 flex items-center justify-center">
-          <div className="text-purple-300/30 text-xs">Background unavailable</div>
+        <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
+          <div className="text-purple-300/50 text-xs">3D Background Loading...</div>
         </div>
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-purple-900/15 to-blue-900/15 flex items-center justify-center">
-          <div className="animate-pulse flex flex-col items-center opacity-40">
-            <div className="w-4 h-4 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full mb-1"></div>
-            <div className="text-purple-300/40 text-xs">Loading...</div>
+        <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
+          <div className="animate-pulse flex flex-col items-center opacity-60">
+            <div className="w-6 h-6 bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-full mb-2 animate-bounce"></div>
+            <div className="text-purple-300/60 text-xs">Loading 3D Scene...</div>
           </div>
         </div>
       )}
