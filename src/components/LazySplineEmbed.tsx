@@ -125,6 +125,14 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
         contain: 'strict',
       }}
     >
+      {/* Spline watermark blocker */}
+      <div className="absolute bottom-0 right-0 w-80 h-32 bg-gradient-to-br from-black via-gray-900 to-black z-50 pointer-events-none opacity-100" 
+           style={{ 
+             background: 'var(--gradient-primary)',
+             zIndex: 999999 
+           }} 
+      />
+      
       {isLoaded && !loadError ? (
         <iframe
           ref={iframeRef}

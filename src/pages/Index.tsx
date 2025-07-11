@@ -174,11 +174,6 @@ const Index = () => {
           <ContactSection />
         </div>
       </main>
-      
-      {/* Enhanced blurred overlay for Spline watermark */}
-      <div className="spline-watermark-overlay">
-        <div className="spline-blur-box"></div>
-      </div>
     </div>
   );
 };
