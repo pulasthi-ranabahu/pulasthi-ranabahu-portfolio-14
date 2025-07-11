@@ -153,47 +153,48 @@
   /* ULTRA Enhanced Spline watermark blur overlay - Complete text invisibility */
   .spline-watermark-overlay {
     position: fixed;
-    bottom: 0.75rem;
-    right: 0.75rem;
-    width: 180px;
-    height: 70px;
-    z-index: 99999;
+    bottom: 0;
+    right: 0;
+    width: 280px;
+    height: 100px;
+    z-index: 999999;
     pointer-events: none;
   }
 
   .spline-blur-box {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.98);
-    backdrop-filter: blur(50px) saturate(0) brightness(0.1);
-    -webkit-backdrop-filter: blur(50px) saturate(0) brightness(0.1);
-    border-radius: 15px;
-    border: 3px solid rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 1);
+    backdrop-filter: blur(80px) saturate(0) brightness(0) contrast(0);
+    -webkit-backdrop-filter: blur(80px) saturate(0) brightness(0) contrast(0);
+    border-radius: 20px 0 0 0;
+    border: 5px solid rgba(0, 0, 0, 1);
     box-shadow: 
-      0 12px 48px rgba(0, 0, 0, 0.95),
-      inset 0 0 20px rgba(0, 0, 0, 0.8),
-      0 0 0 2px rgba(0, 0, 0, 0.7);
+      0 20px 60px rgba(0, 0, 0, 1),
+      inset 0 0 40px rgba(0, 0, 0, 1),
+      0 0 0 3px rgba(0, 0, 0, 1);
+    mix-blend-mode: multiply;
   }
 
   .spline-blur-box::before {
     content: '';
     position: absolute;
-    inset: -5px;
-    background: rgba(0, 0, 0, 0.99);
-    backdrop-filter: blur(40px) saturate(0) brightness(0);
-    -webkit-backdrop-filter: blur(40px) saturate(0) brightness(0);
-    border-radius: 18px;
+    inset: -10px;
+    background: rgba(0, 0, 0, 1);
+    backdrop-filter: blur(100px) saturate(0) brightness(0) contrast(0) grayscale(1);
+    -webkit-backdrop-filter: blur(100px) saturate(0) brightness(0) contrast(0) grayscale(1);
+    border-radius: 25px 0 0 0;
     z-index: -1;
   }
 
   .spline-blur-box::after {
     content: '';
     position: absolute;
-    inset: 3px;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(35px) saturate(0) brightness(0);
-    -webkit-backdrop-filter: blur(35px) saturate(0) brightness(0);
-    border-radius: 12px;
+    inset: 5px;
+    background: rgba(0, 0, 0, 1);
+    backdrop-filter: blur(120px) saturate(0) brightness(0) contrast(0) opacity(0);
+    -webkit-backdrop-filter: blur(120px) saturate(0) brightness(0) contrast(0) opacity(0);
+    border-radius: 15px 0 0 0;
     z-index: 1;
   }
   
