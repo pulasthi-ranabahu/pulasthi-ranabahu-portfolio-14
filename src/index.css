@@ -155,11 +155,12 @@
     position: fixed !important;
     bottom: 0 !important;
     right: 0 !important;
-    width: 320px !important;
-    height: 120px !important;
+    width: 400px !important;
+    height: 150px !important;
     z-index: 2147483647 !important;
     pointer-events: none !important;
-    background: #000000 !important;
+    background: var(--gradient-primary) !important;
+    opacity: 1 !important;
   }
 
   .spline-blur-box {
