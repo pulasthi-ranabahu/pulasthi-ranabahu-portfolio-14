@@ -126,7 +126,7 @@ const LazySplineEmbed: React.FC<LazySplineEmbedProps> = ({
       }}
     >
       {/* Spline watermark blocker */}
-      <div className="absolute bottom-0 right-0 w-32 h-16 bg-black z-50 pointer-events-none opacity-100" 
+      <div className="absolute bottom-0 right-0 w-40 h-16 bg-black z-50 pointer-events-none opacity-100" 
            style={{ 
              background: '#000000',
              zIndex: 999999 
