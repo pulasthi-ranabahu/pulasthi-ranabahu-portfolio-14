@@ -46,7 +46,7 @@ const EducationSection = () => {
       institution: "University of Kelaniya",
       period: "2023 - Present",
       qualification: "BICT (Hons)",
-      description: "Undergraduate - Pursuing Bachelor of Science in Information and Communication Technology with focus on Cybersecurity.",
+      description: "Undergraduate - Pursuing Bachelor of Information and Communication Technology with focus on Computer Networking.",
       logo: "/lovable-uploads/77a8850d-5392-4bc6-bbf9-55885e84b707.png",
       accentColor: "border-yellow-500",
       side: "left"
